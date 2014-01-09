@@ -12,7 +12,8 @@ before_install:
   - sudo apt-get install postgis
 
 before_script:
-  - psql -c 'create database atlas;' -U postgres -T template_postgis
+  - psql -c 'create database atlas;' -U postgres
+  - psql -d atlas -c 'CREATE EXTENSION postgis' -U postgres;
 
 install:
   - pip install -r requirements.txt
