@@ -6,10 +6,10 @@ branches:
   only:
     - master 
 
-env:
-  - POSTGIS=1.5
-  
 services: postgresql
+
+before_install:
+  - sudo apt-get install postgresql-postgis
 
 before_script:
   - psql -c 'create database atlas;' -U postgres
