@@ -9,7 +9,7 @@ branches:
 services: postgresql
 
 before_install:
-  - sudo apt-get install postgresql-postgis
+  - sudo apt-get install postgis
 
 before_script:
   - psql -c 'create database atlas;' -U postgres
