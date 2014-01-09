@@ -1,0 +1,2 @@
+def home(req):
+    pass

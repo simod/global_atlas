@@ -1,0 +1,9 @@
+*.pyc
+db.sqlite3
+.coverage
+development.py
+develop.py
+.htaccess
+uploads
+test.py
+.travis.yml
