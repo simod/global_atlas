@@ -12,11 +12,7 @@ before_install:
   - sudo apt-get install postgis
 
 before_script:
-  - psql -c 'create database atlas;' -U postgres
-  - psql -d atlas -f /usr/share/postgresql/9.1/contrib/postgis-1.5/postgis.sql
-  - psql -d atlas -f /usr/share/postgresql/9.1/contrib/postgis-1.5/spatial_ref_sys.sql
-  - psql -d atlas -c 'GRANT ALL ON geometry_columns TO PUBLIC;'
-  - psql -d atlas -c 'GRANT ALL ON spatial_ref_sys TO PUBLIC;'
+  - psql -c 'create database atlas;' -U postgres -T template_postgis
 
 install:
   - pip install -r requirements.txt
