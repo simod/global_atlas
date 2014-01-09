@@ -30,7 +30,7 @@ class ModelsCreateTests(TestCase):
             size = MapSize.objects.get(name='A4')
         )
         self.assertTrue(created)
-        self.assertEqual(themap.__unicode__(),'atitle')
+        self.assertEqual(str(themap),'atitle')
 
     def testThemeCreation(self):
         """Test Theme creation"""
@@ -39,7 +39,7 @@ class ModelsCreateTests(TestCase):
             slug = 'theslug'
         )
         self.assertTrue(created)
-        self.assertEqual(theme.__unicode__(),'thename')
+        self.assertEqual(str(theme),'thename')
 
         try:
             integrity_error = False
@@ -63,7 +63,7 @@ class ModelsCreateTests(TestCase):
             requester = Requester.objects.get(slug='francis')
         )
         self.assertTrue(created)
-        self.assertEqual(mr.__unicode__(),'title')
+        self.assertEqual(str(mr),'title')
 
     def testCountryCreation(self):
         """Test Country creation"""
@@ -74,7 +74,7 @@ class ModelsCreateTests(TestCase):
         co.countries.add(Country.objects.get(fips='ITA'))
         co.countries.add(Country.objects.get(fips='NOR'))
         self.assertTrue(created)
-        self.assertEqual(co.__unicode__(),'atlantis')
+        self.assertEqual(str(co),'atlantis')
 
     def testFormatCreation(self):
         """ Test Format creation"""
@@ -83,7 +83,7 @@ class ModelsCreateTests(TestCase):
             resolution = 'low'
         )
         self.assertTrue(created)
-        self.assertEqual(fo.__unicode__(),'gif - low')
+        self.assertEqual(str(fo),'gif - low')
 
         #test creating an existing format raises an error
         try:
@@ -103,7 +103,7 @@ class ModelsCreateTests(TestCase):
             dimensions = '34*35'
         )
         self.assertTrue(created)
-        self.assertEqual(ms.__unicode__(),'A2')
+        self.assertEqual(str(ms),'A2')
 
         #test creating an existing size raises an error
         try:
@@ -123,7 +123,7 @@ class ModelsCreateTests(TestCase):
             slug = 'biota'
         )
         self.assertTrue(created)
-        self.assertEqual(cat.__unicode__(),'Biota')
+        self.assertEqual(str(cat),'Biota')
 
         #test creating an existing category raises an error
         try:
@@ -143,7 +143,7 @@ class ModelsCreateTests(TestCase):
             slug = 'simon'
         )
         self.assertTrue(created)
-        self.assertEqual(req.__unicode__(),'Simon')
+        self.assertEqual(str(req),'Simon')
 
         #test creating an existing requester raises an error
         try:
@@ -163,7 +163,7 @@ class ModelsCreateTests(TestCase):
             slug = 'aaa'
         ) 
         self.assertTrue(created)
-        self.assertEqual(so.__unicode__(),'AAA')
+        self.assertEqual(str(so),'AAA')
 
         #test creating an existing source raises an error
         try:
