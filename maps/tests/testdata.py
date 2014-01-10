@@ -4,6 +4,7 @@ from datetime import datetime
 from django.contrib.gis.geos import GEOSGeometry
 from django.contrib.auth.models import User
 from django.core.files.uploadedfile import SimpleUploadedFile
+from django.utils import timezone
 
 from maps.models import Map, Theme, MapRequest, Country, Format, \
         MapSize, Category, Requester, Source
@@ -37,10 +38,10 @@ def loadUsers():
             is_active = fields['is_active'],
             is_superuser = fields['is_superuser'],
             is_staff = fields['is_staff'],
-            last_login = datetime.now(),
+            last_login = timezone.now(),
             password = fields['password'],
             email = fields['email'],
-            date_joined = datetime.now(),
+            date_joined = timezone.now(),
         )
 
 def loadMaps():
@@ -177,6 +178,20 @@ testdata = {
             "size": "A4",
             "map_file": "uploads/maps/test.txt"
         }
+    },{
+        "fields": {
+            "title": "Second map",
+            "category": "crisis",
+            "scale": "1:100000",
+            "description": "A map",
+            "country": "NOR",
+            "request": "request2",
+            "source": "jrc",
+            "theme": "emergency",
+            "map_thumbnail": "uploads/thumbnails/test.txt",
+            "date": "2014-01-10",
+            "size": "A3",
+        }
     }],
     "themes": [{
         "fields": {
@@ -306,6 +321,19 @@ testdata = {
             "requester": "francis",
             "date": "2014-01-08",
             "size": "A4",
+            "email": "s@d.com",
+            "purpose": "To help out"
+        }
+    },{
+        "fields": {
+            "extended_description": "A map of Norway",
+            "title": "request2",
+            "format": "pdf",
+            "content": "With something in it",
+            "user": "simone",
+            "requester": "johnny",
+            "date": "2014-01-10",
+            "size": "A3",
             "email": "s@d.com",
             "purpose": "To help out"
         }

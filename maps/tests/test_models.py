@@ -51,6 +51,13 @@ class ModelsCreateTests(TestCase):
             integrity_error = True
         self.assertTrue(integrity_error)
 
+    def testThemeSlugCreation(self):
+        """Test Theme Slug creation"""
+        theme, created = Theme.objects.get_or_create(
+            name = u'this is a name',
+        )
+        self.assertEqual(theme.slug, 'this-is-a-name')
+
     def testMapRequestCreation(self):
         """Test MapRequest creation"""       
         mr, created = MapRequest.objects.get_or_create(
@@ -136,6 +143,13 @@ class ModelsCreateTests(TestCase):
             integrity_error = True
         self.assertTrue(integrity_error)
 
+    def testCategorySlugCreation(self):
+        """Test Theme Slug creation"""
+        cat, created = Category.objects.get_or_create(
+            name = u'Biota Category',
+        )
+        self.assertEqual(cat.slug, 'biota-category')
+
     def testRequesterCreation(self):
         """Test Requester creation"""
         req, created = Requester.objects.get_or_create(
@@ -154,7 +168,14 @@ class ModelsCreateTests(TestCase):
             )
         except IntegrityError, e:
             integrity_error = True
-        self.assertTrue(integrity_error)       
+        self.assertTrue(integrity_error)
+
+    def testRequesterSlugCreation(self):
+        """Test Requester Slug creation"""
+        req, created = Requester.objects.get_or_create(
+            name = u'Mr Brown',
+        )
+        self.assertEqual(req.slug, 'mr-brown')   
 
     def testSourceCreation(self):
         """Test Source creation"""
@@ -175,6 +196,13 @@ class ModelsCreateTests(TestCase):
         except IntegrityError, e:
             integrity_error = True
         self.assertTrue(integrity_error)
+
+    def testSourceSlugCreation(self):
+        """Test Source Slug creation"""
+        so, created = Source.objects.get_or_create(
+            name = u'J R C',
+        )
+        self.assertEqual(so.slug, 'j-r-c')
 
 
 class ModelsUpdateTests(TestCase):

@@ -3,6 +3,7 @@ import os
 from django.db import models
 from django.contrib.gis.db import models as geomodels
 from django.contrib.auth.models import User
+from django.utils.text import slugify
 
 class Map(geomodels.Model):
     """Map object"""
@@ -30,6 +31,11 @@ class Theme(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)[:50]
+        super(Theme, self).save(*args, **kwargs)
 
 class MapRequest(models.Model):
     """Request for a map"""
@@ -91,6 +97,11 @@ class Category(models.Model):
     def __unicode__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)[:50]
+        super(Category, self).save(*args, **kwargs)
+
 class Requester(models.Model):
     """Who requests for a map"""
     name = models.CharField(max_length=128, unique=True)
@@ -99,6 +110,11 @@ class Requester(models.Model):
     def __unicode__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)[:50]
+        super(Requester, self).save(*args, **kwargs)
+
 class Source(models.Model):
     """Data source"""
     name = models.CharField(max_length=128, unique=True)
@@ -106,3 +122,8 @@ class Source(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)[:50]
+        super(Source, self).save(*args, **kwargs)
