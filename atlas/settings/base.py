@@ -37,6 +37,11 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.gis',
+
+    # Utility apps
+    'south',
+
+    # Local apps
     'atlas',
     'maps',
 )
