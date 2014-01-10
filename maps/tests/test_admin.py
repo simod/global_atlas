@@ -8,27 +8,27 @@ from maps.admin import ThemeAdmin, CategoryAdmin, RequesterAdmin, SourceAdmin, \
 
 class AdminTests(TestCase):
 
-    def testSourceAdmin(self):
+    def test_source_admin(self):
         """Test SourceAdmin prepopupated fields"""
         sa = SourceAdmin(Source, AdminSite())
         self.assertTrue('slug' in sa.prepopulated_fields)
 
-    def testThemeAdmin(self):
+    def test_theme_admin(self):
         """Test ThemeAdmin prepopupated fields"""
         ta = ThemeAdmin(Theme, AdminSite())
         self.assertTrue('slug' in ta.prepopulated_fields)
 
-    def testRequesterAdmin(self):
+    def test_requester_admin(self):
         """Test RequesterAdmin prepopupated fields"""
         ra = RequesterAdmin(Requester, AdminSite())
         self.assertTrue('slug' in ra.prepopulated_fields)
 
-    def testCategoryAdmin(self):
+    def test_category_admin(self):
         """Test CategoryAdmin prepopupated fields"""
         ca = CategoryAdmin(Category, AdminSite())
         self.assertTrue('slug' in ca.prepopulated_fields)
 
-    def testCountryAdmin(self):
+    def test_country_admin(self):
         """Test CategoryAdmin filter fields"""
         ca = CountryAdmin(Country, AdminSite())
         self.assertTrue('countries' in ca.filter_horizontal)

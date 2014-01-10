@@ -15,19 +15,19 @@ samplefile = SimpleUploadedFile('test_map.gif', sampleimg.read(), 'image/gif')
 
 point = GEOSGeometry("POINT (0 0)")
 
-def loadTestData(*args):
-    loadUsers()
-    loadThemes()
-    loadCategories()
-    loadCountries()
-    loadFormats()
-    loadSources()
-    loadMapSizes()
-    loadRequesters()
-    loadMapRequest()
-    loadMaps()
+def load_test_data(*args):
+    load_users()
+    load_themes()
+    load_categories()
+    load_countries()
+    load_formats()
+    load_sources()
+    load_map_sizes()
+    load_requesters()
+    load_map_requests()
+    load_maps()
 
-def loadUsers():
+def load_users():
     userdata = testdata['users']
     for user in userdata:
         fields = user['fields']
@@ -44,7 +44,7 @@ def loadUsers():
             date_joined = timezone.now(),
         )
 
-def loadMaps():
+def load_maps():
     mapdata = testdata['maps']
 
     for themap in mapdata:
@@ -65,7 +65,7 @@ def loadMaps():
             map_file = samplefile,
         )
 
-def loadThemes():
+def load_themes():
     themedata = testdata['themes']
     for theme in themedata:
         fields = theme['fields']
@@ -74,7 +74,7 @@ def loadThemes():
             slug = fields['slug']
         )
 
-def loadCategories():
+def load_categories():
     catdata = testdata['categories']
     for cat in catdata:
         fields = cat['fields']
@@ -83,7 +83,7 @@ def loadCategories():
             slug = fields['slug']
         )
 
-def loadCountries():
+def load_countries():
     coundata = testdata['countries']
 
     countrysets = []
@@ -109,7 +109,7 @@ def loadCountries():
         for pk in superset['fields']['countries']:
             country.countries.add(Country.objects.get(fips=superset['fields']['fips']))
 
-def loadFormats():
+def load_formats():
     fordata = testdata['formats']
     for format in fordata:
         fields = format['fields']
@@ -118,7 +118,7 @@ def loadFormats():
             resolution = fields['resolution']
         )
 
-def loadRequesters():
+def load_requesters():
     reqdata = testdata['requesters']
     for requester in reqdata:
         fields = requester['fields']
@@ -127,7 +127,7 @@ def loadRequesters():
             slug = fields['slug']
         )
 
-def loadSources():
+def load_sources():
     sourcedata = testdata['sources']
     for source in sourcedata:
         fields = source['fields']
@@ -136,7 +136,7 @@ def loadSources():
             slug = fields['slug']
         )
 
-def loadMapSizes():
+def load_map_sizes():
     sizedata = testdata['mapsizes']
     for size in sizedata:
         fields = size['fields']
@@ -145,7 +145,7 @@ def loadMapSizes():
             dimensions = fields['dimensions']
         )
 
-def loadMapRequest():
+def load_map_requests():
     reqdata = testdata['maprequests']
     for req in reqdata:
         fields = req['fields']

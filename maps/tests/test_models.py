@@ -6,15 +6,15 @@ from django.db import IntegrityError
 
 from maps.models import Map, Theme, MapRequest, Country, Format, \
     MapSize, Category, Requester, Source
-from .testdata import loadTestData, samplefile, point
+from .testdata import load_test_data, samplefile, point
 
 class ModelsCreateTests(TestCase):
     """Test the models creation"""
 
     def setUp(self):
-        loadTestData()
+        load_test_data()
 
-    def testMapCreation(self):
+    def test_map_creation(self):
         """Test Map creation"""
         themap, created = Map.objects.get_or_create(
             title = 'atitle',
@@ -32,7 +32,7 @@ class ModelsCreateTests(TestCase):
         self.assertTrue(created)
         self.assertEqual(str(themap),'atitle')
 
-    def testThemeCreation(self):
+    def test_theme_creation(self):
         """Test Theme creation"""
         theme, created = Theme.objects.get_or_create(
             name = 'thename',
@@ -51,14 +51,14 @@ class ModelsCreateTests(TestCase):
             integrity_error = True
         self.assertTrue(integrity_error)
 
-    def testThemeSlugCreation(self):
+    def test_theme_slug_creation(self):
         """Test Theme Slug creation"""
         theme, created = Theme.objects.get_or_create(
             name = u'this is a name',
         )
         self.assertEqual(theme.slug, 'this-is-a-name')
 
-    def testMapRequestCreation(self):
+    def test_map_request_creation(self):
         """Test MapRequest creation"""       
         mr, created = MapRequest.objects.get_or_create(
             title = 'title',
@@ -72,7 +72,7 @@ class ModelsCreateTests(TestCase):
         self.assertTrue(created)
         self.assertEqual(str(mr),'title')
 
-    def testCountryCreation(self):
+    def test_country_creation(self):
         """Test Country creation"""
         co, created = Country.objects.get_or_create(
             fips = 'COUNT',
@@ -83,7 +83,7 @@ class ModelsCreateTests(TestCase):
         self.assertTrue(created)
         self.assertEqual(str(co),'atlantis')
 
-    def testFormatCreation(self):
+    def test_format_creation(self):
         """ Test Format creation"""
         fo, created = Format.objects.get_or_create(
             name = 'gif',
@@ -103,7 +103,7 @@ class ModelsCreateTests(TestCase):
             integrity_error = True
         self.assertTrue(integrity_error)
 
-    def testMapSizeCreation(self):
+    def test_map_size_creation(self):
         """Test MapSize creation"""
         ms, created = MapSize.objects.get_or_create(
             name = 'A2',
@@ -123,7 +123,7 @@ class ModelsCreateTests(TestCase):
             integrity_error = True
         self.assertTrue(integrity_error)
 
-    def testCategoryCreation(self):
+    def test_category_creation(self):
         """Test Category creation"""
         cat, created = Category.objects.get_or_create(
             name = 'Biota',
@@ -143,14 +143,14 @@ class ModelsCreateTests(TestCase):
             integrity_error = True
         self.assertTrue(integrity_error)
 
-    def testCategorySlugCreation(self):
+    def test_category_slug_creation(self):
         """Test Theme Slug creation"""
         cat, created = Category.objects.get_or_create(
             name = u'Biota Category',
         )
         self.assertEqual(cat.slug, 'biota-category')
 
-    def testRequesterCreation(self):
+    def test_requester_creation(self):
         """Test Requester creation"""
         req, created = Requester.objects.get_or_create(
             name = 'Simon',
@@ -170,14 +170,14 @@ class ModelsCreateTests(TestCase):
             integrity_error = True
         self.assertTrue(integrity_error)
 
-    def testRequesterSlugCreation(self):
+    def test_requester_slug_creation(self):
         """Test Requester Slug creation"""
         req, created = Requester.objects.get_or_create(
             name = u'Mr Brown',
         )
         self.assertEqual(req.slug, 'mr-brown')   
 
-    def testSourceCreation(self):
+    def test_source_creation(self):
         """Test Source creation"""
         so, created = Source.objects.get_or_create(
             name = 'AAA',
@@ -197,7 +197,7 @@ class ModelsCreateTests(TestCase):
             integrity_error = True
         self.assertTrue(integrity_error)
 
-    def testSourceSlugCreation(self):
+    def test_source_slug_creation(self):
         """Test Source Slug creation"""
         so, created = Source.objects.get_or_create(
             name = u'J R C',
@@ -209,9 +209,9 @@ class ModelsUpdateTests(TestCase):
     """Test the models update"""
 
     def setUp(self):
-        loadTestData()
+        load_test_data()
 
-    def testMapUpdate(self):
+    def test_map_update(self):
         """Test Map update"""
         description = 'other description'
         themap = Map.objects.get(title='A map')
@@ -220,7 +220,7 @@ class ModelsUpdateTests(TestCase):
         themap = Map.objects.get(title='A map')
         self.assertEqual(themap.description, description)
 
-    def testThemeUpdate(self):
+    def test_theme_update(self):
         """Test Theme update"""
         theme = Theme.objects.get(slug='crisis')
         theme.name = 'faketitle'
@@ -228,7 +228,7 @@ class ModelsUpdateTests(TestCase):
         theme = Theme.objects.get(slug='crisis')
         self.assertEqual(theme.name, 'faketitle')
 
-    def testMapRequestUpdate(self):
+    def test_map_request_update(self):
         """Test MapRequest update"""
         mr = MapRequest.objects.all()[0]
         mr.title = 'faketitle'
@@ -236,7 +236,7 @@ class ModelsUpdateTests(TestCase):
         mr = MapRequest.objects.get(pk=mr.pk)
         self.assertEqual(mr.title, 'faketitle')
 
-    def testCountryUpdate(self):
+    def test_country_update(self):
         """Test Country update"""
         co = Country.objects.get(fips='ITA')
         co.iso2 = 'IK'
@@ -244,7 +244,7 @@ class ModelsUpdateTests(TestCase):
         co = Country.objects.get(fips='ITA')
         self.assertEqual(co.iso2, 'IK')
 
-    def testFormatUpdate(self):
+    def test_format_update(self):
         """Test Format update"""
         fo = Format.objects.get(name='jpg', resolution='high')
         fo.resolution = 'low'
@@ -252,7 +252,7 @@ class ModelsUpdateTests(TestCase):
         fo = Format.objects.get(pk=fo.pk)
         self.assertEqual(fo.resolution, 'low')
 
-    def testMapSizeUpdate(self):
+    def test_map_size_update(self):
         """Test MapSize update"""
         ms = MapSize.objects.get(name='A4')
         ms.dimensions = '3*3'
@@ -260,7 +260,7 @@ class ModelsUpdateTests(TestCase):
         ms = MapSize.objects.get(pk=ms.pk)
         self.assertEqual(ms.dimensions, '3*3')
 
-    def testCategoryUpdate(self):
+    def test_category_update(self):
         """Test Category update"""
         cat = Category.objects.get(slug='location')
         cat.name = 'fakename'
@@ -268,7 +268,7 @@ class ModelsUpdateTests(TestCase):
         cat = Category.objects.get(pk=cat.pk)
         self.assertEqual(cat.name, 'fakename')
 
-    def testRequesterUpdate(self):
+    def test_requester_update(self):
         """Test Requester update"""
         req = Requester.objects.get(slug='francis')
         req.name = 'Fran'
@@ -276,7 +276,7 @@ class ModelsUpdateTests(TestCase):
         req = Requester.objects.get(pk=req.pk)
         self.assertEqual(req.name, 'Fran')
 
-    def testSourceUpdate(self):
+    def test_source_update(self):
         """Test Source update"""
         so = Source.objects.get(slug='jrc')
         so.name = 'OCHA'
@@ -288,58 +288,58 @@ class ModelsDeleteTests(TestCase):
     """Test the models deletion"""
 
     def setUp(self):
-        loadTestData()
+        load_test_data()
 
-    def testMapDelete(self):
+    def test_map_delete(self):
         """Test Map delete"""
         Map.objects.get(title='A map').delete()
         maps = Map.objects.filter(title='A map').count()
         self.assertEqual(maps, 0)
 
-    def testThemeDelete(self):
+    def test_theme_delete(self):
         """Test Theme delete"""
         Theme.objects.get(slug='crisis').delete()
         themes = Theme.objects.filter(slug='crisis').count()
         self.assertEqual(themes, 0)
 
-    def testMapRequestDelete(self):
+    def test_map_request_delete(self):
         """Test MapRequest delete"""
         mr = MapRequest.objects.all()[0]
         mr.delete()
         mrs = MapRequest.objects.filter(title=mr.title).count()
         self.assertEqual(mrs, 0)
 
-    def testCountryDelete(self):
+    def test_country_delete(self):
         """Test Country delete"""
         Country.objects.get(fips='ITA').delete()
         cs = Country.objects.filter(iso2='IT').count()
         self.assertEqual(cs, 0)
 
-    def testFormatDelete(self):
+    def test_format_delete(self):
         """Test Format delete"""
         Format.objects.get(name='jpg', resolution='high').delete()
         fs = Format.objects.filter(name='jpg').count()
         self.assertEqual(fs, 0)
 
-    def testMapSizeDelete(self):
+    def test_map_size_delete(self):
         """Test MapSize delete"""
         MapSize.objects.get(name='A4').delete()
         ms = MapSize.objects.filter(name='A4').count()
         self.assertEqual(ms, 0)
 
-    def testCategoryDelete(self):
+    def test_category_delete(self):
         """Test Category delete"""
         Category.objects.get(slug='location').delete()
         cs = Category.objects.filter(name='Location').count()
         self.assertEqual(cs, 0)
 
-    def testRequesterDelete(self):
+    def test_requester_delete(self):
         """Test Requester delete"""
         Requester.objects.get(slug='francis').delete()
         rs = Requester.objects.filter(name='Francis').count()
         self.assertEqual(rs, 0)
 
-    def testSourceDelete(self):
+    def test_source_delete(self):
         """ Test Source delete"""
         Source.objects.get(slug='jrc').delete()
         ss = Source.objects.filter(name='JRC').count()
