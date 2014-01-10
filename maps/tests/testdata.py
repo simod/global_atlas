@@ -6,308 +6,308 @@ from django.contrib.auth.models import User
 from django.core.files.uploadedfile import SimpleUploadedFile
 
 from maps.models import Map, Theme, MapRequest, Country, Format, \
-    MapSize, Category, Requester, Source
+        MapSize, Category, Requester, Source
 
 sampleimg = StringIO.StringIO('GIF87a\x01\x00\x01\x00\x80\x01\x00\x00\x00\x00ccc,\x00'
-                                '\x00\x00\x00\x01\x00\x01\x00\x00\x02\x02D\x01\x00;')
+                                                                '\x00\x00\x00\x01\x00\x01\x00\x00\x02\x02D\x01\x00;')
 samplefile = SimpleUploadedFile('test_map.gif', sampleimg.read(), 'image/gif')
 
 point = GEOSGeometry("POINT (0 0)")
 
 def loadTestData(*args):
-  loadUsers()
-  loadThemes()
-  loadCategories()
-  loadCountries()
-  loadFormats()
-  loadSources()
-  loadMapSizes()
-  loadRequesters()
-  loadMapRequest()
-  loadMaps()
+    loadUsers()
+    loadThemes()
+    loadCategories()
+    loadCountries()
+    loadFormats()
+    loadSources()
+    loadMapSizes()
+    loadRequesters()
+    loadMapRequest()
+    loadMaps()
 
 def loadUsers():
-  userdata = testdata['users']
-  for user in userdata:
-    fields = user['fields']
-    User.objects.create(
-      username = fields['username'],
-      first_name = fields['first_name'],
-      last_name = fields['last_name'],
-      is_active = fields['is_active'],
-      is_superuser = fields['is_superuser'],
-      is_staff = fields['is_staff'],
-      last_login = datetime.now(),
-      password = fields['password'],
-      email = fields['email'],
-      date_joined = datetime.now(),
-    )
+    userdata = testdata['users']
+    for user in userdata:
+        fields = user['fields']
+        User.objects.create(
+            username = fields['username'],
+            first_name = fields['first_name'],
+            last_name = fields['last_name'],
+            is_active = fields['is_active'],
+            is_superuser = fields['is_superuser'],
+            is_staff = fields['is_staff'],
+            last_login = datetime.now(),
+            password = fields['password'],
+            email = fields['email'],
+            date_joined = datetime.now(),
+        )
 
 def loadMaps():
-  mapdata = testdata['maps']
+    mapdata = testdata['maps']
 
-  for themap in mapdata:
-    fields = themap['fields']
-    Map.objects.create(
-      title = fields['title'],
-      category = Category.objects.get(slug=fields['category']),
-      scale = fields['scale'],
-      description = fields['description'],
-      country = Country.objects.get(fips=fields['country']),
-      center = point,
-      request = MapRequest.objects.get(title=fields['request']),
-      source = Source.objects.get(slug=fields['source']),
-      theme = Theme.objects.get(slug=fields['theme']),
-      map_thumbnail = samplefile,
-      date = datetime.strptime(fields['date'], '%Y-%m-%d'),
-      size = MapSize.objects.get(name=fields['size']),
-      map_file = samplefile,
-    )
+    for themap in mapdata:
+        fields = themap['fields']
+        Map.objects.create(
+            title = fields['title'],
+            category = Category.objects.get(slug=fields['category']),
+            scale = fields['scale'],
+            description = fields['description'],
+            country = Country.objects.get(fips=fields['country']),
+            center = point,
+            request = MapRequest.objects.get(title=fields['request']),
+            source = Source.objects.get(slug=fields['source']),
+            theme = Theme.objects.get(slug=fields['theme']),
+            map_thumbnail = samplefile,
+            date = datetime.strptime(fields['date'], '%Y-%m-%d'),
+            size = MapSize.objects.get(name=fields['size']),
+            map_file = samplefile,
+        )
 
 def loadThemes():
-  themedata = testdata['themes']
-  for theme in themedata:
-    fields = theme['fields']
-    Theme.objects.create(
-      name = fields['name'],
-      slug = fields['slug']
-    )
+    themedata = testdata['themes']
+    for theme in themedata:
+        fields = theme['fields']
+        Theme.objects.create(
+            name = fields['name'],
+            slug = fields['slug']
+        )
 
 def loadCategories():
-  catdata = testdata['categories']
-  for cat in catdata:
-    fields = cat['fields']
-    Category.objects.create(
-      name = fields['name'],
-      slug = fields['slug']
-    )
+    catdata = testdata['categories']
+    for cat in catdata:
+        fields = cat['fields']
+        Category.objects.create(
+            name = fields['name'],
+            slug = fields['slug']
+        )
 
 def loadCountries():
-  coundata = testdata['countries']
+    coundata = testdata['countries']
 
-  countrysets = []
+    countrysets = []
 
-  for country in coundata:
-    fields = country['fields']
-    
-    #store the country if is composed by other countries
-    #to be used at the end to add relationships
-    if len(fields['countries']) > 0:
-      countrysets.append(country)
+    for country in coundata:
+        fields = country['fields']
+        
+        #store the country if is composed by other countries
+        #to be used at the end to add relationships
+        if len(fields['countries']) > 0:
+            countrysets.append(country)
 
-    Country.objects.create(
-      name = fields['name'],
-      iso3 = fields['iso3'],
-      iso2 = fields['iso2'],
-      fips = fields['fips']
-    )
+        Country.objects.create(
+            name = fields['name'],
+            iso3 = fields['iso3'],
+            iso2 = fields['iso2'],
+            fips = fields['fips']
+        )
 
-  #add relationships
-  for superset in countrysets:
-    country = Country.objects.get(fips=superset['fields']['fips'])
-    for pk in superset['fields']['countries']:
-      country.countries.add(Country.objects.get(fips=superset['fields']['fips']))
+    #add relationships
+    for superset in countrysets:
+        country = Country.objects.get(fips=superset['fields']['fips'])
+        for pk in superset['fields']['countries']:
+            country.countries.add(Country.objects.get(fips=superset['fields']['fips']))
 
 def loadFormats():
-  fordata = testdata['formats']
-  for format in fordata:
-    fields = format['fields']
-    Format.objects.create(
-      name = fields['name'],
-      resolution = fields['resolution']
-    )
+    fordata = testdata['formats']
+    for format in fordata:
+        fields = format['fields']
+        Format.objects.create(
+            name = fields['name'],
+            resolution = fields['resolution']
+        )
 
 def loadRequesters():
-  reqdata = testdata['requesters']
-  for requester in reqdata:
-    fields = requester['fields']
-    Requester.objects.create(
-      name = fields['name'],
-      slug = fields['slug']
-    )
+    reqdata = testdata['requesters']
+    for requester in reqdata:
+        fields = requester['fields']
+        Requester.objects.create(
+            name = fields['name'],
+            slug = fields['slug']
+        )
 
 def loadSources():
-  sourcedata = testdata['sources']
-  for source in sourcedata:
-    fields = source['fields']
-    Source.objects.create(
-      name = fields['name'],
-      slug = fields['slug']
-    )
+    sourcedata = testdata['sources']
+    for source in sourcedata:
+        fields = source['fields']
+        Source.objects.create(
+            name = fields['name'],
+            slug = fields['slug']
+        )
 
 def loadMapSizes():
-  sizedata = testdata['mapsizes']
-  for size in sizedata:
-    fields = size['fields']
-    MapSize.objects.create(
-      name = fields['name'],
-      dimensions = fields['dimensions']
-    )
+    sizedata = testdata['mapsizes']
+    for size in sizedata:
+        fields = size['fields']
+        MapSize.objects.create(
+            name = fields['name'],
+            dimensions = fields['dimensions']
+        )
 
 def loadMapRequest():
-  reqdata = testdata['maprequests']
-  for req in reqdata:
-    fields = req['fields']
-    MapRequest.objects.create(
-      extended_description = fields['extended_description'],
-      title = fields['title'],
-      format = Format.objects.filter(name=fields['format'])[0],
-      content = fields['content'],
-      user = User.objects.get(username=fields['user']),
-      requester = Requester.objects.get(slug=fields['requester']),
-      date = datetime.strptime(fields['date'], '%Y-%m-%d'),
-      size = MapSize.objects.get(name=fields['size']),
-      email = fields['email'],
-      purpose = fields['purpose']
-    )
+    reqdata = testdata['maprequests']
+    for req in reqdata:
+        fields = req['fields']
+        MapRequest.objects.create(
+            extended_description = fields['extended_description'],
+            title = fields['title'],
+            format = Format.objects.filter(name=fields['format'])[0],
+            content = fields['content'],
+            user = User.objects.get(username=fields['user']),
+            requester = Requester.objects.get(slug=fields['requester']),
+            date = datetime.strptime(fields['date'], '%Y-%m-%d'),
+            size = MapSize.objects.get(name=fields['size']),
+            email = fields['email'],
+            purpose = fields['purpose']
+        )
 
 testdata = {
-  "maps": [{
-    "fields": {
-      "title": "A map",
-      "category": "location", 
-      "scale": "1:500000", 
-      "description": "A map", 
-      "country": "ITA", 
-      "request": "request1", 
-      "source": "jrc", 
-      "theme": "crisis", 
-      "map_thumbnail": "uploads/thumbnails/test.txt", 
-      "date": "2014-01-08", 
-      "size": "A4", 
-      "map_file": "uploads/maps/test.txt"
-    }
-  }],
-  "themes":[{
-    "fields": {
-      "name": "Crisis", 
-      "slug": "crisis"
-    }
-  },
-  {
-    "fields": {
-      "name": "Emergency", 
-      "slug": "emergency"
-    }
-  }],
-  "countries":[{
-    "fields": {
-      "iso3": "ITA", 
-      "iso2": "IT", 
-      "fips": "ITA", 
-      "name": "Italy", 
-      "countries": []
-    }
-  },
-  {
-    "fields": {
-      "iso3": "NOR", 
-      "iso2": "NO", 
-      "fips": "NOR", 
-      "name": "Norway", 
-      "countries": []
-    }
-  },
-  {
-    "fields": {
-      "iso3": "", 
-      "iso2": "", 
-      "fips": "WORLD", 
-      "name": "World", 
-      "countries": [
-        "ITA", 
-        "NOR"
-      ]
-    }
-  }],
-  "formats": [{
-    "fields": {
-      "resolution": "high", 
-      "name": "jpg"
-    }
-  },
-  {
-    "fields": {
-      "resolution": "low", 
-      "name": "pdf"
-    }
-  }],
-  "mapsizes":[{
-    "fields": {
-      "name": "A4", 
-      "dimensions": "12*14"
-    }
-  },
-  {
-    "fields": {
-      "name": "A3", 
-      "dimensions": "24*26"
-    }
-  }],
-  "categories": [{
-    "fields": {
-      "name": "Location", 
-      "slug": "location"
-    }
-  },
-  {
-    "fields": {
-      "name": "Crisis", 
-      "slug": "crisis"
-    }
-  }],
-  "requesters":[{
-    "fields": {
-      "name": "Johnny",
-      "slug": "johnny"
-    }
-  },
-  {
-    "fields": {
-      "name": "Francis",
-      "slug": "francis"
-    }
-  }],
-  "sources":[{
-    "fields": {
-      "name": "JRC",
-      "slug": "jrc"
-    }
-  },
-  {
-    "fields": {
-      "name": "WFP",
-      "slug": "wfp"
-    }
-  }],
-  "users":[{
-    "fields": {
-      "username": "simone", 
-      "first_name": "", 
-      "last_name": "", 
-      "is_active": True, 
-      "is_superuser": True, 
-      "is_staff": True, 
-      "last_login": "2014-01-07T13:53:42.376Z", 
-      "groups": [], 
-      "user_permissions": [], 
-      "password": "thepwd", 
-      "email": "", 
-      "date_joined": "2014-01-07T13:51:54.769Z"
-    }
-  }],
-  "maprequests":[{
-    "fields": {
-      "extended_description": "I need a map", 
-      "title": "request1", 
-      "format": "jpg", 
-      "content": "With something in it", 
-      "user": "simone", 
-      "requester": "francis", 
-      "date": "2014-01-08", 
-      "size": "A4", 
-      "email": "s@d.com", 
-      "purpose": "To help out"
-    }
-  }]
+    "maps": [{
+        "fields": {
+            "title": "A map",
+            "category": "location",
+            "scale": "1:500000",
+            "description": "A map",
+            "country": "ITA",
+            "request": "request1",
+            "source": "jrc",
+            "theme": "crisis",
+            "map_thumbnail": "uploads/thumbnails/test.txt",
+            "date": "2014-01-08",
+            "size": "A4",
+            "map_file": "uploads/maps/test.txt"
+        }
+    }],
+    "themes": [{
+        "fields": {
+            "name": "Crisis",
+            "slug": "crisis"
+        }
+    },
+    {
+        "fields": {
+            "name": "Emergency",
+            "slug": "emergency"
+        }
+    }],
+    "countries": [{
+        "fields": {
+            "iso3": "ITA",
+            "iso2": "IT",
+            "fips": "ITA",
+            "name": "Italy",
+            "countries": []
+        }
+    },
+    {
+        "fields": {
+            "iso3": "NOR",
+            "iso2": "NO",
+            "fips": "NOR",
+            "name": "Norway",
+            "countries": []
+        }
+    },
+    {
+        "fields": {
+            "iso3": "",
+            "iso2": "",
+            "fips": "WORLD",
+            "name": "World",
+            "countries": [
+                "ITA",
+                "NOR"
+            ]
+        }
+    }],
+    "formats": [{
+        "fields": {
+            "resolution": "high",
+            "name": "jpg"
+        }
+    },
+    {
+        "fields": {
+            "resolution": "low",
+            "name": "pdf"
+        }
+    }],
+    "mapsizes": [{
+        "fields": {
+            "name": "A4",
+            "dimensions": "12*14"
+        }
+    },
+    {
+        "fields": {
+            "name": "A3",
+            "dimensions": "24*26"
+        }
+    }],
+    "categories": [{
+        "fields": {
+            "name": "Location",
+            "slug": "location"
+        }
+    },
+    {
+        "fields": {
+            "name": "Crisis",
+            "slug": "crisis"
+        }
+    }],
+    "requesters": [{
+        "fields": {
+            "name": "Johnny",
+            "slug": "johnny"
+        }
+    },
+    {
+        "fields": {
+            "name": "Francis",
+            "slug": "francis"
+        }
+    }],
+    "sources": [{
+        "fields": {
+            "name": "JRC",
+            "slug": "jrc"
+        }
+    },
+    {
+        "fields": {
+            "name": "WFP",
+            "slug": "wfp"
+        }
+    }],
+    "users": [{
+        "fields": {
+            "username": "simone",
+            "first_name": "",
+            "last_name": "",
+            "is_active": True,
+            "is_superuser": True,
+            "is_staff": True,
+            "last_login": "2014-01-07T13:53:42.376Z",
+            "groups": [],
+            "user_permissions": [],
+            "password": "thepwd",
+            "email": "",
+            "date_joined": "2014-01-07T13:51:54.769Z"
+        }
+    }],
+    "maprequests": [{
+        "fields": {
+            "extended_description": "I need a map",
+            "title": "request1",
+            "format": "jpg",
+            "content": "With something in it",
+            "user": "simone",
+            "requester": "francis",
+            "date": "2014-01-08",
+            "size": "A4",
+            "email": "s@d.com",
+            "purpose": "To help out"
+        }
+    }]
 }

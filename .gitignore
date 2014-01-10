@@ -6,3 +6,6 @@ develop.py
 .htaccess
 uploads
 test.py
+htmlcov
+.cache/v/cache/lastfailed
+.cache/v/pep8/mtimes
