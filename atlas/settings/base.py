@@ -39,7 +39,6 @@ INSTALLED_APPS = (
     'django.contrib.gis',
 
     # Utility apps
-    'south',
     'tastypie',
 
     # Local apps
