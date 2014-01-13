@@ -11,12 +11,8 @@ username = 'simone'
 password = 'thepwd'
 
 
-
 class MapApiTests(ResourceTestCase):
     """Tests the Maps apis"""
-
-    def get_credentials(self):
-        return self.create_basic(username=username, password=password)
 
     def setUp(self):
         super(MapApiTests, self).setUp()
@@ -27,6 +23,9 @@ class MapApiTests(ResourceTestCase):
     def test_map_list_unauthorized(self):
         self.assertHttpUnauthorized(self.api_client.get(self.url))
 
-    def test_map_list_authorized(self):
-        resp = self.api_client.get(self.url,  
-            authentication=self.get_credentials())
+    def test_valid_json_response(self):
+        self.api_client.client.login(username=username, password=password)
+        resp = self.api_client.get(self.url)
+        self.assertValidJSONResponse(resp)
+
+        self.assertEquals(len(self.deserialize(resp)['objects']), 2)

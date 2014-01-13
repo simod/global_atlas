@@ -31,18 +31,16 @@ def load_users():
     userdata = testdata['users']
     for user in userdata:
         fields = user['fields']
-        User.objects.create(
-            username = fields['username'],
-            first_name = fields['first_name'],
-            last_name = fields['last_name'],
-            is_active = fields['is_active'],
-            is_superuser = fields['is_superuser'],
-            is_staff = fields['is_staff'],
-            last_login = timezone.now(),
-            password = fields['password'],
-            email = fields['email'],
-            date_joined = timezone.now(),
+        user = User.objects.create_user(
+            fields['username'],
+            fields['email'],
+            fields['password'],
         )
+        user.is_superuser = fields['is_superuser']
+        user.is_staff = fields['is_staff']
+        user.last_login = timezone.now()
+        user.date_joined = timezone.now()
+        user.save()
 
 def load_maps():
     mapdata = testdata['maps']
