@@ -4,6 +4,20 @@ from django.db import models
 from django.contrib.gis.db import models as geomodels
 from django.contrib.auth.models import User
 from django.utils.text import slugify
+from django.db.models import Count
+
+class CountryManager(models.Manager):
+    """Custom Country model manager"""
+
+    def get_countries(self):
+        """Return just the unrelated countries"""
+        return Country.objects.annotate(Count('countries')) \
+            .filter(countries__count=0)
+
+    def get_regions(self):
+        """Return just the related countries"""
+        return Country.objects.annotate(Count('countries')) \
+            .filter(countries__count__gt=0)
 
 class Map(geomodels.Model):
     """Map object"""
@@ -60,6 +74,8 @@ class Country(models.Model):
     iso2 = models.CharField(max_length=2, blank=True, null=True, unique=True)
     iso3 = models.CharField(max_length=3, blank=True, null=True, unique=True)
     countries = models.ManyToManyField('Country', blank=True, null=True)
+
+    objects = CountryManager()
 
     class Meta:
         verbose_name_plural = 'Countries'

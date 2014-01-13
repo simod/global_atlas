@@ -344,3 +344,23 @@ class ModelsDeleteTests(TestCase):
         Source.objects.get(slug='jrc').delete()
         ss = Source.objects.filter(name='JRC').count()
         self.assertEqual(ss, 0)
+
+class ModelManagerTests(TestCase):
+    """Test the model managers custom methods"""
+
+    def setUp(self):
+        load_test_data()
+
+    def test_country_manager_get_regions(self):
+        """Test that the get_regions method 
+         returns just them"""
+        count = Country.objects.get_regions().count()
+        self.assertEqual(count, 1)
+
+    def test_country_manager_get_countries(self):
+        """Test that the get_countries method
+         returns just them"""
+        count = Country.objects.get_countries().count()
+        self.assertEqual(count, 2)
+
+
