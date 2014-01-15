@@ -40,6 +40,7 @@ INSTALLED_APPS = (
 
     # Utility apps
     'tastypie',
+    'south',
 
     # Local apps
     'atlas',

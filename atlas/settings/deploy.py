@@ -10,5 +10,3 @@ DATABASES = {
         'PORT': 5432
     }
 }
-
-INSTALLED_APPS += ('south',)

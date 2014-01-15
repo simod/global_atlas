@@ -3,10 +3,11 @@ from datetime import datetime
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.db import IntegrityError
+from django.contrib.gis.geos import GEOSGeometry
 
 from maps.models import Map, Theme, MapRequest, Country, Format, \
     MapSize, Category, Requester, Source
-from .testdata import load_test_data, samplefile, point
+from .testdata import load_test_data, samplefile
 
 # class TestModelsGetTests(TestCase):
 #     """Test the correct installation of testdata"""
@@ -80,7 +81,7 @@ class ModelsCreateTests(TestCase):
             theme = Theme.objects.get(slug='crisis'),
             category = Category.objects.get(slug='location'),
             source = Source.objects.get(slug='jrc'),
-            center = point,
+            center = GEOSGeometry("POINT (0 0)"),
             request = MapRequest.objects.all()[0],
             map_file = samplefile,
             map_thumbnail = samplefile,
@@ -420,5 +421,3 @@ class ModelManagerTests(TestCase):
          returns just them"""
         count = Country.objects.get_countries().count()
         self.assertEqual(count, 2)
-
-

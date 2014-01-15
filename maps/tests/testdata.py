@@ -13,8 +13,6 @@ sampleimg = StringIO.StringIO('GIF87a\x01\x00\x01\x00\x80\x01\x00\x00\x00\x00ccc
                                                                 '\x00\x00\x00\x01\x00\x01\x00\x00\x02\x02D\x01\x00;')
 samplefile = SimpleUploadedFile('test_map.gif', sampleimg.read(), 'image/gif')
 
-point = GEOSGeometry("POINT (0 0)")
-
 def load_test_data(*args):
     load_users()
     load_themes()
@@ -53,7 +51,7 @@ def load_maps():
             scale = fields['scale'],
             description = fields['description'],
             country = Country.objects.get(fips=fields['country']),
-            center = point,
+            center = GEOSGeometry("POINT (0 0)"),
             request = MapRequest.objects.get(title=fields['request']),
             source = Source.objects.get(slug=fields['source']),
             theme = Theme.objects.get(slug=fields['theme']),
