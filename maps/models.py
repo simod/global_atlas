@@ -73,7 +73,7 @@ class Country(models.Model):
     name = models.CharField(max_length=128, unique=True)
     iso2 = models.CharField(max_length=2, blank=True, null=True, unique=True)
     iso3 = models.CharField(max_length=3, blank=True, null=True, unique=True)
-    countries = models.ManyToManyField('Country', blank=True, null=True)
+    countries = models.ManyToManyField('Country', blank=True, null=True, related_name='subcountries')
 
     objects = CountryManager()
 
@@ -143,3 +143,4 @@ class Source(models.Model):
         if not self.slug:
             self.slug = slugify(self.name)[:50]
         super(Source, self).save(*args, **kwargs)
+        
