@@ -15,15 +15,36 @@ samplefile = SimpleUploadedFile('test_map.gif', sampleimg.read(), 'image/gif')
 
 def load_test_data(*args):
     load_users()
-    load_themes()
-    load_categories()
-    load_countries()
-    load_formats()
-    load_sources()
-    load_map_sizes()
-    load_requesters()
-    load_map_requests()
-    load_maps()
+
+    if not args:
+        raise ValueError('Data type to load not provided')
+
+    if 'themes' in args:
+        load_themes()
+
+    if 'categories' in args:
+        load_categories()
+
+    if 'countries' in args:
+        load_countries()
+
+    if 'formats' in args:
+        load_formats()
+
+    if 'sources' in args:
+        load_sources()
+
+    if 'sizes' in args:   
+        load_map_sizes()
+
+    if 'requesters' in args:
+        load_requesters()
+
+    if 'maprequests' in args:
+        load_map_requests()
+
+    if 'maps' in args:
+        load_maps()
 
 def load_users():
     userdata = testdata['users']
@@ -41,6 +62,13 @@ def load_users():
         user.save()
 
 def load_maps():
+    #load neede data
+    load_categories()
+    load_countries()
+    load_sources()
+    load_themes()
+    load_map_requests()
+
     mapdata = testdata['maps']
 
     for themap in mapdata:
@@ -142,6 +170,11 @@ def load_map_sizes():
         )
 
 def load_map_requests():
+    #load neede data
+    load_formats()
+    load_map_sizes()
+    load_requesters()
+
     reqdata = testdata['maprequests']
     for req in reqdata:
         fields = req['fields']
