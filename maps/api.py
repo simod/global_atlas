@@ -18,6 +18,8 @@ class UserResource(ModelResource):
         authentication= SessionAuthentication()
         authorization = DjangoAuthorization()
         allowed_methods = ['get']
+        excludes = ['is_staff', 'password', 'is_superuser',
+             'is_active',  'date_joined', 'last_login']
 
 class ThemeResource(ModelResource):
     """Theme api"""

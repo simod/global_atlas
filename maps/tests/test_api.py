@@ -11,6 +11,83 @@ username = 'simone'
 password = 'thepwd'
 
 
+class UserApiTests(ResourceTestCase):
+    """Tests the User api"""
+
+    def setUp(self):
+        super(UserApiTests, self).setUp()
+
+        load_test_data('')
+        self.list_url = '/api/users/'
+        self.detail_url = '/api/users/%s/'
+
+    def test_user_get_list_unauth(self):
+        """Test that a 401 is given when unauth"""
+        self.assertHttpUnauthorized(self.api_client.get(
+            self.list_url))
+
+    def test_user_get_list(self):
+        """Test that a valid json response is given
+        and the count is 2"""
+        self.api_client.client.login(username=username, password=password)
+        resp = self.api_client.get(self.list_url)
+        self.assertValidJSONResponse(resp)
+
+        self.assertEquals(len(self.deserialize(resp)['objects']), 1)
+
+    def test_user_get_detail_unauth(self):
+        """Test that a 401 is given on detail view when unath"""
+        user = User.objects.all()[0]
+        self.assertHttpUnauthorized(
+            self.api_client.get(self.detail_url % user.pk))
+
+    def test_user_get_detail(self):
+        """Test that a valid map detail is returned when authenticated"""
+        self.api_client.client.login(username=username, password=password)
+        user = User.objects.all()[0]
+        resp = self.api_client.get(self.detail_url % user.pk)
+        self.assertValidJSONResponse(resp)
+
+        self.assertKeys(self.deserialize(resp), [u'id', u'email', 
+            u'first_name',  u'last_name', u'username', u'resource_uri'])
+        self.assertEqual(self.deserialize(resp)['username'], 'simone')
+
+    def test_user_post_unauth(self):
+        """Test that 405 on unauthenticated post"""
+        self.assertHttpMethodNotAllowed(self.api_client.post(self.list_url, 
+            data={}))
+
+    def test_user_post(self):
+        """Test that 405 on authenticated post"""
+        self.api_client.client.login(username=username, password=password)
+        self.assertHttpMethodNotAllowed(self.api_client.post(self.list_url, 
+            data={}))
+
+    def test_user_put_unauth(self):
+        """Test that 405 on unauthenticated put"""
+        self.assertHttpMethodNotAllowed(self.api_client.put(self.list_url, 
+            data={}))
+
+    def test_user_put(self):
+        """Test that 405 on authenticated put"""
+        user = User.objects.all()[0]
+        self.api_client.client.login(username=username, password=password)
+        self.assertHttpMethodNotAllowed(self.api_client.put(
+            self.detail_url % user.pk, data={}))
+
+    def test_user_delete_unauth(self):
+        """Test that 405 on unauthenticated delete"""
+        self.assertHttpMethodNotAllowed(self.api_client.delete(self.list_url, 
+            data={}))
+
+    def test_user_delete(self):
+        """Test that 405 on authenticated delete"""
+        user = User.objects.all()[0]
+        self.api_client.client.login(username=username, password=password)
+        self.assertHttpMethodNotAllowed(self.api_client.delete(
+            self.detail_url % user.pk, data={}))
+
+
 class MapApiTests(ResourceTestCase):
     """Tests the Maps apis"""
 
