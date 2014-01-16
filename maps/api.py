@@ -5,6 +5,7 @@ from tastypie.contrib.gis.resources import ModelResource as GeoModelResource
 from tastypie.authentication import SessionAuthentication
 from tastypie.authorization import DjangoAuthorization
 from tastypie import fields
+from tastypie.constants import ALL
 
 from .models import Map, Theme, MapRequest, Country, Format, \
     MapSize, Category, Requester, Source
@@ -21,6 +22,10 @@ class UserResource(ModelResource):
         excludes = ['is_staff', 'password', 'is_superuser',
              'is_active',  'date_joined', 'last_login']
 
+        filtering = {
+            'username': ALL,
+        }
+
 class ThemeResource(ModelResource):
     """Theme api"""
 
@@ -30,6 +35,11 @@ class ThemeResource(ModelResource):
         authentication= SessionAuthentication()
         authorization = DjangoAuthorization()
         allowed_methods = ['get','post','delete','put']
+
+        filtering = {
+            'slug': ALL,
+            'name': ALL
+        }
 
 
 class CategoryResource(ModelResource):
@@ -42,6 +52,12 @@ class CategoryResource(ModelResource):
         authorization = DjangoAuthorization()
         allowed_methods = ['get','post','delete','put']
 
+        filtering = {
+            'slug': ALL,
+            'name': ALL
+        }
+
+
 class SourceResource(ModelResource):
     """Source api"""
 
@@ -52,9 +68,16 @@ class SourceResource(ModelResource):
         authorization = DjangoAuthorization()
         allowed_methods = ['get','post','delete','put']
 
+        filtering = {
+            'slug': ALL,
+            'name': ALL
+        }
+
 
 class CountryResource(ModelResource):
     """Country api"""
+
+    countries = fields.ToManyField('self', 'countries')
 
     class Meta:
         queryset = Country.objects.all()
@@ -62,6 +85,10 @@ class CountryResource(ModelResource):
         authentication= SessionAuthentication()
         authorization = DjangoAuthorization()
         allowed_methods = ['get','post','delete','put']
+
+        filtering = {
+            'fips': ALL,
+        }
 
 
 class MapSizeResource(ModelResource):
@@ -74,6 +101,10 @@ class MapSizeResource(ModelResource):
         authorization = DjangoAuthorization()
         allowed_methods = ['get','post','delete','put']
 
+        filtering = {
+            'name': ALL,
+        }
+
 
 class FormatResource(ModelResource):
     """Format api"""
@@ -84,6 +115,11 @@ class FormatResource(ModelResource):
         authentication= SessionAuthentication()
         authorization = DjangoAuthorization()
         allowed_methods = ['get','post','delete','put']
+
+        filtering = {
+            'resolution': ALL,
+            'name': ALL
+        }
 
 
 class RequesterResource(ModelResource):
@@ -96,14 +132,19 @@ class RequesterResource(ModelResource):
         authorization = DjangoAuthorization()
         allowed_methods = ['get','post','delete','put']
 
+        filtering = {
+            'slug': ALL,
+            'name': ALL
+        }
+
 
 class MapRequestResource(ModelResource):
     """MapRequest api"""
 
-    size = fields.ForeignKey(MapSizeResource, 'size')
-    format = fields.ForeignKey(FormatResource, 'format')
-    requester = fields.ForeignKey(RequesterResource, 'requester')
-    user = fields.ForeignKey(UserResource, 'user')
+    size = fields.ToOneField(MapSizeResource, 'size')
+    format = fields.ToOneField(FormatResource, 'format')
+    requester = fields.ToOneField(RequesterResource, 'requester')
+    user = fields.ToOneField(UserResource, 'user')
 
     class Meta:
         queryset = MapRequest.objects.all()
@@ -112,16 +153,21 @@ class MapRequestResource(ModelResource):
         authorization = DjangoAuthorization()
         allowed_methods = ['get','post','delete','put']
 
+        filtering = {
+            'title': ALL,
+            'requester': ALL
+        }
+
 
 class MapResource(GeoModelResource):
     """Map api"""
 
-    theme = fields.ForeignKey(ThemeResource, 'theme')
-    category = fields.ForeignKey(CategoryResource, 'category')
-    source = fields.ForeignKey(SourceResource , 'source')
-    country = fields.ForeignKey(CountryResource , 'country')
-    size = fields.ForeignKey(MapSizeResource , 'size')
-    request = fields.ForeignKey(MapRequestResource , 'request')
+    theme = fields.ToOneField(ThemeResource, 'theme')
+    category = fields.ToOneField(CategoryResource, 'category')
+    source = fields.ToOneField(SourceResource , 'source')
+    country = fields.ToOneField(CountryResource , 'country')
+    size = fields.ToOneField(MapSizeResource , 'size')
+    request = fields.ToOneField(MapRequestResource , 'request')
 
     class Meta:
         queryset = Map.objects.all()
@@ -129,3 +175,7 @@ class MapResource(GeoModelResource):
         authentication= SessionAuthentication()
         authorization = DjangoAuthorization()
         allowed_methods = ['get','post','delete','put']
+
+        filtering = {
+            'title': ALL,
+        }

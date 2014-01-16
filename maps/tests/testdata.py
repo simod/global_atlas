@@ -130,8 +130,8 @@ def load_countries():
     #add relationships
     for superset in countrysets:
         country = Country.objects.get(fips=superset['fields']['fips'])
-        for pk in superset['fields']['countries']:
-            country.countries.add(Country.objects.get(fips=superset['fields']['fips']))
+        for fips in superset['fields']['countries']:
+            country.countries.add(Country.objects.get(fips=fips))
 
 def load_formats():
     fordata = testdata['formats']

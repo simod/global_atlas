@@ -425,7 +425,7 @@ class CountryApiTests(ResourceTestCase):
         self.assertValidJSONResponse(resp)
 
         self.assertKeys(self.deserialize(resp), [u'id', u'fips', 
-            u'name', u'iso2', u'iso3', u'resource_uri'])
+            u'name', u'iso2', u'iso3', u'countries', u'resource_uri'])
         self.assertEqual(self.deserialize(resp)['fips'], 'ITA')
 
     def test_country_post_unauth(self):
@@ -442,13 +442,16 @@ class CountryApiTests(ResourceTestCase):
             'iso2': 'SP',
             'iso3': 'SPA',
             'countries': [
-                '/api/countries/%s/' % Country.objects.all()[0],
-                '/api/countries/%s/' % Country.objects.all()[1]
+                '/api/countries/%s/' % Country.objects.all()[0].pk,
+                '/api/countries/%s/' % Country.objects.all()[1].pk
             ] 
         }
         self.api_client.client.login(username=username, password=password)
+
         self.assertHttpCreated(self.api_client.post(self.list_url, 
             format='json', data=post_data))
+        
+        self.assertEqual(Country.objects.all()[3].countries.count(),2)
         self.assertEqual(Country.objects.count(), 4)
 
     def test_country_put_unauth(self):
