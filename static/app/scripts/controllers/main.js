@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('staticApp')
+angular.module('atlas')
   .controller('MainCtrl', function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',

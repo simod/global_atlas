@@ -16,9 +16,6 @@ samplefile = SimpleUploadedFile('test_map.gif', sampleimg.read(), 'image/gif')
 def load_test_data(*args):
     load_users()
 
-    if not args:
-        raise ValueError('Data type to load not provided')
-
     if 'themes' in args:
         load_themes()
 
@@ -43,7 +40,7 @@ def load_test_data(*args):
     if 'maprequests' in args:
         load_map_requests()
 
-    if 'maps' in args:
+    if 'maps' in args or not args:
         load_maps()
 
 def load_users():
@@ -62,7 +59,7 @@ def load_users():
         user.save()
 
 def load_maps():
-    #load neede data
+    #load needed data
     load_categories()
     load_countries()
     load_sources()
@@ -170,7 +167,7 @@ def load_map_sizes():
         )
 
 def load_map_requests():
-    #load neede data
+    #load needed data
     load_formats()
     load_map_sizes()
     load_requesters()

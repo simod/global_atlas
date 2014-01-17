@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from django.views.generic import TemplateView
 from tastypie.api import Api
 
 from .api import MapResource, ThemeResource, MapRequestResource, \
@@ -20,7 +21,7 @@ api.register(UserResource())
 
 urlpatterns = patterns('',
     # Examples:
-    #url(r'^$', 'views.home', name='home'),
+    url(r'^$', TemplateView.as_view(template_name='index.html')),
     url(r'', include(api.urls)),
 
 )
