@@ -1,11 +1,16 @@
 'use strict';
+(function(){
+  goog.provide('atlas');
 
-angular.module('atlas', [
-  'ngCookies',
-  'ngResource',
-  'ngSanitize',
-  'ngRoute'
-])
-  .config(function () {
-    
-  });
+  goog.require('atlas_main_controller');
+  goog.require('atlas_mr_controller');
+
+  var module = angular.module('atlas', [
+    'ngCookies',
+    'ngResource',
+    'ngSanitize',
+    'ngRoute',
+    'atlas_main_controller',
+    'atlas_mr_controller'
+  ]);
+})(); 

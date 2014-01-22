@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load bootstrap_tags %}
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -7,7 +8,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
+    <title>Global Atlas</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -20,21 +21,36 @@
     <link rel="stylesheet" href="{% static "styles/main.css" %}">
     <!-- endbuild -->
   </head>
-  <body ng-app="atlas">
+  <body ng-app="atlas" ng-controller="AtlasController">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <header>
-      <h1>Global Atlas</h1>
+      <h1 class="col-md-offset-4">Global Atlas</h1>
     </header>
     <nav>
-      <button>Search maps</button>
-      <button>Request a map</button>
+      <button class="btn-lg btn-primary">Search maps</button>
+      <button class="btn-lg btn-primary pull-right" data-toggle="modal" data-target="#mr_form">Request a map</button>
     </nav>
     <!-- Add your site or application content here -->
     <div class="map" id="map">
       Map goes here
+    </div>
+
+    <!-- Map Request form -->
+    <div class="modal fade" id="mr_form">
+        <div class="modal-content">
+            <form ng-controller="MRController">
+                {% csrf_token %}
+                <legend>Request for a map</legend>
+                {{ mr_form|as_bootstrap }}
+                <div class="form-actions">
+                  <a href="." class="btn">Go back</a>
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <!--[if lt IE 9]>
@@ -54,9 +70,24 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="{% static "scripts/app.js" %}"></script>
-        <script src="{% static "scripts/controllers/main.js" %}"></script>
-        <!-- endbuild -->
+    <script>
+      window.CLOSURE_NO_DEPS = true;
+      window.CLOSURE_BASE_PATH = "."
+    </script>
+
+    <script src="{% static "bower_components/closure-library/closure/goog/base.js" %}"></script>
+
+    <script src="{% static "deps.js" %}"></script>
+    <script>
+        goog.require('atlas');
+     </script>
+     <script type="text/javascript">
+        (function(){
+          var module = angular.module('atlas');
+          module.constant('atlasSettings',{
+            api_endpoint: "{% url 'api_api_top_level' api_name='api' %}"
+          });
+        })();
+      </script>
 </body>
 </html>

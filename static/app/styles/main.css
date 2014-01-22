@@ -77,3 +77,8 @@ body {
     border-bottom: 0;
   }
 }
+
+#mr_form{
+  width: 400px;
+  height: 700px;
+}

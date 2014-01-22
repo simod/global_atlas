@@ -15,6 +15,16 @@ class FormTests(TestCase):
     def setUp(self):
         super(FormTests, self).setUp()
 
+        self.form_data = {
+            'title': 'Test request',
+            'date': '2013-05-01T22:05:12',
+            'email': 's@d.com',
+            'user': '/api/users/%s/',
+            'format': '/api/formats/%s/',
+            'requester': '/api/requesters/%s/',
+            'size': '/api/sizes/%s/'
+        }
+
         load_test_data('maprequests')
 
         self.post_url = reverse('api_dispatch_list', kwargs={

@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'tastypie',
     'south',
     'djangular',
+    'django_forms_bootstrap',
 
     # Local apps
     'atlas',

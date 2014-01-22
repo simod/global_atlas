@@ -1,10 +1,13 @@
 'use strict';
+(function(){
+  goog.provide('atlas_main_controller');
 
-angular.module('atlas')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  goog.require('atlas_app_service');
+
+  var module = angular.module('atlas_main_controller',['atlas_app_service']);
+
+  module.controller('AtlasController', function ($scope, ApiUrls) {
+    console.log('controller');
+    console.log(ApiUrls.query());
   });
+})();
