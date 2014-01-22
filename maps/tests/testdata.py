@@ -348,7 +348,8 @@ testdata = {
             "date": "2014-01-08",
             "size": "A4",
             "email": "s@d.com",
-            "purpose": "To help out"
+            "purpose": "To help out",
+            "deadline": "2014-10-08"
         }
     },{
         "fields": {
@@ -361,7 +362,8 @@ testdata = {
             "date": "2014-01-10",
             "size": "A3",
             "email": "s@d.com",
-            "purpose": "To help out"
+            "purpose": "To help out",
+            "deadline": "2014-10-08"
         }
     }]
 }

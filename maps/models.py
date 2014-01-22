@@ -60,6 +60,7 @@ class MapRequest(models.Model):
     purpose = models.TextField(blank=True, null=True)
     extended_description = models.TextField(blank=True, null=True)
     content = models.TextField(blank=True, null=True)
+    deadline = models.DateField(blank=True, null=True)
     size = models.ForeignKey('MapSize')
     format = models.ForeignKey('Format')
     requester = models.ForeignKey('Requester')
