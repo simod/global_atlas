@@ -1,10 +1,12 @@
 from django.conf.urls import patterns, include, url
-from django.views.generic import TemplateView
+from django.contrib.auth.decorators import login_required
 from tastypie.api import Api
 
 from .api import MapResource, ThemeResource, MapRequestResource, \
     CountryResource, FormatResource, MapSizeResource, \
     CategoryResource, RequesterResource, SourceResource, UserResource
+from .views import Home
+
 
 api = Api(api_name='api')
 api.register(MapResource())
@@ -21,7 +23,8 @@ api.register(UserResource())
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^$', TemplateView.as_view(template_name='index.html')),
+    #url(r'^$', login_required(Home.as_view())),
+    url(r'^$', Home.as_view()),
     url(r'', include(api.urls)),
 
 )
