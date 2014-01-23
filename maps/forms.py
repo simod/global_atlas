@@ -9,3 +9,14 @@ class MapRequestForm(NgModelFormMixin, ModelForm):
 
     class Meta:
         model = MapRequest
+        fields = [
+            'title',
+            'email',
+            'purpose',
+            'extended_description',
+            'content',
+            'deadline',
+            'size',
+            'format',
+            'requester'
+        ]

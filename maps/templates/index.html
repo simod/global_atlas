@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="{% static "styles/main.css" %}">
     <!-- endbuild -->
   </head>
-  <body ng-app="atlas" ng-controller="AtlasController">
+  <body ng-controller="AtlasController">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -37,18 +37,18 @@
     <div class="map" id="map">
       Map goes here
     </div>
-
     <!-- Map Request form -->
     <div class="modal fade" id="mr_form">
         <div class="modal-content">
-            <form ng-controller="MRController">
+            <form name="mr_form" ng-controller="MRController">
                 {% csrf_token %}
                 <legend>Request for a map</legend>
                 {{ mr_form|as_bootstrap }}
                 <div class="form-actions">
-                  <a href="." class="btn">Go back</a>
-                  <button type="submit" class="btn btn-primary">Save changes</button>
+                  <a class="btn" data-dismiss="modal">Go back</a>
+                  <button type="submit" class="btn btn-primary" ng-click="submit()">Save changes</button>
                 </div>
+                
             </form>
         </div>
     </div>
@@ -63,7 +63,6 @@
     <script src="{% static "bower_components/jquery/jquery.js" %}"></script>
     <script src="{% static "bower_components/angular/angular.js" %}"></script>
     <script src="{% static "bower_components/bootstrap/dist/js/bootstrap.js" %}"></script>
-    <script src="{% static "bower_components/angular-resource/angular-resource.js" %}"></script>
     <script src="{% static "bower_components/angular-cookies/angular-cookies.js" %}"></script>
     <script src="{% static "bower_components/angular-sanitize/angular-sanitize.js" %}"></script>
     <script src="{% static "bower_components/angular-route/angular-route.js" %}"></script>
@@ -83,9 +82,22 @@
      </script>
      <script type="text/javascript">
         (function(){
-          var module = angular.module('atlas');
-          module.constant('atlasSettings',{
-            api_endpoint: "{% url 'api_api_top_level' api_name='api' %}"
+          $.get("{% url 'api_api_top_level' api_name='api' %}", function(data){
+            var module = angular.module('atlas');
+
+            // Set the initial api url
+            module.constant('ApiUrls', {
+              urls: data
+            });
+
+            // Config general ajax parameters
+            module.config(function($httpProvider) {
+              $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+              $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+              $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+            });
+
+            angular.bootstrap(document,['atlas']);
           });
         })();
       </script>

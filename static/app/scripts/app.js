@@ -7,10 +7,9 @@
 
   var module = angular.module('atlas', [
     'ngCookies',
-    'ngResource',
     'ngSanitize',
     'ngRoute',
     'atlas_main_controller',
-    'atlas_mr_controller'
+    'atlas_mr_controller',
   ]);
 })(); 
