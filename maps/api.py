@@ -224,6 +224,10 @@ class MapRequestResource(ModelResource):
         
         validation = ModelFormValidation(form_class=MapRequestForm)
 
+    # Set the user as the logged in user
+    def obj_create(self, bundle, **kwargs):
+        return super(MapRequestResource, self).obj_create(
+            bundle, user=bundle.request.user)
 
 class MapResource(GeoModelResource):
     """Map api"""

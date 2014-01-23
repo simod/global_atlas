@@ -343,7 +343,7 @@ class MapRequestApiTests(ResourceTestCase):
             'deadline': '2013-05-01',
             'content': 'cippa',
             'email': 's@d.com',
-            'user': '/api/users/%s/' % User.objects.all()[0].pk,
+            #'user': '/api/users/%s/' % User.objects.all()[0].pk,
             'format': '/api/formats/%s/' % Format.objects.all()[0].pk,
             'requester': '/api/requesters/%s/' % Requester.objects.all()[0].pk,
             'size': '/api/sizes/%s/' % MapSize.objects.all()[0].pk
@@ -352,6 +352,10 @@ class MapRequestApiTests(ResourceTestCase):
         self.assertHttpCreated(self.api_client.post(self.list_url, 
             format='json', data=post_data))
         self.assertEqual(MapRequest.objects.count(), 3)
+
+        # Test the user is set to the logged in user
+        self.assertEqual(MapRequest.objects.get(title='Test request').user.username,
+         'simone')
 
     def test_maprequest_put_unauth(self):
         """Test that 401 on unauthenticated put"""
