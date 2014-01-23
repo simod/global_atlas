@@ -13,7 +13,17 @@
     $scope.email = 'your@email.com';
 
     $scope.submit = function(){
-      UrlsProvider.request_post({email:$scope.email});
+      UrlsProvider.request_post({
+        title: $scope.title,
+        email: $scope.email,
+        purpose: $scope.purpose,
+        extended_description: $scope.extended_description,
+        content: $scope.content,
+        deadline: $scope.deadline,
+        size: UrlsProvider.size_url + $scope.size +'/',
+        format: UrlsProvider.format_url + $scope.format +'/',
+        requester: UrlsProvider.requester_url + $scope.requester +'/'
+      });
     }
   });
 
