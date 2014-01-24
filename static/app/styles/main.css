@@ -82,3 +82,30 @@ body {
   width: 400px;
   height: 700px;
 }
+
+input.ng-invalid {
+  border: 1px solid red;
+}
+input.ng-valid {
+  border: 1px solid green;
+}
+
+/* Error Handling */
+[data-abide] .djng-form-errors ul.djng-form-djng-form-errors, [data-abide] span.djng-form-errors, [data-abide] ul.djng-form-errors { display: block; padding: 0.375em 0.25em; margin-top: 0; margin-bottom: 1em; font-size: 0.75em; font-weight: bold; background: #c60f13; color: white; }
+[data-abide] span.djng-form-errors, [data-abide] ul.djng-form-errors { display: none; }
+
+span.djng-form-errors, ul.djng-form-errors > li { display: block; padding: 0.375em 0.25em; margin-top: 0; margin-bottom: 1em; font-size: 0.75em; font-weight: bold; background: #c60f13; color: white; }
+
+.djng-form-errors input, .djng-form-errors textarea, .djng-form-errors select { border-color: #c60f13; background-color: rgba(198, 15, 19, 0.1); margin-bottom: 0; }
+.djng-form-errors input:focus, .djng-form-errors textarea:focus, .djng-form-errors select:focus { background: #fafafa; border-color: #999999; }
+.djng-form-errors label, .djng-form-errors label.djng-form-errors { color: #c60f13; }
+.djng-form-errors > ul, .djng-form-errors ul.djng-form-errors { display: block; padding: 0.375em 0.25em; margin-top: 0; margin-bottom: 1em; font-size: 0.75em; font-weight: bold; background: #c60f13; color: white; }
+.djng-form-errors span.djng-form-errors-message { display: block; }
+
+input.error, textarea.error { border-color: #c60f13; background-color: rgba(198, 15, 19, 0.1); margin-bottom: 0; }
+input.error:focus, textarea.error:focus { background: #fafafa; border-color: #999999; }
+
+.error select { border-color: #c60f13; background-color: rgba(198, 15, 19, 0.1); }
+.error select:focus { background: #fafafa; border-color: #999999; }
+
+label.error { color: #c60f13; }

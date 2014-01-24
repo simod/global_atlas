@@ -1,10 +1,10 @@
 from django.forms import ModelForm
-from djangular.forms.angular_model import NgModelFormMixin
+from djangular.forms import NgModelFormMixin, NgFormValidationMixin
 
 from .models import MapRequest
 
 
-class MapRequestForm(NgModelFormMixin, ModelForm):
+class MapRequestForm(ModelForm):
     """Form for the map request model"""
 
     class Meta:
@@ -20,3 +20,9 @@ class MapRequestForm(NgModelFormMixin, ModelForm):
             'format',
             'requester'
         ]
+
+
+class MapRequestValidationForm(NgModelFormMixin, NgFormValidationMixin, MapRequestForm):
+    """Form for the map request model"""
+
+    pass
