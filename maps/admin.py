@@ -17,10 +17,13 @@ class SourceAdmin(admin.ModelAdmin):
 class CountryAdmin(admin.ModelAdmin):
     filter_horizontal = ('countries',)
 
+class MapRequestAdmin(admin.ModelAdmin):
+    list_display = ('title', 'date')
+
 admin.site.register(Theme, ThemeAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Map)
-admin.site.register(MapRequest)
+admin.site.register(MapRequest, MapRequestAdmin)
 admin.site.register(Country, CountryAdmin)
 admin.site.register(Format)
 admin.site.register(MapSize)

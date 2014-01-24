@@ -152,6 +152,7 @@ class CountryResource(ModelResource):
 
         filtering = {
             'fips': ALL,
+            'countries': ALL
         }
 
 

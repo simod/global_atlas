@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from djangular.forms import NgModelFormMixin, NgFormValidationMixin
+from djangular.forms import NgModelFormMixin, NgFormValidationMixin, AddPlaceholderFormMixin
 
 from .models import MapRequest
 
@@ -22,7 +22,8 @@ class MapRequestForm(ModelForm):
         ]
 
 
-class MapRequestValidationForm(NgModelFormMixin, NgFormValidationMixin, MapRequestForm):
+class MapRequestValidationForm(AddPlaceholderFormMixin, 
+    NgModelFormMixin, NgFormValidationMixin, MapRequestForm):
     """Form use on the client side, adds validation fields"""
 
     pass

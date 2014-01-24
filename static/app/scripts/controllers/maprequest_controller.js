@@ -10,8 +10,6 @@
 
   module.controller('MRController', function($scope, UrlsProvider){
     
-    $scope.email = 'your@email.com';
-
     $scope.submit = function(){
       UrlsProvider.request_post({
         title: $scope.title,
