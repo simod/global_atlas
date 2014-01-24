@@ -5,7 +5,7 @@ from .models import MapRequest
 
 
 class MapRequestForm(ModelForm):
-    """Form for the map request model"""
+    """Form for the map request model, used in the apis"""
 
     class Meta:
         model = MapRequest
@@ -23,6 +23,6 @@ class MapRequestForm(ModelForm):
 
 
 class MapRequestValidationForm(NgModelFormMixin, NgFormValidationMixin, MapRequestForm):
-    """Form for the map request model"""
+    """Form use on the client side, adds validation fields"""
 
     pass

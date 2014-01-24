@@ -19,15 +19,15 @@
         requester_url: ApiUrls.urls.requesters.list_endpoint,
         request_post: function(data){
           $http.post(ApiUrls.urls.requests.list_endpoint, data)
-            .success(function(){
+            .success(function(data, status, headers, config){
               alert('Your request is correctly registered!');
             })
-            .error(function(){
-              alert('error');
+            .error(function(data, status, headers, config){
+              alert(data['error']);
             });
         }
       }
-      
+
     }]
   });
 })();
