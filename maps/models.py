@@ -1,4 +1,5 @@
 import os
+import datetime
 
 from django.db import models
 from django.contrib.gis.db import models as geomodels
@@ -60,7 +61,7 @@ class MapRequest(models.Model):
     purpose = models.TextField(blank=True, null=True)
     extended_description = models.TextField(blank=True, null=True)
     content = models.TextField(blank=True, null=True)
-    deadline = models.DateField(blank=True, null=True)
+    deadline = models.DateField(default=datetime.date(year=2015, month=12, day=31))
     size = models.ForeignKey('MapSize')
     format = models.ForeignKey('Format')
     requester = models.ForeignKey('Requester')
