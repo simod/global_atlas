@@ -22,7 +22,8 @@ class FormTests(TestCase):
             'user': '/api/users/%s/',
             'format': '/api/formats/%s/',
             'requester': '/api/requesters/%s/',
-            'size': '/api/sizes/%s/'
+            'size': '/api/sizes/%s/',
+            'deadline': '2014-05-01',
         }
 
         load_test_data('maprequests')
