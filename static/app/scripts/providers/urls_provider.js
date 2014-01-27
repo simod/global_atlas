@@ -17,6 +17,7 @@
         format_url: ApiUrls.urls.formats.list_endpoint,
         size_url: ApiUrls.urls.sizes.list_endpoint,
         requester_url: ApiUrls.urls.requesters.list_endpoint,
+        country_url: ApiUrls.urls.countries.list_endpoint,
         request_post: function(data){
           $http.post(ApiUrls.urls.requests.list_endpoint, data)
             .success(function(data, status, headers, config){

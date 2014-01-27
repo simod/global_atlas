@@ -9,7 +9,6 @@
   var module = angular.module('atlas_mr_controller', ['atlas_url_provider']);
 
   module.controller('MRController', function($scope, UrlsProvider){
-    
     $scope.submit = function(){
       UrlsProvider.request_post({
         title: $scope.title,

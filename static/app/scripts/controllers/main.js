@@ -5,6 +5,5 @@
   var module = angular.module('atlas_main_controller',[]);
 
   module.controller('AtlasController', function ($scope, ApiUrls) {
-    console.log(ApiUrls.urls);
   });
 })();

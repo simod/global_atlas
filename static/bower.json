@@ -10,7 +10,10 @@
     "angular-cookies": "1.2.6",
     "angular-sanitize": "1.2.6",
     "angular-route": "1.2.6",
-    "closure-library": "git+https://code.google.com/p/closure-library/"
+    "closure-library": "git+https://code.google.com/p/closure-library/",
+    "jquery-ui": "1.10.3",
+    "angular-ui-select2": "",
+    "select2": "~3.4.5"
   },
   "devDependencies": {
     "angular-mocks": "1.2.6",

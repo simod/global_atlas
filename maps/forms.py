@@ -27,3 +27,4 @@ class MapRequestValidationForm(AddPlaceholderFormMixin,
     """Form use on the client side, adds validation fields"""
 
     pass
+    
