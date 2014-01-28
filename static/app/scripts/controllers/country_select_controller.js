@@ -16,7 +16,7 @@
       multiple: true,
       tags: [],
       ajax: {
-        url: UrlsProvider.country_url,
+        url: UrlsProvider.country_url + '?type=country',
         data: function(q){
           return {
             q: q

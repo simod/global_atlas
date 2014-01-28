@@ -155,6 +155,20 @@ class CountryResource(ModelResource):
             'countries': ALL
         }
 
+    def get_object_list(self, request):
+        """Expose the model manager querysets and apply filters"""
+        if request.GET.has_key('type'):
+            if request.GET['type'] == 'regions':
+                queryset = Country.objects.get_regions()
+            else:
+                queryset = Country.objects.get_countries()
+        else:
+            queryset = super(CountryResource, self).get_object_list(request)
+
+        if request.GET.has_key('q'):
+            queryset = queryset.filter(name__icontains=request.GET['q'])
+
+        return queryset
 
 class MapSizeResource(ModelResource):
     """MapSize api"""
