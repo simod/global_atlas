@@ -36,7 +36,7 @@
     </nav>
     
     <!-- Add search here -->
-    <div class="search" id="search">
+    <div class="search pull-left" id="search">
       <p>Countries</p>
       <div id="country_select" ui-select2="select2Options" ng-model="select2" placeholder="Type to search" ng-controller="CountrySelectController">
       </div>
@@ -65,8 +65,11 @@
       Map goes here
     </div>
 
-    <div class="search_results" id="search_results">
-
+    <div class="search_results pull-right" id="search_results">
+      <h2>Maps</h2>
+      <div ng-repeat="map in search_results">
+        <span ng-bind="map.title"></span>
+      </div>
     </div>
 
     <!-- Map Request form -->

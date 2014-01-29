@@ -6,7 +6,7 @@ from tastypie.contrib.gis.resources import ModelResource as GeoModelResource
 from tastypie.authentication import SessionAuthentication
 from tastypie.authorization import DjangoAuthorization
 from tastypie import fields
-from tastypie.constants import ALL
+from tastypie.constants import ALL, ALL_WITH_RELATIONS
 from tastypie.validation import FormValidation
 
 from .models import Map, Theme, MapRequest, Country, Format, \
@@ -152,7 +152,8 @@ class CountryResource(ModelResource):
 
         filtering = {
             'fips': ALL,
-            'countries': ALL
+            'countries': ALL,
+            'id': ALL
         }
 
     def get_object_list(self, request):
@@ -247,11 +248,11 @@ class MapRequestResource(ModelResource):
 class MapResource(GeoModelResource):
     """Map api"""
 
-    theme = fields.ToOneField(ThemeResource, 'theme')
-    category = fields.ToOneField(CategoryResource, 'category')
-    source = fields.ToOneField(SourceResource , 'source')
-    country = fields.ToOneField(CountryResource , 'country')
-    size = fields.ToOneField(MapSizeResource , 'size')
+    theme = fields.ToOneField(ThemeResource, 'theme', full=True)
+    category = fields.ToOneField(CategoryResource, 'category', full=True)
+    source = fields.ToOneField(SourceResource , 'source', full=True)
+    country = fields.ToOneField(CountryResource , 'country', full=True)
+    size = fields.ToOneField(MapSizeResource , 'size', full=True)
     request = fields.ToOneField(MapRequestResource , 'request')
 
     class Meta:
@@ -263,4 +264,7 @@ class MapResource(GeoModelResource):
 
         filtering = {
             'title': ALL,
+            'country': ALL_WITH_RELATIONS
         }
+
+
