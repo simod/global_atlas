@@ -15,6 +15,31 @@
       $scope.search_filters['country__id__in'] = e.val;
     });
 
+    // Manage the search filters
+    $('.search_filter').find('li').click(function(e){
+
+      if($(e.target).hasClass('active')){
+        // clear active classes in the parent block
+        $(e.target).parent().find('li').removeClass('active');
+
+        // Remove the filters entry
+        delete $scope.search_filters[$(e.target)
+        .attr('data-class') + '__id'];        
+      }
+      else{
+        // clear active classes in the parent block
+        $(e.target).parent().find('li').removeClass('active');
+
+        //Add the active class
+        $(e.target).addClass('active');
+
+        // Add the entry in the filters
+        $scope.search_filters[$(e.target)
+          .attr('data-class') + '__id'] = $(e.target).val();
+      }
+      // Trigger the scope digest
+      $scope.$digest();
+    });
 
     // React to the change of the filters and trigger the search
     $scope.$watch('search_filters', function(newVal, oldVal){

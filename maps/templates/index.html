@@ -28,53 +28,62 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <header>
-      <h1 class="col-md-offset-4">Global Atlas</h1>
-    </header>
-    <nav>
-      <button class="btn-lg btn-primary pull-right" data-toggle="modal" data-target="#mr_form">Request a map</button>
-    </nav>
-    
-    <!-- Add search here -->
-    <div class="search pull-left" id="search">
-      <p>Countries</p>
-      <div id="country_select" ui-select2="select2Options" ng-model="select2" placeholder="Type to search" ng-controller="CountrySelectController">
+    <div id="wrapper">
+      <header class="col-md-12 header">
+        <h1 class="col-md-4">Global Atlas</h1>
+        <button class="btn-lg btn-primary col-md-3 col-md-offset-4 " data-toggle="modal" data-target="#mr_form">Request a map</button>
+      </header>
+      
+      <!-- Add search here -->
+      <div class="search col-md-3 " id="search">
+        <h3>Query Filters</h3>
+        <div>
+          <label>Countries</label>
+          <div id="country_select" ui-select2="select2Options" ng-model="select2" placeholder="Type to search" ng-controller="CountrySelectController">
+          </div>
+        </div>
+        <div class="pull-left search_block">
+          <label>Themes</label>
+          <ul class="search_filter" id="themes">
+            {% for theme in themes %}
+              <li data-class="theme" value="{{ theme.id }}">{{ theme }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="pull-left search_block">
+          <label>Regions</label>
+          <ul class="search_filter" id="regions">
+            {% for region in regions %}
+              <li data-class="country" value="{{ region.id }}">{{ region }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="pull-left search_block">
+          <label>Categories</label>
+          <ul class="search_filter" id="categories">
+            {% for category in categories %}
+              <li data-class="category" value="{{ category.id }}">{{ category }}</li>
+            {% endfor %}
+          </ul>
+        </div>
       </div>
-      <p>Regions</p>
-      <ul id="regions">
-        {% for region in regions %}
-          <li>{{ region }}</li>
-        {% endfor %}
-      </ul>
-      <p>Categories</p>
-      <ul id="categories">
-        {% for category in categories %}
-          <li>{{ category }}</li>
-        {% endfor %}
-      </ul>
-      <p>Themes</p>
-      <ul id="themes">
-        {% for theme in themes %}
-          <li>{{ theme }}</li>
-        {% endfor %}
-      </ul>
-    </div>
 
-    <!-- Add map here -->
-    <div class="map" id="map">
-      Map goes here
-    </div>
+      <!-- Add map here -->
+      <div class="map col-md-4" id="map">
+        Map goes here
+      </div>
 
-    <div class="search_results pull-right" id="search_results">
-      <h2>Maps</h2>
-      <div ng-repeat="map in search_results">
-        <span ng-bind="map.title"></span>
+      <div class="search_results col-md-4" id="search_results">
+        <h3>Available Maps</h3>
+        <div ng-repeat="map in search_results">
+          <span ng-bind="map.title"></span>
+        </div>
       </div>
     </div>
 
     <!-- Map Request form -->
-    <div class="modal fade" id="mr_form">
-        <div class="modal-content">
+    <div class="modal fade col-md-4 col-md-offset-4" id="mr_form">
+        <div class="modal-content mr_form_wrapper">
             <form name="{{mr_form.name}}" ng-controller="MRController" novalidate>
                 <legend>Request for a map</legend>
                 {{ mr_form.as_p }}

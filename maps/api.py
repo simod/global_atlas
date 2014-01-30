@@ -102,7 +102,8 @@ class ThemeResource(ModelResource):
 
         filtering = {
             'slug': ALL,
-            'name': ALL
+            'name': ALL,
+            'id': ALL
         }
 
 
@@ -118,7 +119,8 @@ class CategoryResource(ModelResource):
 
         filtering = {
             'slug': ALL,
-            'name': ALL
+            'name': ALL,
+            'id': ALL
         }
 
 
@@ -264,7 +266,9 @@ class MapResource(GeoModelResource):
 
         filtering = {
             'title': ALL,
-            'country': ALL_WITH_RELATIONS
+            'country': ALL_WITH_RELATIONS,
+            'category': ALL_WITH_RELATIONS,
+            'theme': ALL_WITH_RELATIONS
         }
 
 
