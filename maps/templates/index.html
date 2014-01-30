@@ -70,8 +70,10 @@
       </div>
 
       <!-- Add map here -->
-      <leaflet ng-controller="MapController" class="map col-md-4" id="map">
-      </leaflet>
+      <div ng-controller="MapController" class="map col-md-4" id="map">
+        <leaflet center="center" geojson="countries">
+        </leaflet>
+      </div>
 
       <div class="search_results" id="search_results">
         <h3>Available Maps</h3>
@@ -136,6 +138,10 @@
             // Set the initial api url
             module.constant('ApiUrls', {
               urls: data
+            });
+
+            module.constant('DataUrls',{
+              countries: "{% static "data/countries.json" %}"
             });
 
             // Configure general ajax parameters

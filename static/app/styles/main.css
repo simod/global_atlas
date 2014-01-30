@@ -133,9 +133,12 @@ span.djng-form-errors, ul.djng-form-errors > li {
 }
 
 #map{
-  width: 400px;
+  width: 450px;
   height: 400px;
   border: 1px solid black;
+  margin-right: 30px;
+  margin-left: 20px;
+  padding: 0px;
 }
 
 .search_block{
@@ -155,7 +158,6 @@ textarea{
   height: 50px;
 }
 
-#map{
-  margin-right: 30px;
-  margin-left: 20px;
+.angular-leaflet-map {
+    height: 100%;
 }
