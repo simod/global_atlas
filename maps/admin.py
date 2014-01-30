@@ -20,9 +20,12 @@ class CountryAdmin(admin.ModelAdmin):
 class MapRequestAdmin(admin.ModelAdmin):
     list_display = ('title', 'date')
 
+class MapAdmin(admin.ModelAdmin):
+    list_display = ('title', 'id', 'date')
+
 admin.site.register(Theme, ThemeAdmin)
 admin.site.register(Category, CategoryAdmin)
-admin.site.register(Map)
+admin.site.register(Map, MapAdmin)
 admin.site.register(MapRequest, MapRequestAdmin)
 admin.site.register(Country, CountryAdmin)
 admin.site.register(Format)

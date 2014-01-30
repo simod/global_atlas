@@ -21,6 +21,10 @@ class MapRequestForm(ModelForm):
             'requester'
         ]
 
+    def __init__(self, *args, **kwargs):
+        super(MapRequestForm, self).__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs['class'] = 'pull-right'
 
 class MapRequestValidationForm(AddPlaceholderFormMixin, 
     NgModelFormMixin, NgFormValidationMixin, MapRequestForm):

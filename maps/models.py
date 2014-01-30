@@ -34,7 +34,7 @@ class Map(geomodels.Model):
     map_thumbnail = models.FileField(upload_to='uploads/thumbnails',  blank=True, null=True)
     center = geomodels.PointField(blank=True, null=True)
     country = models.ForeignKey('Country')
-    size = models.ForeignKey('MapSize', blank=True, null=True)
+    size = models.ForeignKey('MapSize')
 
     def __unicode__(self):
         return self.title
@@ -59,7 +59,7 @@ class MapRequest(models.Model):
     user = models.ForeignKey(User)
     date = models.DateField(auto_now=True)
     purpose = models.TextField(blank=True, null=True)
-    extended_description = models.TextField(blank=True, null=True)
+    extended_description = models.TextField('Description', blank=True, null=True)
     content = models.TextField(blank=True, null=True)
     deadline = models.DateField(default=datetime.date(year=2015, month=12, day=31))
     size = models.ForeignKey('MapSize')
