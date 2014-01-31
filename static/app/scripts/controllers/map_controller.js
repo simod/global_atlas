@@ -23,6 +23,15 @@
             opacity: 1,
             color: 'white',
             fillOpacity: 0.9
+          },
+          onEachFeature: function(feature, layer){
+            var popupContent = '<p>' + feature.properties.name + '</p>';
+
+            layer.on('mouseover', function(){
+              layer.bindPopup(popupContent, {
+                feature: feature
+              }).openPopup(layer.getBounds().getCenter());
+            });
           }
         }
       });
