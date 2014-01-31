@@ -36,7 +36,7 @@
       </header>
       
       <!-- Add search here -->
-      <div class="search col-md-3 " id="search">
+      <div class="search col-md-3 pull-left" id="search">
         <h3>Query Filters</h3>
         <div>
           <label>Countries</label>
@@ -70,12 +70,12 @@
       </div>
 
       <!-- Add map here -->
-      <div ng-controller="MapController" class="map col-md-4" id="map">
+      <div ng-controller="MapController" class="map col-md-4 pull-left" id="map">
         <leaflet center="center" geojson="countries">
         </leaflet>
       </div>
 
-      <div class="search_results" id="search_results">
+      <div class="search_results pull-left" id="search_results">
         <h3>Available Maps</h3>
         <div ng-repeat="map in search_results">
           <span ng-bind="map.title"></span>
@@ -108,9 +108,6 @@
     <script src="{% static "bower_components/select2/select2.min.js" %}"></script>
     <script src="{% static "bower_components/angular/angular.js" %}"></script>
     <script src="{% static "bower_components/bootstrap/dist/js/bootstrap.js" %}"></script>
-    <script src="{% static "bower_components/angular-cookies/angular-cookies.js" %}"></script>
-    <script src="{% static "bower_components/angular-sanitize/angular-sanitize.js" %}"></script>
-    <script src="{% static "bower_components/angular-route/angular-route.js" %}"></script>
     <script src="{% static "bower_components/jquery-ui/ui/jquery-ui.js" %}"></script>
     <script src="{% static "bower_components/angular-ui-select2/src/select2.js" %}"></script>
     <script src="{% static "bower_components/leaflet-dist/leaflet.js" %}"></script>
@@ -137,7 +134,8 @@
 
             // Set the initial api url
             module.constant('ApiUrls', {
-              urls: data
+              urls: data,
+              maps_count: "{% url "maps_count" %}"
             });
 
             module.constant('DataUrls',{

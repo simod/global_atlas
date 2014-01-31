@@ -11,7 +11,7 @@
 
   module.provider('UrlsProvider', function(){
 
-    this.$get = ['$http', 'ApiUrls', function($http, ApiUrls){
+    this.$get = function(ApiUrls){
 
       return {
         format_url: ApiUrls.urls.formats.list_endpoint,
@@ -19,17 +19,8 @@
         requester_url: ApiUrls.urls.requesters.list_endpoint,
         country_url: ApiUrls.urls.countries.list_endpoint,
         map_url: ApiUrls.urls.maps.list_endpoint,        
-        request_post: function(data){
-          $http.post(ApiUrls.urls.requests.list_endpoint, data)
-            .success(function(data, status, headers, config){
-              alert('Your request is correctly registered!');
-            })
-            .error(function(data, status, headers, config){
-              alert(data['error']);
-            });
-        }
+        request_url: ApiUrls.urls.requests.list_endpoint
       }
-
-    }]
+    }
   });
 })();

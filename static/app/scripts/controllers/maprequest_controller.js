@@ -8,9 +8,10 @@
 
   var module = angular.module('atlas_mr_controller', ['atlas_url_provider']);
 
-  module.controller('MRController', function($scope, UrlsProvider){
+  module.controller('MRController', function($scope, $http, UrlsProvider){
     $scope.submit = function(){
-      UrlsProvider.request_post({
+
+      var data = {
         title: $scope.title,
         email: $scope.email,
         purpose: $scope.purpose,
@@ -20,8 +21,16 @@
         size: UrlsProvider.size_url + $scope.size +'/',
         format: UrlsProvider.format_url + $scope.format +'/',
         requester: UrlsProvider.requester_url + $scope.requester +'/'
-      });
+      }
+
+      $http.post(UrlsProvider.request_url, data)
+        .success(function(data, status, headers, config){
+          $('#mr_form').modal('toggle');
+          alert('Your request is correctly registered!');
+        })
+        .error(function(data, status, headers, config){
+          alert(data['error']);
+        });
     }
   });
-
 })();
