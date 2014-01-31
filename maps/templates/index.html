@@ -134,12 +134,12 @@
 
             // Set the initial api url
             module.constant('ApiUrls', {
-              urls: data,
-              maps_count: "{% url "maps_count" %}"
+              urls: data
             });
 
             module.constant('DataUrls',{
-              countries: "{% static "data/countries.json" %}"
+              countries: "{% static "data/countries.json" %}",
+              maps_count: "{% url "maps_count" %}"
             });
 
             // Configure general ajax parameters
