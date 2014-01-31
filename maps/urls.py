@@ -5,7 +5,7 @@ from tastypie.api import Api
 from .api import MapResource, ThemeResource, MapRequestResource, \
     CountryResource, FormatResource, MapSizeResource, \
     CategoryResource, RequesterResource, SourceResource, UserResource
-from .views import Home
+from .views import Home, MapsForCountry
 
 
 api = Api(api_name='api')
@@ -26,5 +26,6 @@ urlpatterns = patterns('',
     #url(r'^$', login_required(Home.as_view())),
     url(r'^$', Home.as_view()),
     url(r'', include(api.urls)),
+    url(r'maps_count/?$', MapsForCountry.as_view(), name='maps_count'),
 
 )
