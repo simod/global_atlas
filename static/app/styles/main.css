@@ -135,7 +135,7 @@ span.djng-form-errors, ul.djng-form-errors > li {
 #map{
   width: 450px;
   height: 400px;
-  border: 1px solid black;
+  border: 1px solid #C0C0C0;
   margin-right: 30px;
   margin-left: 20px;
   padding: 0px;
@@ -176,8 +176,18 @@ textarea{
   margin-top: 7px;
 }
 
-.result_article  li{
+.result_article li{
   list-style-type: none;
+}
+
+.result_article h4{
+  margin-top: 5px;
+  padding-left: 0px;
+  color: #90A3D9;
+}
+
+.result_article{
+  border-bottom: 1px solid #C0C0C0;
 }
 
 .legend {
