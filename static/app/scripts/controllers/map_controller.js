@@ -25,7 +25,12 @@
         lat: 5.6,
         lng: 3.9,
         zoom: 2
-      }
+      },
+      legend: {
+        position: 'topright',
+        colors: [ '#66CCFF', '#90A3D9', '#657FCB', '#335CD6', '#0033CC'],
+        labels: [ 'One map', 'Two maps', 'Three maps', 'Four maps', '4+ maps']
+      },
     });
 
     var map = leafletData.getMap();
