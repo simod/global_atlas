@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{% static "bower_components/jquery-ui/themes/smoothness/jquery-ui.css" %}">
     <!-- bower:css -->
     <link rel="stylesheet" href="{% static "bower_components/bootstrap/dist/css/bootstrap.css" %}">
+    <link rel="stylesheet" href="{% static "styles/flags.css" %}">
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,app}) styles/main.css -->
@@ -71,7 +72,7 @@
 
       <!-- Add map here -->
       <div ng-controller="MapController" class="map col-md-4 pull-left" id="map">
-        <leaflet center="center" geojson="countries">
+        <leaflet center="center" geojson="countries" layers="layers">
         </leaflet>
       </div>
 

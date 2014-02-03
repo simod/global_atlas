@@ -69,12 +69,13 @@ class MapRequest(models.Model):
     def __unicode__(self):
         return self.title
 
-class Country(models.Model):
+class Country(geomodels.Model):
     """Country object"""
     fips = models.CharField('FIPS', max_length=5, unique=True)
     name = models.CharField(max_length=128, unique=True)
     iso2 = models.CharField(max_length=2, blank=True, null=True, unique=True)
     iso3 = models.CharField(max_length=3, blank=True, null=True, unique=True)
+    geometry = geomodels.MultiPolygonField(blank=True, null=True)
     countries = models.ManyToManyField('Country', blank=True, null=True, related_name='subcountries')
 
     objects = CountryManager()

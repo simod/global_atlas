@@ -5,8 +5,22 @@
 
   var module = angular.module('map_controller', ['leaflet-directive']);
 
-  module.controller('MapController', function($scope, $http, DataUrls, leafletData){
+  module.controller('MapController', function($scope, $http, DataUrls,
+   leafletData, UrlsProvider){
     angular.extend($scope, {
+      layers: {
+        baselayers: {
+          ithaca: {
+            name: 'ithaca-silver',
+            type: 'wms',
+            url: 'http://playground.ithacaweb.org/geoserver/gwc/service/wms',
+            layerOptions: {
+              layers: 'gmes:erds',
+              format: 'image/png'
+            }
+          }
+        }
+      },
       center: {
         lat: 5.6,
         lng: 3.9,
@@ -34,9 +48,13 @@
       return html;
     };
 
-    info_div.update = function(country, maps_data){
-      this._div.innerHTML = country ? '<strong>' + country['name'] + '</strong><br>' + 
-        (maps_data ? this.create_counts_snippet(maps_data) : 'No maps') :
+    info_div.update = function(country){
+      this._div.innerHTML = country ? 
+        '<p class="flag flag-' + country['iso3'].toLowerCase() + '"></p>' +
+        '<strong>' + country['name'] + '</strong>' + 
+        '<br><p class="map-info-counts">' + (country['maps_count']['total'] !== 0 ? 
+          this.create_counts_snippet(country['maps_count']) : 
+          'No maps') + '</p>':
         'Hover a country';
     };
 
@@ -44,25 +62,39 @@
       info_div.addTo(map);
     });
 
-    $http.get(DataUrls.countries).success(function(countries){
-      $http.get(DataUrls.maps_count).success(function(maps_data){
-        angular.extend($scope, {
-          countries: {
-            data: countries,
-            style: {
-              fillColor: 'grey',
-              weight: 0.7,
-              opacity: 1,
-              color: 'white',
-              fillOpacity: 0.9
-            },
-            onEachFeature: function(feature, layer){
-              layer.on('mouseover', function(){
-                info_div.update(feature.properties, maps_data[feature.id]);
-              });
-            }
+    function getMapColors(maps){
+      return maps > 4 ? '#0033CC' :
+             maps > 3 ? '#335CD6' :
+             maps > 2 ? '#657FCB' :
+             maps > 1 ? '#90A3D9' :
+             maps > 0 ? '#66CCFF' :
+             'transparent'
+    }
+
+    function styleCountry(feature) {
+      return {
+        weight: 0.5,
+        opacity: 1,
+        color: 'gray',
+        fillOpacity: 0.7,
+        fillColor: getMapColors(feature.maps_count.total)
+      };
+    }
+
+    $http.get(UrlsProvider.country_url + '?limit=200').success(function(countries){
+      angular.extend($scope, {
+        countries: {
+          data: {
+            "type": "FeatureCollection",
+            "features": countries.objects
+          },
+          style: styleCountry,
+          onEachFeature: function(feature, layer){
+            layer.on('mouseover', function(){
+              info_div.update(feature);
+            });
           }
-        });
+        }
       });
     });
   });

@@ -140,7 +140,7 @@ class SourceResource(ModelResource):
         }
 
 
-class CountryResource(ModelResource):
+class CountryResource(GeoModelResource):
     """Country api"""
 
     countries = fields.ToManyField('self', 'countries')
@@ -157,6 +157,17 @@ class CountryResource(ModelResource):
             'countries': ALL,
             'id': ALL
         }
+
+    def dehydrate(self, bundle):
+        bundle.data['type'] = 'Feature'
+        bundle.data['maps_count'] = {
+            'total': bundle.obj.map_set.count(),
+        }
+        for cat in Category.objects.all():
+            bundle.data['maps_count'][cat.name] = \
+                cat.map_set.filter(country=bundle.obj).count()
+        
+        return bundle
 
     def get_object_list(self, request):
         """Expose the model manager querysets and apply filters"""
