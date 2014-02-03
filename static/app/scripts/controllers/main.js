@@ -15,6 +15,13 @@
       $scope.search_filters['country__id__in'] = e.val;
     });
 
+    // Listed to the map click event and set the country filter
+    $scope.$on('mapclicked', function(e, feature){
+      $('#country_select').select2('data', 
+        {id: feature.id, text: feature.name}, 
+        true);
+    });
+
     // Manage the search filters
     $('.search_filter').find('li').click(function(e){
 

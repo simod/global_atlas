@@ -29,6 +29,9 @@
             })
           }
         }
+      },
+      initSelection: function (element, callback) {
+        callback(element.val());
       }
     }
   });

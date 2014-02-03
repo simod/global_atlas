@@ -138,11 +138,6 @@
               urls: data
             });
 
-            module.constant('DataUrls',{
-              countries: "{% static "data/countries.json" %}",
-              maps_count: "{% url "maps_count" %}"
-            });
-
             // Configure general ajax parameters
             module.config(function($httpProvider) {
               $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';

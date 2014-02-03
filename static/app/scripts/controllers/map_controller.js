@@ -5,7 +5,7 @@
 
   var module = angular.module('map_controller', ['leaflet-directive']);
 
-  module.controller('MapController', function($scope, $http, DataUrls,
+  module.controller('MapController', function($scope, $http,
    leafletData, UrlsProvider){
     angular.extend($scope, {
       layers: {
@@ -55,7 +55,7 @@
         '<br><p class="map-info-counts">' + (country['maps_count']['total'] !== 0 ? 
           this.create_counts_snippet(country['maps_count']) : 
           'No maps') + '</p>':
-        'Hover a country';
+        'Hover or click a country';
     };
 
     map.then(function(map){
@@ -92,6 +92,9 @@
           onEachFeature: function(feature, layer){
             layer.on('mouseover', function(){
               info_div.update(feature);
+            });
+            layer.on('click', function(e){
+              $scope.$emit('mapclicked', e.target.feature)
             });
           }
         }
