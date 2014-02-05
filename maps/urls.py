@@ -23,7 +23,8 @@ api.register(UserResource())
 
 urlpatterns = patterns('',
     # Examples:
-    #url(r'^$', login_required(Home.as_view())),
-    url(r'^$', Home.as_view()),
+    (r'^accounts/login/$', 'django.contrib.auth.views.login',
+        {'template_name': 'login.html'}),
+    url(r'^$', login_required(Home.as_view())),
     url(r'', include(api.urls)),
 )
