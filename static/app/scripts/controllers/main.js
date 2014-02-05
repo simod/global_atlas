@@ -7,8 +7,19 @@
   var module = angular.module('atlas_main_controller', ['atlas_url_provider']);
 
   module.controller('AtlasController', function ($scope, $http, UrlsProvider) {
-    
+    $scope.page = 1;
+    $scope.results_limit = 5;
     $scope.search_filters = {};
+    $scope.search_results = [];
+    $scope.search_total_counts = 0;
+    $scope.numpages = 1;
+
+    $scope.$watch('search_total_counts', function(){
+      $scope.numpages = Math.round(
+        ($scope.search_total_counts / $scope.results_limit) + 0.49
+      );
+      if($scope.numpages == 0){$scope.numpages =1};
+    });
 
     // Update the filters on change of the country selections
     $('#country_select').on('change', function(e){
@@ -53,10 +64,29 @@
       search();
     },true);
 
+    $scope.paginate_down = function(){
+      if($scope.page > 1){
+        $scope.page -= 1;
+        search();
+      }   
+    }
+
+    $scope.paginate_up = function(){
+      if($scope.numpages > $scope.page){
+        $scope.page += 1;
+        search();
+      }
+    }
+
     function search(){
-      $http.get(UrlsProvider.map_url, {params: $scope.search_filters})
+      var url_with_pagination = UrlsProvider.map_url + 
+        '?limit=' + $scope.results_limit +
+        '&offset=' + ($scope.results_limit * ($scope.page - 1));
+
+      $http.get(url_with_pagination, {params: $scope.search_filters})
       .success(function(data){
         $scope.search_results = data.objects;
+        $scope.search_total_counts = data.meta.total_count;
       });
     }
   });

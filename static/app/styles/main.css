@@ -214,3 +214,16 @@ textarea{
   min-width: 150px;
   color: #657FCB;
 }
+
+.search_results > h3 {
+  margin-top: 0px;
+}
+
+.search > h3{
+  margin-top: 0px;
+}
+
+.pager{
+  margin: 10px 0 10px 0;
+  width: 184px;
+}

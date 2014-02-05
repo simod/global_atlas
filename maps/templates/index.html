@@ -84,6 +84,13 @@
 
       <div class="search_results pull-left" id="search_results">
         <h3>Available Maps</h3>
+        <div class="pager">
+          <a><strong ng-click="paginate_down()">-</strong></a>
+          <span ng-model="page" ng-bind="page"></span>
+          <span> of </span>
+          <span ng-bind="numpages"></span>
+          <a><strong ng-click="paginate_up()">+</strong></a>
+        </div>
         <div ng-repeat="map in search_results">
           <article class="result_article">
             <div class="item-header">
