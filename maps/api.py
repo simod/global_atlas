@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.forms.models import ModelChoiceField
+from django.db.models import Count
 
 from tastypie.resources import ModelResource
 from tastypie.contrib.gis.resources import ModelResource as GeoModelResource
@@ -162,10 +163,9 @@ class CountryResource(GeoModelResource):
         bundle.data['type'] = 'Feature'
         bundle.data['maps_count'] = {
             'total': bundle.obj.map_set.count(),
-        }
-        for cat in Category.objects.all():
-            bundle.data['maps_count'][cat.name] = \
-                cat.map_set.filter(country=bundle.obj).count()
+            'counts': list(bundle.obj.map_set. \
+            values('category__name').annotate(count=Count('category__name')))
+        }  
         
         return bundle
 
@@ -264,7 +264,7 @@ class MapResource(GeoModelResource):
     theme = fields.ToOneField(ThemeResource, 'theme', full=True)
     category = fields.ToOneField(CategoryResource, 'category', full=True)
     source = fields.ToOneField(SourceResource , 'source', full=True)
-    country = fields.ToOneField(CountryResource , 'country', full=True)
+    country = fields.ToOneField(CountryResource , 'country')
     size = fields.ToOneField(MapSizeResource , 'size', full=True)
     request = fields.ToOneField(MapRequestResource , 'request')
 
