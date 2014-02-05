@@ -268,8 +268,12 @@ class MapResource(GeoModelResource):
     size = fields.ToOneField(MapSizeResource , 'size', full=True)
     request = fields.ToOneField(MapRequestResource , 'request')
 
+    def dehydrate(self, bundle):
+        bundle.data['country'] = bundle.obj.country.name
+        return bundle
+
     class Meta:
-        queryset = Map.objects.all()
+        queryset = Map.objects.all().order_by('-date')
         resource_name = 'maps'
         authentication= SessionAuthentication()
         authorization = DjangoAuthorization()

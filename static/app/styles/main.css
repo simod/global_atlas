@@ -215,7 +215,7 @@ textarea{
   color: #657FCB;
 }
 
-.search_results > h3 {
+.results > h3 {
   margin-top: 0px;
 }
 
@@ -226,4 +226,13 @@ textarea{
 .pager{
   margin: 10px 0 10px 0;
   width: 184px;
+}
+
+.search_results li{
+  max-width: 260px
+}
+
+.search_results{
+  max-height: 450px;
+  overflow: auto;
 }

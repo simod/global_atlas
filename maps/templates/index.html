@@ -86,7 +86,7 @@
         </leaflet>
       </div>
 
-      <div class="search_results pull-left" id="search_results">
+      <div class="results pull-left">
         <h3>Found 
            <ng-pluralize count="search_total_counts"
             when="{'one': '1 Map', 'other': '{} Maps'}"><ng-pluralize>
@@ -99,18 +99,29 @@
           <span ng-bind="numpages"></span>
           <a><strong ng-click="paginate_up()">+</strong></a>
         </div>
-        <div ng-repeat="map in search_results">
-          <article class="result_article">
-            <div class="item-header">
-              <h4 ng-bind="map.title"></h4>
-            </div>
-            <div class="details">
-              <ul>      
-                <li><strong>Format: </strong><span ng-bind="map.size.name"></span></li>
-                <li><strong>Source: </strong><span ng-bind="map.source.name"></span></li>
-              </ul>
-            </div>
-          </article>
+        <div class="search_results">
+          <div ng-repeat="map in search_results">
+            <article class="result_article">
+              <div class="item-header">
+                <h4 ng-bind="map.title"></h4>
+              </div>
+              <div class="thumbnail">
+                {% verbatim %}
+                <img ng-src="{{map.map_thumbnail}}" />
+                {% endverbatim %}
+              </div>
+              <div class="details">
+                <ul>      
+                  <li><strong>Format: </strong><span ng-bind="map.size.name"></span></li>
+                  <li><strong>Source: </strong><span ng-bind="map.source.name"></span></li>
+                  <li><strong>Category: </strong><span ng-bind="map.category.name"></span></li>
+                  <li><strong>Theme: </strong><span ng-bind="map.theme.name"></span></li>
+                  <li><strong>Size: </strong><span ng-bind="map.size.name"></span></li>
+                  <li><strong>Country: </strong><span ng-bind="map.country"></span></li>
+                </ul>
+              </div>
+            </article>
+          </div>
         </div>
       </div>
     </div>
