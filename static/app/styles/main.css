@@ -102,14 +102,14 @@ h1 {
   padding: 10px;
 }
 
-input.ng-invalid {
+#mr_form input.ng-invalid {
   border: 1px solid #CC6666;
 }
-input.ng-valid {
+#mr_form input.ng-valid {
   border: 1px solid #339966;
 }
 
-span.djng-form-errors, ul.djng-form-errors > li { 
+#mr_form span.djng-form-errors, ul.djng-form-errors > li { 
   display: block; padding: 0.375em 0.25em; 
   margin-top: 0; 
   margin-bottom: 1em; 

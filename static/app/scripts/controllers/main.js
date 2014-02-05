@@ -33,6 +33,12 @@
         true);
     });
 
+    // Listen to the title change and query
+    $scope.$on('query_by_title', function(e, title){
+      $scope.search_filters['title__icontains'] = title;
+      search();
+    });
+
     // Manage the search filters
     $('.search_filter').find('li').click(function(e){
 
