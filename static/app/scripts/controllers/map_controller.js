@@ -16,7 +16,7 @@
              maps > 0 ? '#66CCFF' :
              'transparent'
     }
-    
+
     angular.extend($scope, {
       layers: {
         baselayers: {
@@ -37,8 +37,8 @@
         zoom: 2
       },
       legend: (function(){
-        var colors = [''];
-        for(var i=1; i<6; i++){
+        var colors = [];
+        for(var i=0; i<6; i++){
           colors.push(getMapColors(i));
         }
         return {
