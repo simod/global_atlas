@@ -14,32 +14,44 @@
     $scope.search_total_counts = 0;
     $scope.numpages = 1;
 
+    // Control what happens when the total results change
     $scope.$watch('search_total_counts', function(){
       $scope.numpages = Math.round(
         ($scope.search_total_counts / $scope.results_limit) + 0.49
       );
-      if($scope.numpages == 0){$scope.numpages =1};
+
+      // In case the user is viewing a page > 1 and a 
+      // subsequent query returns less pages, then 
+      // reset the page to one and search again.
+      if($scope.numpages < $scope.page){
+        $scope.page = 1;
+        search();
+      }
+
+      // In case of no results, the number of pages is one.
+      if($scope.numpages == 0){$scope.numpages = 1};
     });
 
     // Update the filters on change of the country selections
     $('#country_select').on('change', function(e){
       $scope.search_filters['country__id__in'] = e.val;
+      search();
     });
 
     // Listed to the map click event and set the country filter
     $scope.$on('mapclicked', function(e, feature){
       $('#country_select').select2('data', 
-        {id: feature.id, text: feature.name}, 
-        true);
+        {id: feature.id, text: feature.name},true);
+      search();
     });
 
-    // Listen to the title change and query
+    // Listen to the title change and set the title filter
     $scope.$on('query_by_title', function(e, title){
       $scope.search_filters['title__icontains'] = title;
       search();
     });
 
-    // Manage the search filters
+    // Manage the search filters lists
     $('.search_filter').find('li').click(function(e){
 
       if($(e.target).hasClass('active')){
@@ -61,14 +73,9 @@
         $scope.search_filters[$(e.target)
           .attr('data-class') + '__id'] = $(e.target).val();
       }
-      // Trigger the scope digest
-      $scope.$digest();
-    });
-
-    // React to the change of the filters and trigger the search
-    $scope.$watch('search_filters', function(newVal, oldVal){
+      // Search
       search();
-    },true);
+    });
 
     $scope.paginate_down = function(){
       if($scope.page > 1){
