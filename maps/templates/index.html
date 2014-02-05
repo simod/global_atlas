@@ -83,9 +83,13 @@
       </div>
 
       <div class="search_results pull-left" id="search_results">
-        <h3>Available Maps</h3>
+        <h3>Found 
+           <ng-pluralize count="search_total_counts"
+            when="{'one': '1 Map', 'other': '{} Maps'}"><ng-pluralize>
+        </h3>
         <div class="pager">
           <a><strong ng-click="paginate_down()">-</strong></a>
+          <span>page </span>
           <span ng-model="page" ng-bind="page"></span>
           <span> of </span>
           <span ng-bind="numpages"></span>
