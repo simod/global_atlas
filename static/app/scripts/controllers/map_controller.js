@@ -7,6 +7,16 @@
 
   module.controller('MapController', function($scope, $http,
    leafletData, UrlsProvider){
+
+    function getMapColors(maps){
+      return maps > 4 ? '#0033CC' :
+             maps > 3 ? '#335CD6' :
+             maps > 2 ? '#657FCB' :
+             maps > 1 ? '#90A3D9' :
+             maps > 0 ? '#66CCFF' :
+             'transparent'
+    }
+    
     angular.extend($scope, {
       layers: {
         baselayers: {
@@ -26,11 +36,17 @@
         lng: 3.9,
         zoom: 2
       },
-      legend: {
-        position: 'topright',
-        colors: [ '#66CCFF', '#90A3D9', '#657FCB', '#335CD6', '#0033CC'],
-        labels: [ 'One map', 'Two maps', 'Three maps', 'Four maps', '4+ maps']
-      },
+      legend: (function(){
+        var colors = [''];
+        for(var i=1; i<6; i++){
+          colors.push(getMapColors(i));
+        }
+        return {
+          position: 'topright',
+          colors: colors,
+          labels: [ '<strong>Maps</strong>', 'One', 'Two', 'Three', 'Four', '4+']
+        }
+      })(),
     });
 
     var map = leafletData.getMap();
@@ -43,12 +59,10 @@
       return this._div;
     };
 
-    info_div.create_counts_snippet = function(maps_data){
+    info_div.create_counts_snippet = function(counts){
       var html = '';
-      for(var category in maps_data){
-        if(maps_data[category] > 0 && category !== 'total'){
-          html += category + ': ' + maps_data[category] + '<br>';
-        }
+      for(var i=0; i < counts.length; i++){
+        html += counts[i].category__name + ': ' + counts[i].count + '<br>';
       }
       return html;
     };
@@ -58,23 +72,14 @@
         '<p class="flag flag-' + country['iso3'].toLowerCase() + '"></p>' +
         '<strong>' + country['name'] + '</strong>' + 
         '<br><p class="map-info-counts">' + (country['maps_count']['total'] !== 0 ? 
-          this.create_counts_snippet(country['maps_count']) : 
+          this.create_counts_snippet(country['maps_count']['counts']) : 
           'No maps') + '</p>':
-        'Hover or click a country';
+        'Hover or click on a country';
     };
 
     map.then(function(map){
       info_div.addTo(map);
     });
-
-    function getMapColors(maps){
-      return maps > 4 ? '#0033CC' :
-             maps > 3 ? '#335CD6' :
-             maps > 2 ? '#657FCB' :
-             maps > 1 ? '#90A3D9' :
-             maps > 0 ? '#66CCFF' :
-             'transparent'
-    }
 
     function styleCountry(feature) {
       return {
@@ -97,6 +102,9 @@
           onEachFeature: function(feature, layer){
             layer.on('mouseover', function(){
               info_div.update(feature);
+            });
+            layer.on('mouseout', function(){
+              info_div.update();
             });
             layer.on('click', function(e){
               $scope.$emit('mapclicked', e.target.feature)
