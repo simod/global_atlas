@@ -169,6 +169,7 @@ class MapApiTests(ResourceTestCase):
             self.detail_url % themap.pk))
         new_data = themap_data.copy()
         new_data['title'] = 'Updated title'
+        new_data['country'] = '/api/countries/%s/' % Country.objects.all()[0].pk
 
         self.assertEqual(Map.objects.count(), 2)
         self.assertHttpAccepted(self.api_client.put(
