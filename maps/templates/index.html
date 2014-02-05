@@ -39,34 +39,40 @@
       <!-- Add search here -->
       <div class="search col-md-3 pull-left" id="search">
         <h3>Query Filters</h3>
-        <div>
-          <label>Countries</label>
-          <div id="country_select" ui-select2="select2Options" ng-model="select2" placeholder="Type to search" ng-controller="CountrySelectController">
+        <div class="spatial-filters pull-left">
+          <strong class="pull-left">Search by country or by region</strong>
+          <div>
+            <label>Countries</label>
+            <div id="country_select" ui-select2="select2Options" ng-model="select2" placeholder="Type to search" ng-controller="CountrySelectController">
+            </div>
+          </div>
+          <div class="pull-left search_block">
+            <label>Regions</label>
+            <ul class="search_filter" id="regions">
+              {% for region in regions %}
+                <li data-class="country" value="{{ region.id }}">{{ region }}</li>
+              {% endfor %}
+            </ul>
           </div>
         </div>
-        <div class="pull-left search_block">
-          <label>Themes</label>
-          <ul class="search_filter" id="themes">
-            {% for theme in themes %}
-              <li data-class="theme" value="{{ theme.id }}">{{ theme }}</li>
-            {% endfor %}
-          </ul>
-        </div>
-        <div class="pull-left search_block">
-          <label>Regions</label>
-          <ul class="search_filter" id="regions">
-            {% for region in regions %}
-              <li data-class="country" value="{{ region.id }}">{{ region }}</li>
-            {% endfor %}
-          </ul>
-        </div>
-        <div class="pull-left search_block">
-          <label>Categories</label>
-          <ul class="search_filter" id="categories">
-            {% for category in categories %}
-              <li data-class="category" value="{{ category.id }}">{{ category }}</li>
-            {% endfor %}
-          </ul>
+        <div class="attribute-filters pull-left">
+          <strong class="pull-left">Refine your query</strong>
+          <div class="pull-left search_block">
+            <label>Themes</label>
+            <ul class="search_filter" id="themes">
+              {% for theme in themes %}
+                <li data-class="theme" value="{{ theme.id }}">{{ theme }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="pull-right search_block">
+            <label>Categories</label>
+            <ul class="search_filter" id="categories">
+              {% for category in categories %}
+                <li data-class="category" value="{{ category.id }}">{{ category }}</li>
+              {% endfor %}
+            </ul>
+          </div>
         </div>
       </div>
 
