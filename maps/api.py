@@ -270,6 +270,7 @@ class MapResource(GeoModelResource):
 
     def dehydrate(self, bundle):
         bundle.data['country'] = bundle.obj.country.name
+        bundle.data['format'] = bundle.obj.request.format.name
         return bundle
 
     class Meta:

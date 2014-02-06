@@ -101,26 +101,16 @@
         </div>
         <div class="search_results">
           <div ng-repeat="map in search_results">
-            <article class="result_article">
+            {% verbatim %}
+            <article class="result_article" data-toggle="popover" data-content="<strong>Format: </strong>{{map.format}}</br><strong>Size: </strong>{{map.size.name}}</br><strong>Category: </strong>{{map.category.name}}</br><strong>Source: </strong>{{map.source.name}}</br><strong>Country: </strong>{{map.country}}</br><strong>Theme: </strong>{{map.theme.name}}" data-title="<strong>Metadata</strong>">
               <div class="item-header">
-                {% verbatim %}
                 <a ng-href="{{ map.map_file }}" download><h4 ng-bind="map.title"></h4></a>
               </div>
               <div class="thumbnail">    
                 <img ng-src="{{ map.map_thumbnail }}" />
-                {% endverbatim %}
-              </div>
-              <div class="details">
-                <ul>      
-                  <li><strong>Format: </strong><span ng-bind="map.size.name"></span></li>
-                  <li><strong>Source: </strong><span ng-bind="map.source.name"></span></li>
-                  <li><strong>Category: </strong><span ng-bind="map.category.name"></span></li>
-                  <li><strong>Theme: </strong><span ng-bind="map.theme.name"></span></li>
-                  <li><strong>Size: </strong><span ng-bind="map.size.name"></span></li>
-                  <li><strong>Country: </strong><span ng-bind="map.country"></span></li>
-                </ul>
               </div>
             </article>
+            {% endverbatim %}
           </div>
         </div>
       </div>
@@ -151,6 +141,8 @@
     <script src="{% static "bower_components/select2/select2.min.js" %}"></script>
     <script src="{% static "bower_components/angular/angular.js" %}"></script>
     <script src="{% static "bower_components/bootstrap/dist/js/bootstrap.js" %}"></script>
+    <script src="{% static "bower_components/bootstrap/js/tooltip.js" %}"></script>
+    <script src="{% static "bower_components/bootstrap/js/popover.js" %}"></script>
     <script src="{% static "bower_components/jquery-ui/ui/jquery-ui.js" %}"></script>
     <script src="{% static "bower_components/angular-ui-select2/src/select2.js" %}"></script>
     <script src="{% static "bower_components/leaflet-dist/leaflet.js" %}"></script>
@@ -172,6 +164,14 @@
       <script type="text/javascript">
         (function(){
           $( "#id_deadline" ).datepicker();
+
+          // Attach the popovers to the search results
+          $('body').popover({
+            selector: '.result_article',
+            html: true,
+            trigger: 'hover',
+            placement: 'left'
+          });
           $.get("{% url 'api_api_top_level' api_name='api' %}", function(data){
             var module = angular.module('atlas');
 

@@ -236,3 +236,7 @@ textarea{
   max-height: 450px;
   overflow: auto;
 }
+
+.popover-title{
+  color: #657FCB;
+}
