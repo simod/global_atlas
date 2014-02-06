@@ -188,6 +188,7 @@ textarea{
 
 .result_article{
   border-bottom: 1px solid #C0C0C0;
+  padding: 5px 0 5px 0;
 }
 
 .legend {
@@ -239,4 +240,13 @@ textarea{
 
 .popover-title{
   color: #657FCB;
+}
+
+.map_date{
+  color: #858585;
+  font-size: 80%;
+}
+
+.thumbnail{
+  margin: 0;
 }

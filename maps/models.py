@@ -27,7 +27,7 @@ class Map(geomodels.Model):
     theme = models.ForeignKey('Theme')
     category = models.ForeignKey('Category')
     source = models.ForeignKey('Source')
-    description = models.TextField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True, default="No description given")
     scale = models.CharField(max_length=20, blank=True, null=True)
     request = models.ForeignKey('MapRequest')
     map_file = models.FileField(upload_to='maps')
