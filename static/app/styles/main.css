@@ -56,14 +56,6 @@ h1 {
   padding: 14px 24px;
 }
 
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
-}
-.marketing p + h4 {
-  margin-top: 28px;
-}
-
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   /* Remove the padding we set earlier */
@@ -216,16 +208,13 @@ textarea{
   color: #657FCB;
 }
 
-.results > h3 {
+h3 {
   margin-top: 0px;
-}
-
-.search > h3{
-  margin-top: 0px;
+  font-size: 150%;
 }
 
 .pager{
-  margin: 10px 0 10px 0;
+  margin: 10px 0 0 0;
   width: 184px;
 }
 
@@ -240,6 +229,10 @@ textarea{
 
 .popover-title{
   color: #657FCB;
+}
+
+.popover-content{
+  font-size: 85%;
 }
 
 .map_date{
