@@ -32,10 +32,10 @@ class Map(geomodels.Model):
     request = models.ForeignKey('MapRequest')
     map_file = models.FileField(upload_to='maps')
     map_thumbnail = models.FileField(upload_to='thumbnails',  blank=True, null=True)
-    center = geomodels.PointField(blank=True, null=True)
     country = models.ForeignKey('Country')
     size = models.ForeignKey('MapSize')
-
+    center = geomodels.PointField(blank=True, null=True)
+    
     def __unicode__(self):
         return self.title
 

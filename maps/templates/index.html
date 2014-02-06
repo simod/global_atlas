@@ -36,7 +36,7 @@
         <button class="btn-lg btn-primary col-md-3 col-md-offset-4 " data-toggle="modal" data-target="#mr_form">Request a map</button>
       </header>
       
-      <!-- Add search here -->
+      <!-- Search-->
       <div class="search col-md-3 pull-left" id="search">
         <h3>Query Filters</h3>
         <div class="spatial-filters pull-left">
@@ -80,12 +80,13 @@
         </div>
       </div>
 
-      <!-- Add map here -->
+      <!-- Map -->
       <div ng-controller="MapController" class="map col-md-4 pull-left" id="map">
         <leaflet center="center" geojson="countries" layers="layers" legend="legend">
         </leaflet>
       </div>
 
+      <!-- Search results -->
       <div class="results pull-left">
         <h3>Found 
            <ng-pluralize count="search_total_counts"
@@ -161,36 +162,38 @@
     <script src="{% static "deps.js" %}"></script>
     <script>
         goog.require('atlas');
-     </script>
-      <script type="text/javascript">
-        (function(){
-          $( "#id_deadline" ).datepicker();
+    </script>
+    <script type="text/javascript">
+      (function(){
+        $( "#id_deadline" ).datepicker();
 
-          // Attach the popovers to the search results
-          $('body').popover({
-            selector: '.result_article',
-            html: true,
-            trigger: 'hover',
-            placement: 'left'
+        // Attach the popovers to the search results
+        $('body').popover({
+          selector: '.result_article',
+          html: true,
+          trigger: 'hover',
+          placement: 'left'
+        });
+
+        // Get the api urls and bootstrap the application
+        $.get("{% url 'api_api_top_level' api_name='api' %}", function(data){
+          var module = angular.module('atlas');
+
+          // Set the initial api url
+          module.constant('ApiUrls', {
+            urls: data
           });
-          $.get("{% url 'api_api_top_level' api_name='api' %}", function(data){
-            var module = angular.module('atlas');
 
-            // Set the initial api url
-            module.constant('ApiUrls', {
-              urls: data
-            });
-
-            // Configure general ajax parameters
-            module.config(function($httpProvider) {
-              $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-              $httpProvider.defaults.xsrfCookieName = 'csrftoken';
-              $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
-            });
-
-            angular.bootstrap(document,['atlas']);
+          // Configure general ajax parameters
+          module.config(function($httpProvider) {
+            $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+            $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+            $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
           });
-        })();
-      </script>
+
+          angular.bootstrap(document,['atlas']);
+        });
+      })();
+    </script>
 </body>
 </html>

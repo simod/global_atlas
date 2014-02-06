@@ -16,9 +16,13 @@ class SourceAdmin(admin.ModelAdmin):
 
 class CountryAdmin(admin.ModelAdmin):
     filter_horizontal = ('countries',)
+    search_fields = ['name',]
+    ordering= ['name',]
+    list_display = ('name', 'fips')
 
 class MapRequestAdmin(admin.ModelAdmin):
-    list_display = ('title', 'date')
+    list_display = ('title', 'date', 'user',)
+    search_fields = ['user__username',]
 
 class MapAdmin(admin.ModelAdmin):
     list_display = ('title', 'id', 'date')
