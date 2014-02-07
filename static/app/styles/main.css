@@ -235,6 +235,10 @@ h3 {
   font-size: 85%;
 }
 
+.popover{
+  min-width: 200px;
+}
+
 .map_date{
   color: #858585;
   font-size: 80%;
