@@ -100,8 +100,6 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static/app"),
 )
 
-MEDIA_URL = '/uploads/'
-
 MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
 
 TASTYPIE_DEFAULT_FORMATS = ['json']

@@ -31,7 +31,7 @@ class Map(geomodels.Model):
     scale = models.CharField(max_length=20, blank=True, null=True)
     request = models.ForeignKey('MapRequest')
     map_file = models.FileField(upload_to='maps')
-    map_thumbnail = models.FileField(upload_to='thumbnails',  blank=True, null=True)
+    map_thumbnail = models.FileField(upload_to='static/app/thumbnails',  blank=True, null=True)
     country = models.ForeignKey('Country')
     size = models.ForeignKey('MapSize')
     center = geomodels.PointField(blank=True, null=True)
