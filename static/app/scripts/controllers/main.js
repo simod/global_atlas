@@ -51,39 +51,47 @@
       search();
     });
 
-    // Manage the search filters lists
+    // Manage the search filters lists adding and removing
+    // the 'active' class ad the id in the relative search filter 
     $('.search_filter').find('li').click(function(e){
 
+      // if is active enter the deactivate block
       if($(e.target).hasClass('active')){
 
-        // clear active classes in the parent block if not a multiple_choice
+        // is single choice
         if(!$(e.target).parent().hasClass('multiple_choice')){
+          // clear all acrive classes for the block
           $(e.target).parent().find('li').removeClass('active');
           // Remove the filters entry
           delete $scope.search_filters[$(e.target)
-         .attr('data-class') + '__id']; 
-          
+            .attr('data-class') + '__id'];    
         }
-        else{
+        else // is a multiple choice
+        {
+          // get the correct filter
           var filter = $scope.search_filters[$(e.target)
-         .attr('data-class') + '__id__in'];
+            .attr('data-class') + '__id__in'];
+          // remove just the correct entry from the filter array
           $(e.target).removeClass('active');
-           filter.splice(filter.indexOf($(e.target).val()),1);
-          
+            filter.splice(filter.indexOf($(e.target).val()),1);         
         }               
       }
-      else{
-        // clear active classes in the parent block if not multiple_choice
+      else // is not active, then activate
+      {
+        // is single choice
         if(!$(e.target).parent().hasClass('multiple_choice')){
+          // clear all active classes for the block
           $(e.target).parent().find('li').removeClass('active');
-          // Add the entry in the filters
+          // Add the filters entry
           $scope.search_filters[$(e.target)
-          .attr('data-class') + '__id'] = $(e.target).val();
-
+            .attr('data-class') + '__id'] = $(e.target).val();
         }
-        else {
+        else // is a multiple choice
+        {
+          // get the correct filter
           var filter = $scope.search_filters[$(e.target)
-         .attr('data-class') + '__id__in'];
+            .attr('data-class') + '__id__in'];
+          // Add the correct entry in the filters array
           filter.push($(e.target).val());
         }
         //Add the active class

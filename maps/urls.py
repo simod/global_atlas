@@ -29,6 +29,6 @@ urlpatterns = patterns('',
     (r'^accounts/login/$', 'django.contrib.auth.views.login',
         {'template_name': 'login.html'}),
     url(r'^$', login_required(Home.as_view())),
-    url(r'^(?P<pk>[0-9]+)/download/?$', login_required(download), name='map_download'),
+    url(r'^maps/(?P<pk>[0-9]+)/download/?$', login_required(download), name='map_download'),
     url(r'', include(api.urls)),
 )

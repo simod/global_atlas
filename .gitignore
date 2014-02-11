@@ -10,3 +10,4 @@ htmlcov
 .cache/v/cache/lastfailed
 .cache/v/pep8/mtimes
 static/app/thumbnails
+initial_data

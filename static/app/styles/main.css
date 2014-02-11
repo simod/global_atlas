@@ -135,11 +135,11 @@ h1 {
 
 .search_block{
   margin-top: 10px;
-  font-size: 90%;
 }
 
-.attribute-filters{
+.attribute-filters, .spatial-filters{
   max-width: 150px;
+  font-size: 90%;
 }
 
 .search{
@@ -218,6 +218,7 @@ textarea{
 
 .search strong{
   margin: 5px;
+  margin-bottom: 15px;
   min-width: 150px;
   color: #657FCB;
 }
@@ -237,7 +238,7 @@ h3 {
 }
 
 .search_results{
-  max-height: 450px;
+  max-height: 350px;
   overflow: auto;
 }
 

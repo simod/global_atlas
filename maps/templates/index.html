@@ -97,7 +97,7 @@
             {% verbatim %}
             <article ng-repeat="map in search_results" class="result_article" data-toggle="popover" data-content="<strong>Format: </strong>{{map.format}}</br><strong>Size: </strong>{{map.size.name}}</br><strong>Category: </strong>{{map.category.name}}</br><strong>Source: </strong>{{map.source.name}}</br><strong>Country: </strong>{{map.country}}</br><strong>Theme: </strong>{{map.theme.name}}</br><strong>Scale: </strong>{{map.scale}}</br><strong>Description: </strong>{{map.description}}" data-title="<strong>Metadata</strong>">
               <div class="item-header">
-                <a ng-href="{{ map.id }}/download"><h4 ng-bind="map.title"></h4></a>
+                <a ng-href="maps/{{ map.id }}/download"><h4 ng-bind="map.title"></h4></a>
               </div>
               <div class="thumbnail">    
                 <a ng-href="{{ map.id }}/download"><img ng-src="{{ map.map_thumbnail }}" /></a>
