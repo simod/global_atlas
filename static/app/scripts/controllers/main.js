@@ -55,23 +55,39 @@
     $('.search_filter').find('li').click(function(e){
 
       if($(e.target).hasClass('active')){
-        // clear active classes in the parent block
-        $(e.target).parent().find('li').removeClass('active');
 
-        // Remove the filters entry
-        delete $scope.search_filters[$(e.target)
-        .attr('data-class') + '__id'];        
+        // clear active classes in the parent block if not a multiple_choice
+        if(!$(e.target).parent().hasClass('multiple_choice')){
+          $(e.target).parent().find('li').removeClass('active');
+          // Remove the filters entry
+          delete $scope.search_filters[$(e.target)
+         .attr('data-class') + '__id']; 
+          
+        }
+        else{
+          var filter = $scope.search_filters[$(e.target)
+         .attr('data-class') + '__id__in'];
+          $(e.target).removeClass('active');
+           filter.splice(filter.indexOf($(e.target).val()),1);
+          
+        }               
       }
       else{
-        // clear active classes in the parent block
-        $(e.target).parent().find('li').removeClass('active');
-
-        //Add the active class
-        $(e.target).addClass('active');
-
-        // Add the entry in the filters
-        $scope.search_filters[$(e.target)
+        // clear active classes in the parent block if not multiple_choice
+        if(!$(e.target).parent().hasClass('multiple_choice')){
+          $(e.target).parent().find('li').removeClass('active');
+          // Add the entry in the filters
+          $scope.search_filters[$(e.target)
           .attr('data-class') + '__id'] = $(e.target).val();
+
+        }
+        else {
+          var filter = $scope.search_filters[$(e.target)
+         .attr('data-class') + '__id__in'];
+          filter.push($(e.target).val());
+        }
+        //Add the active class
+        $(e.target).addClass('active');        
       }
       // Search
       search();

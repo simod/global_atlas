@@ -128,17 +128,31 @@ h1 {
   width: 450px;
   height: 400px;
   border: 1px solid #C0C0C0;
-  margin-right: 30px;
+  margin-right: 20px;
   margin-left: 20px;
   padding: 0px;
 }
 
 .search_block{
-  margin: 10px;
+  margin-top: 10px;
+  font-size: 90%;
+}
+
+.attribute-filters{
+  max-width: 150px;
+}
+
+.search{
+  padding: 0;
+  max-width: 230px;
 }
 
 .search_filter > li{
   list-style-type: none;
+}
+
+.results{
+  max-width: 300px;
 }
 
 ul{

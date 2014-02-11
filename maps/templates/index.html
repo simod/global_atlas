@@ -62,14 +62,6 @@
             <input ng-model="title" type="text" ng-controller="TitleSelectController" placeholder="Type to search"></input>
           </div>
           <div class="pull-left search_block">
-            <label>Themes</label>
-            <ul class="search_filter" id="themes">
-              {% for theme in themes %}
-                <li data-class="theme" value="{{ theme.id }}">{{ theme }}</li>
-              {% endfor %}
-            </ul>
-          </div>
-          <div class="pull-right search_block">
             <label>Categories</label>
             <ul class="search_filter" id="categories">
               {% for category in categories %}
@@ -101,9 +93,9 @@
           <a><strong ng-click="paginate_up()">+</strong></a>
         </div>
         <div class="search_results">
-          <div ng-repeat="map in search_results">
+          <div>
             {% verbatim %}
-            <article class="result_article" data-toggle="popover" data-content="<strong>Format: </strong>{{map.format}}</br><strong>Size: </strong>{{map.size.name}}</br><strong>Category: </strong>{{map.category.name}}</br><strong>Source: </strong>{{map.source.name}}</br><strong>Country: </strong>{{map.country}}</br><strong>Theme: </strong>{{map.theme.name}}</br><strong>Scale: </strong>{{map.scale}}</br><strong>Description: </strong>{{map.description}}" data-title="<strong>Metadata</strong>">
+            <article ng-repeat="map in search_results" class="result_article" data-toggle="popover" data-content="<strong>Format: </strong>{{map.format}}</br><strong>Size: </strong>{{map.size.name}}</br><strong>Category: </strong>{{map.category.name}}</br><strong>Source: </strong>{{map.source.name}}</br><strong>Country: </strong>{{map.country}}</br><strong>Theme: </strong>{{map.theme.name}}</br><strong>Scale: </strong>{{map.scale}}</br><strong>Description: </strong>{{map.description}}" data-title="<strong>Metadata</strong>">
               <div class="item-header">
                 <a ng-href="{{ map.id }}/download"><h4 ng-bind="map.title"></h4></a>
               </div>
