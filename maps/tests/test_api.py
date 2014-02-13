@@ -344,7 +344,6 @@ class MapRequestApiTests(ResourceTestCase):
             'deadline': '2013-05-01',
             'content': 'cippa',
             'email': 's@d.com',
-            #'user': '/api/users/%s/' % User.objects.all()[0].pk,
             'format': '/api/formats/%s/' % Format.objects.all()[0].pk,
             'requester': '/api/requesters/%s/' % Requester.objects.all()[0].pk,
             'size': '/api/sizes/%s/' % MapSize.objects.all()[0].pk

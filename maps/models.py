@@ -64,7 +64,7 @@ class MapRequest(models.Model):
     deadline = models.DateField(default=datetime.date(year=2015, month=12, day=31))
     size = models.ForeignKey('MapSize')
     format = models.ForeignKey('Format')
-    requester = models.ForeignKey('Requester')
+    requester = models.ForeignKey('Requester', verbose_name='Institution')
 
     def __unicode__(self):
         return self.title

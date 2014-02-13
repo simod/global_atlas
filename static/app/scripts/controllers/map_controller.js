@@ -83,7 +83,7 @@
 
     function styleCountry(feature) {
       return {
-        weight: 0.5,
+        weight: 0.2,
         opacity: 1,
         color: 'gray',
         fillOpacity: 0.7,
