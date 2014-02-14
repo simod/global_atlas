@@ -195,7 +195,7 @@ testdata = {
             "category": "location",
             "scale": "1:500000",
             "description": "A map",
-            "country": "ITA",
+            "country": "IT",
             "request": "request1",
             "source": "jrc",
             "theme": "crisis",
@@ -210,7 +210,7 @@ testdata = {
             "category": "crisis",
             "scale": "1:100000",
             "description": "A map",
-            "country": "NOR",
+            "country": "NO",
             "request": "request2",
             "source": "jrc",
             "theme": "emergency",
@@ -256,8 +256,8 @@ testdata = {
             "fips": "WRL",
             "name": "World",
             "countries": [
-                "ITA",
-                "NOR"
+                "IT",
+                "NO"
             ]
         }
     }],

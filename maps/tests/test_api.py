@@ -434,7 +434,7 @@ class CountryApiTests(ResourceTestCase):
         self.assertKeys(self.deserialize(resp), [u'id', u'fips', 
             u'name', u'iso2', u'iso3', u'countries', u'resource_uri', 
             u'geometry', u'maps_count', u'type'])
-        self.assertEqual(self.deserialize(resp)['fips'], 'ITA')
+        self.assertEqual(self.deserialize(resp)['fips'], 'IT')
 
     def test_country_post_unauth(self):
         """Test that 401 on unauthenticated post"""
@@ -445,7 +445,7 @@ class CountryApiTests(ResourceTestCase):
         """Test a post while authenticated"""
         self.assertEqual(Country.objects.count(), 3)
         post_data = {
-            'fips': 'SPAIN',
+            'fips': 'SP',
             'name': 'Spain',
             'iso2': 'SP',
             'iso3': 'SPA',
@@ -474,7 +474,7 @@ class CountryApiTests(ResourceTestCase):
         co_data = self.deserialize(self.api_client.get(
             self.detail_url % co.pk))
         new_data = co_data.copy()
-        new_data['fips'] = 'ESPA'
+        new_data['fips'] = 'ES'
 
         self.assertEqual(Country.objects.count(), 3)
         self.assertHttpAccepted(self.api_client.put(
@@ -482,7 +482,7 @@ class CountryApiTests(ResourceTestCase):
         self.assertEqual(Country.objects.count(), 3)
 
         self.assertEqual(Country.objects.get(pk=co.pk).fips, 
-            'ESPA')
+            'ES')
 
     def test_country_delete_unauth(self):
         """Test that 401 on unauthenticated delete"""

@@ -28,7 +28,7 @@ class ModelsMapTests(TestCase):
             request = MapRequest.objects.all()[0],
             map_file = samplefile,
             map_thumbnail = samplefile,
-            country = Country.objects.get(fips='ITA'),
+            country = Country.objects.get(fips='IT'),
             size = MapSize.objects.get(name='A4')
         )
         self.assertTrue(created)
@@ -142,25 +142,25 @@ class ModelsCountryTests(TestCase):
     def test_country_create(self):
         """Test Country create"""
         co, created = Country.objects.get_or_create(
-            fips = 'COUNT',
+            fips = 'CO',
             name = 'atlantis'
         )
-        co.countries.add(Country.objects.get(fips='ITA'))
-        co.countries.add(Country.objects.get(fips='NOR'))
+        co.countries.add(Country.objects.get(fips='IT'))
+        co.countries.add(Country.objects.get(fips='NO'))
         self.assertTrue(created)
         self.assertEqual(str(co),'atlantis')
 
     def test_country_update(self):
         """Test Country update"""
-        co = Country.objects.get(fips='ITA')
+        co = Country.objects.get(fips='IT')
         co.iso2 = 'IK'
         co.save()
-        co = Country.objects.get(fips='ITA')
+        co = Country.objects.get(fips='IT')
         self.assertEqual(co.iso2, 'IK')
 
     def test_country_delete(self):
         """Test Country delete"""
-        Country.objects.get(fips='ITA').delete()
+        Country.objects.get(fips='IT').delete()
         cs = Country.objects.filter(iso2='IT').count()
         self.assertEqual(cs, 0)
 
