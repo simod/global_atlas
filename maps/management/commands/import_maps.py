@@ -41,10 +41,10 @@ def load_maps():
             scale = row[10]
             maprequest = MapRequest.objects.get(title='initial')
             try:
-                map_file = File(open('uploads/maps/%s' % row[12]))
+                map_file = File(open('maps/%s' % row[12]))
             except: raise
             try:
-                map_thumbnail = File(open('static_root/thumbnails/%s' % '%s.jpg' 
+                map_thumbnail = File(open('thumbnails/%s' % '%s.jpg' 
                     % os.path.splitext(row[12])[0]))
             except:
                 print 'Thumbnail for file %s not found' % row[12]
@@ -78,7 +78,7 @@ def load_maps():
                 if created:
                     print 'Saved maps with id %s' % themap.pk
                 else: print 'Updated maps with id %s' % themap.pk
-                
+
             except: raise
     print 'Loaded %s maps' % Map.objects.count()
 
