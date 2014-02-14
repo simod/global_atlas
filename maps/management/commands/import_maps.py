@@ -5,6 +5,7 @@ from datetime import datetime
 from django.core.management.base import BaseCommand, CommandError
 from django.contrib.gis.geos import Point
 from django.utils.text import slugify
+from django.core.files import File
 
 from maps.models import Country, Map, MapRequest, Theme, Category, \
     Source, MapSize
@@ -36,11 +37,11 @@ def load_maps():
             scale = row[10]
             #maprequest = MapRequest.objects.filter(requester__name=row[11])[0]
             try:
-                map_file = open('uploads/maps/%s' % row[12]).read()
+                map_file = File(open('uploads/maps/%s' % row[12]))
             except: raise
             try:
-                map_thumbnail = open('static_root/thumbnails/%s' % '%s.jpg' 
-                    % os.path.splitext(row[12])[0]).read()
+                map_thumbnail = File(open('static_root/thumbnails/%s' % '%s.jpg' 
+                    % os.path.splitext(row[12])[0]))
             except:
                 print 'Thumbnail for file %s not found' % row[12]
                 map_thumbnail = None
