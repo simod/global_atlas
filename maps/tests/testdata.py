@@ -235,7 +235,7 @@ testdata = {
         "fields": {
             "iso3": "ITA",
             "iso2": "IT",
-            "fips": "ITA",
+            "fips": "IT",
             "name": "Italy",
             "countries": []
         }
@@ -244,7 +244,7 @@ testdata = {
         "fields": {
             "iso3": "NOR",
             "iso2": "NO",
-            "fips": "NOR",
+            "fips": "NO",
             "name": "Norway",
             "countries": []
         }
@@ -253,7 +253,7 @@ testdata = {
         "fields": {
             "iso3": "",
             "iso2": "",
-            "fips": "WORLD",
+            "fips": "WRL",
             "name": "World",
             "countries": [
                 "ITA",
