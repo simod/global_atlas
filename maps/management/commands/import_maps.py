@@ -42,10 +42,18 @@ def load_maps():
             else: 
                 theme = Theme.objects.get(slug=slugify(unicode(row[6])))
 
-            category, c = Category.objects.get_or_create(name=row[7], 
-                slug=slugify(unicode(row[7])))
-            source, c = Source.objects.get_or_create(name=row[8], 
-                slug=slugify(unicode(row[8])))
+            if not Category.objects.filter(slug=slugify(unicode(row[7]))).exists():
+                category, c = Category.objects.get_or_create(name=row[7], 
+                    slug=slugify(unicode(row[7])))
+            else:
+                Category.objects.get(slug=slugify(unicode(row[7])))
+
+            if not Source.objects.filter(slug=slugify(unicode(row[8]))).exists():
+                source, c = Source.objects.get_or_create(name=row[8], 
+                    slug=slugify(unicode(row[8])))
+            else:
+                Source.objects.get(slug=slugify(unicode(row[8])))
+
             description = row[9]
             scale = row[10]
             maprequest = MapRequest.objects.get(title='initial')
