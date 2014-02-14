@@ -18,7 +18,7 @@ WHO;FILENAME;LONG;LAT
 
 def load_maps():
 
-    with open('../../../data/MAPS2.csv', 'rU') as maps:
+    with open('data/MAPS2.csv', 'rU') as maps:
         for row in maps.read():
             row = row.split(';')
             id = row[0]
@@ -36,10 +36,10 @@ def load_maps():
             scale = row[10]
             #maprequest = MapRequest.objects.filter(requester__name=row[11])[0]
             try:
-                map_file = open('../../../uploads/maps/%s' % row[12])
+                map_file = open('uploads/maps/%s' % row[12])
             except: raise
             try:
-                map_thumbnail = open('../../../static_root/thumbnails/%s' % '%s.jpg' 
+                map_thumbnail = open('static_root/thumbnails/%s' % '%s.jpg' 
                     % os.path.splitext(row[12])[0])
             except:
                 print 'Thumbnail for file %s not found' % row[12]
