@@ -26,6 +26,7 @@ class MapRequestAdmin(admin.ModelAdmin):
 
 class MapAdmin(admin.ModelAdmin):
     list_display = ('title', 'id', 'date')
+    search_fields = ['title', 'id',]
 
 admin.site.register(Theme, ThemeAdmin)
 admin.site.register(Category, CategoryAdmin)
