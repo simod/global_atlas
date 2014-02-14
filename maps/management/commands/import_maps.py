@@ -35,7 +35,7 @@ def load_maps():
                 slug=slugify(unicode(row[8])))
             description = row[9]
             scale = row[10]
-            #maprequest = MapRequest.objects.filter(requester__name=row[11])[0]
+            maprequest = MapRequest.objects.get(title='initial')
             try:
                 map_file = File(open('uploads/maps/%s' % row[12]))
             except: raise
@@ -66,7 +66,7 @@ def load_maps():
                     source = source,
                     description = description,
                     scale = scale,
-                    #request = maprequest,
+                    request = maprequest,
                     center = center,
                     map_file = map_file,
                     map_thumbnail = map_thumbnail
