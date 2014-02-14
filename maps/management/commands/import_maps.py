@@ -54,7 +54,7 @@ def load_maps():
                 continue
 
             try:
-                themap = Map.objects.get_or_create(
+                themap, created = Map.objects.get_or_create(
                     pk = id,
                     title = title,
                     country = country,
@@ -70,6 +70,7 @@ def load_maps():
                     map_file = map_file,
                     map_thumbnail = map_thumbnail
                 )
+                print 'saved maps with id %s' % themap.pk
             except: raise
     print 'Loaded %s maps' % Map.objects.count()
 
