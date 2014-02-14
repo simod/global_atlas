@@ -46,13 +46,13 @@ def load_maps():
                 category, c = Category.objects.get_or_create(name=row[7], 
                     slug=slugify(unicode(row[7])))
             else:
-                Category.objects.get(slug=slugify(unicode(row[7])))
+                category = Category.objects.get(slug=slugify(unicode(row[7])))
 
             if not Source.objects.filter(slug=slugify(unicode(row[8]))).exists():
                 source, c = Source.objects.get_or_create(name=row[8], 
                     slug=slugify(unicode(row[8])))
             else:
-                Source.objects.get(slug=slugify(unicode(row[8])))
+                source = Source.objects.get(slug=slugify(unicode(row[8])))
 
             description = row[9]
             scale = row[10]
