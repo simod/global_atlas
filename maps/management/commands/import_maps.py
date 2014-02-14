@@ -35,8 +35,13 @@ def load_maps():
                 date = datetime.strptime(row[5], '%d/%m/%y')
             except:
                 date = datetime.strptime('01/01/1999', '%d/%m/%Y')
-            theme, c = Theme.objects.get_or_create(name=row[6], 
-                slug=slugify(unicode(row[6])))
+
+            if not Theme.objects.exists(slug=slugify(unicode(row[6]))):
+                theme, c = Theme.objects.get_or_create(name=row[6], 
+                    slug=slugify(unicode(row[6])))
+            else: 
+                theme = Theme.objects.get(slug=slugify(unicode(row[6])))
+
             category, c = Category.objects.get_or_create(name=row[7], 
                 slug=slugify(unicode(row[7])))
             source, c = Source.objects.get_or_create(name=row[8], 
@@ -63,25 +68,29 @@ def load_maps():
                 continue
 
             try:
-                themap, created = Map.objects.get_or_create(
-                    pk = id,
-                    title = title,
-                    country = country,
-                    size = size,
-                    date = date,
-                    theme = theme,
-                    category = category,
-                    source = source,
-                    description = description,
-                    scale = scale,
-                    request = maprequest,
-                    center = center,
-                    map_file = map_file,
-                    map_thumbnail = map_thumbnail
-                )
-                if created:
-                    print 'Saved maps with id %s' % themap.pk
-                else: print 'Updated maps with id %s' % themap.pk
+                if not Map.objects.exists(pk = id):
+                    themap, created = Map.objects.get_or_create(
+                        pk = id,
+                        title = title,
+                        country = country,
+                        size = size,
+                        date = date,
+                        theme = theme,
+                        category = category,
+                        source = source,
+                        description = description,
+                        scale = scale,
+                        request = maprequest,
+                        center = center,
+                        map_file = map_file,
+                        map_thumbnail = map_thumbnail
+                    )
+                    if created:
+                        print 'Saved maps with id %s' % themap.pk
+                    else: print 'Updated maps with id %s' % themap.pk
+
+                else:
+                    print 'Skipped existing map with id = %s' % id
 
             except: raise
     print 'Loaded %s maps' % Map.objects.count()
