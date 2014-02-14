@@ -33,7 +33,7 @@ def load_maps():
                 slug=slugify(unicode(row[8])))
             description = row[9]
             scale = row[10]
-            maprequest = MapRequest.objects.filter(requester__name=row[11])[0]
+            #maprequest = MapRequest.objects.filter(requester__name=row[11])[0]
             try:
                 map_file = open('../../../uploads/maps/%s' % row[12])
             except: raise
@@ -45,8 +45,12 @@ def load_maps():
                 map_thumbnail = None
                 continue
 
-            center = Point(float(row[13].replace(',','.')), 
+            try:
+                center = Point(float(row[13].replace(',','.')), 
                 float(row[14].replace(',','.')))
+            except: 
+                center = None
+                continue
 
             try:
                 themap = Map.objects.get_or_create(
@@ -60,7 +64,7 @@ def load_maps():
                     source = source,
                     description = description,
                     scale = scale,
-                    request = maprequest,
+                    #request = maprequest,
                     center = center,
                     map_file = map_file,
                     map_thumbnail = map_thumbnail
