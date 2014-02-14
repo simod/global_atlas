@@ -19,7 +19,7 @@ WHO;FILENAME;LONG;LAT
 def load_maps():
 
     with open('data/MAPS2.csv', 'rU') as maps:
-        for row in maps.read():
+        for row in maps.readlines():
             row = row.split(';')
             id = row[0]
             title = row[1]
