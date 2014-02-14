@@ -91,7 +91,7 @@
       };
     }
 
-    $http.get(UrlsProvider.country_url + '?limit=200').success(function(countries){
+    $http.get(UrlsProvider.country_url + '?limit=200&type=country').success(function(countries){
       angular.extend($scope, {
         countries: {
           data: {
