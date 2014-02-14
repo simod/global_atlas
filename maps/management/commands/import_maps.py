@@ -36,7 +36,7 @@ def load_maps():
             except:
                 date = datetime.strptime('01/01/1999', '%d/%m/%Y')
 
-            if not Theme.objects.exists(slug=slugify(unicode(row[6]))):
+            if not Theme.objects.filter(slug=slugify(unicode(row[6]))).exists():
                 theme, c = Theme.objects.get_or_create(name=row[6], 
                     slug=slugify(unicode(row[6])))
             else: 
@@ -68,7 +68,7 @@ def load_maps():
                 continue
 
             try:
-                if not Map.objects.exists(pk = id):
+                if not Map.objects.filter(pk = id).exists():
                     themap, created = Map.objects.get_or_create(
                         pk = id,
                         title = title,
