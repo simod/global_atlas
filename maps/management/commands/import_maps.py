@@ -2,6 +2,7 @@ import os
 
 from datetime import datetime
 
+from django.core.management.base import BaseCommand, CommandError
 from django.contrib.gis.geos import Point
 from django.utils.text import slugify
 
