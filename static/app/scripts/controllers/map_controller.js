@@ -8,12 +8,14 @@
   module.controller('MapController', function($scope, $http,
    leafletData, UrlsProvider){
 
+    var color_thresholds = [0,4,9,19,49];
+
     function getMapColors(maps){
-      return maps > 4 ? '#0033CC' :
-             maps > 3 ? '#335CD6' :
-             maps > 2 ? '#657FCB' :
-             maps > 1 ? '#90A3D9' :
-             maps > 0 ? '#66CCFF' :
+      return maps > color_thresholds[4] ? '#0033CC' :
+             maps > color_thresholds[3] ? '#335CD6' :
+             maps > color_thresholds[2] ? '#657FCB' :
+             maps > color_thresholds[1] ? '#90A3D9' :
+             maps > color_thresholds[0] ? '#66CCFF' :
              'transparent'
     }
 
@@ -37,14 +39,14 @@
         zoom: 2
       },
       legend: (function(){
-        var colors = [];
-        for(var i=0; i<6; i++){
-          colors.push(getMapColors(i));
+        var colors = [0];
+        for(var i=0; i<color_thresholds.length; i++){
+          colors.push(getMapColors(color_thresholds[i]+1));
         }
         return {
           position: 'topright',
           colors: colors,
-          labels: [ '<strong>Maps</strong>', 'One', 'Two', 'Three', 'Four', '4+']
+          labels: [ '<strong>Maps</strong>', 'One', 'Five', 'Ten', 'Twenty', '50+']
         }
       })(),
     });
