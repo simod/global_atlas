@@ -73,8 +73,8 @@ def load_maps():
                 float(row[14].replace(',','.')))
             except: 
                 center = None
-                continue
-
+                pass
+                
             try:
                 if not Map.objects.filter(pk = id).exists():
                     themap, created = Map.objects.get_or_create(
