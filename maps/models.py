@@ -18,7 +18,7 @@ class CountryManager(models.Manager):
     def get_regions(self):
         """Return just the related countries"""
         return Country.objects.annotate(Count('countries')) \
-            .filter(countries__count__gt=0)
+            .filter(fips__regex=r'^.{3,}$')
 
 class Map(geomodels.Model):
     """Map object"""
