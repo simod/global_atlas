@@ -24,9 +24,12 @@ def load_maps():
             country = Country.objects.filter(fips=row[2])[0]
             size = MapSize.objects.get_or_create(name=row[4].split('(')[0])
             date = datetime.strptime(row[5], '%d/%m/%y')
-            theme = Theme.objects.get_or_create(name=row[6], slug=slugify(row[6]))
-            category = Category.objects.get_or_create(name=row[7], slug=slugify(row[7]))
-            source = Source.objects.get_or_create(name=row[8], slug=slugify(row[8]))
+            theme = Theme.objects.get_or_create(name=row[6], 
+                slug=slugify(unicode(row[6])))
+            category = Category.objects.get_or_create(name=row[7], 
+                slug=slugify(unicode(row[7])))
+            source = Source.objects.get_or_create(name=row[8], 
+                slug=slugify(unicode(row[8])))
             description = row[9]
             scale = row[10]
             maprequest = MapRequest.objects.filter(requester__name=row[11])[0]
