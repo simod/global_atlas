@@ -36,11 +36,11 @@ def load_maps():
             scale = row[10]
             #maprequest = MapRequest.objects.filter(requester__name=row[11])[0]
             try:
-                map_file = open('uploads/maps/%s' % row[12])
+                map_file = open('uploads/maps/%s' % row[12]).read()
             except: raise
             try:
                 map_thumbnail = open('static_root/thumbnails/%s' % '%s.jpg' 
-                    % os.path.splitext(row[12])[0])
+                    % os.path.splitext(row[12])[0]).read()
             except:
                 print 'Thumbnail for file %s not found' % row[12]
                 map_thumbnail = None
