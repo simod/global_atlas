@@ -21,16 +21,16 @@ def load_maps():
     with open('data/MAPS2.csv', 'rU') as maps:
         for row in maps.readlines():
             row = row.split(';')
-            id = row[0]
+            id = int(row[0])
             title = row[1]
             country = Country.objects.filter(fips=row[2])[0]
-            size = MapSize.objects.get_or_create(name=row[4].split('(')[0])
+            size, c = MapSize.objects.get_or_create(name=row[4].split('(')[0])
             date = datetime.strptime(row[5], '%d/%m/%y')
-            theme = Theme.objects.get_or_create(name=row[6], 
+            theme, c = Theme.objects.get_or_create(name=row[6], 
                 slug=slugify(unicode(row[6])))
-            category = Category.objects.get_or_create(name=row[7], 
+            category, c = Category.objects.get_or_create(name=row[7], 
                 slug=slugify(unicode(row[7])))
-            source = Source.objects.get_or_create(name=row[8], 
+            source, c = Source.objects.get_or_create(name=row[8], 
                 slug=slugify(unicode(row[8])))
             description = row[9]
             scale = row[10]
