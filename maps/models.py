@@ -22,7 +22,7 @@ class CountryManager(models.Manager):
 
 class Map(geomodels.Model):
     """Map object"""
-    title = models.CharField(max_length=128)
+    title = models.CharField(max_length=255)
     date = models.DateField()
     theme = models.ForeignKey('Theme')
     category = models.ForeignKey('Category')
