@@ -41,7 +41,7 @@ def load_maps():
             scale = row[10]
             maprequest = MapRequest.objects.get(title='initial')
             try:
-                map_file = File(open('maps/%s' % row[12]))
+                map_file = File(open('map_files/%s' % row[12]))
             except: raise
             try:
                 map_thumbnail = File(open('thumbnails/%s' % '%s.jpg' 
