@@ -284,7 +284,8 @@ class MapResource(GeoModelResource):
             'title': ALL,
             'country': ALL_WITH_RELATIONS,
             'category': ALL_WITH_RELATIONS,
-            'theme': ALL_WITH_RELATIONS
+            'theme': ALL_WITH_RELATIONS,
+            'id': ALL
         }
 
 

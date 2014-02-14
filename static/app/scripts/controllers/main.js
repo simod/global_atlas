@@ -47,7 +47,11 @@
 
     // Listen to the title change and set the title filter
     $scope.$on('query_by_title', function(e, title){
-      $scope.search_filters['title__icontains'] = title;
+      if(isNaN(parseInt(title))){
+        $scope.search_filters['title__icontains'] = title;
+      }else{
+        $scope.search_filters['id__contains'] = title;
+      }
       search();
     });
 
