@@ -9,63 +9,6 @@ from maps.models import Map, Theme, MapRequest, Country, Format, \
     MapSize, Category, Requester, Source
 from .testdata import load_test_data, samplefile
 
-# class TestModelsGetTests(TestCase):
-#     """Test the correct installation of testdata"""
-
-#     def setUp(self):
-#         load_test_data()
-
-#     def test_users(self):
-#         """Test the user is there"""
-#         user = User.objects.all()
-#         self.assertEqual(user.count(), 1)
-
-#     def test_maps(self):
-#         """Test the maps are there"""
-#         maps = Map.objects.all()
-#         self.assertEqual(maps.count(), 2)
-
-#     def test_theme(self):
-#         """Test the themes are there"""
-#         theme = Theme.objects.all()
-#         self.assertEqual(theme.count(), 2)
-
-#     def test_maprequests(self):
-#         """Test the maprequest are there"""
-#         mrs = MapRequest.objects.all()
-#         self.assertEqual(mrs.count(), 2)
-
-#     def test_countires(self):
-#         """Test the countries are there"""
-#         cos = Country.objects.all()
-#         self.assertEqual(cos.count(), 3)
-
-#     def test_formats(self):
-#         """Tests formats are there"""
-#         fos = Format.objects.all()
-#         self.assertEqual(fos.count(), 2)
-    
-#     def test_mapsizes(self):
-#         """Test mapsizes are there"""
-#         mss = MapSize.objects.all()
-#         self.assertEqual(mss.count(), 2)
-
-#     def test_categories(self):
-#         """Test categories are there"""
-#         cats = Category.objects.all()
-#         self.assertEqual(cats.count(), 2)
-
-#     def test_requesters(self):
-#         """Test requesters are there"""
-#         reqs = Requester.objects.all()
-#         self.assertEqual(reqs.count(), 2)
-
-#     def test_source(self):
-#         """Test surces are there"""
-#         ss = Source.objects.all()
-#         self.assertEqual(ss.count(), 2)
-
-
 
 class ModelsMapTests(TestCase):
     """Test the Map models"""

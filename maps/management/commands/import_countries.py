@@ -23,7 +23,6 @@ def import_countries():
 
 class Command(BaseCommand):
 
-
     def handle(self, *args, **options):
 
         import_countries()
