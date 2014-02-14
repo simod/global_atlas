@@ -24,7 +24,11 @@ def load_maps():
             row = row.split(';')
             id = int(row[0])
             title = row[1]
-            country = Country.objects.filter(fips=row[2])[0]
+            try:
+                country = Country.objects.filter(fips=row[2])[0]
+            except:
+                print 'Missing country with fips = %s' % row[2]
+                raise
             size, c = MapSize.objects.get_or_create(name=row[4].split('(')[0])
             date = datetime.strptime(row[5], '%d/%m/%y')
             theme, c = Theme.objects.get_or_create(name=row[6], 
@@ -71,7 +75,10 @@ def load_maps():
                     map_file = map_file,
                     map_thumbnail = map_thumbnail
                 )
-                print 'saved maps with id %s' % themap.pk
+                if created:
+                    print 'Saved maps with id %s' % themap.pk
+                else: print 'Updated maps with id %s' % themap.pk
+                
             except: raise
     print 'Loaded %s maps' % Map.objects.count()
 
