@@ -99,7 +99,7 @@ class Format(models.Model):
 
 class MapSize(models.Model):
     """Map Sizes"""
-    name = models.CharField(max_length=5, unique=True)
+    name = models.CharField(max_length=15, unique=True)
     dimensions = models.CharField(max_length=20, blank=True, null=True)
 
     def __unicode__(self):
