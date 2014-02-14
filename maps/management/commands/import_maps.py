@@ -30,7 +30,11 @@ def load_maps():
                 print 'Missing country with fips = %s' % row[2]
                 raise
             size, c = MapSize.objects.get_or_create(name=row[4].split('(')[0])
-            date = datetime.strptime(row[5], '%d/%m/%y')
+            
+            try:
+                date = datetime.strptime(row[5], '%d/%m/%y')
+            except:
+                date = datetime.strptime('01/01/1999', '%d/%m/%Y')
             theme, c = Theme.objects.get_or_create(name=row[6], 
                 slug=slugify(unicode(row[6])))
             category, c = Category.objects.get_or_create(name=row[7], 
