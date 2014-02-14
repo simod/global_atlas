@@ -11,7 +11,8 @@ from maps.models import Country, Map, MapRequest, Theme, Category, \
 """
 Bulk load existing maps from a csv file
 structured as:
-Map_ID;TITLE;FIPS;COUNTRY;MAP SIZE;DATE;THEME;CATEGORY;SOURCE;DESC;MAP SCALE;WHO;FILENAME;LONG;LAT
+Map_ID;TITLE;FIPS;COUNTRY;MAP SIZE;DATE;THEME;CATEGORY;SOURCE;DESC;MAP SCALE;
+WHO;FILENAME;LONG;LAT
 """
 
 def load_maps():
@@ -33,9 +34,17 @@ def load_maps():
             description = row[9]
             scale = row[10]
             maprequest = MapRequest.objects.filter(requester__name=row[11])[0]
-            map_file = open('../../../uploads/maps/%s' % row[12])
-            map_thumbnail = open('../../../static_root/thumbnails/%s' % '%s.jpg' 
-                % os.path.splitext(row[12])[0])
+            try:
+                map_file = open('../../../uploads/maps/%s' % row[12])
+            except: raise
+            try:
+                map_thumbnail = open('../../../static_root/thumbnails/%s' % '%s.jpg' 
+                    % os.path.splitext(row[12])[0])
+            except:
+                print 'Thumbnail for file %s not found' % row[12]
+                map_thumbnail = None
+                continue
+
             center = Point(float(row[13].replace(',','.')), 
                 float(row[14].replace(',','.')))
 
