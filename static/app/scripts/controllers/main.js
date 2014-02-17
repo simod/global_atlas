@@ -49,10 +49,10 @@
     $scope.$on('query_by_title', function(e, title){
       if(isNaN(parseInt(title))){
         $scope.search_filters['title__icontains'] = title;
-        delete $scope.search_filters['id__exact']
+        delete $scope.search_filters['id__exact'];
       }else{
         $scope.search_filters['id__exact'] = title;
-        delete $scope.search_filters['title__icontains']
+        delete $scope.search_filters['title__icontains'];
       }
       search();
     });
