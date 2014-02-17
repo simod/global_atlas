@@ -50,7 +50,7 @@
             <label>Regions</label>
             <ul class="search_filter" id="regions">
               {% for region in regions %}
-                <li data-class="country" value="{{ region.id }}">{{ region }}</li>
+                <li data-class="country" value="{{ region.id }}">{{ region }} ({{region.maps_count}})</li>
               {% endfor %}
             </ul>
           </div>
@@ -65,7 +65,7 @@
             <label>Categories</label>
             <ul class="search_filter" id="categories">
               {% for category in categories %}
-                <li data-class="category" value="{{ category.id }}">{{ category }}</li>
+                <li data-class="category" value="{{ category.id }}">{{ category }} ({{category.maps_count}})</li>
               {% endfor %}
             </ul>
           </div>

@@ -19,7 +19,7 @@ class Home(View):
         return render(request, self.template_name, {
                 'mr_form': form,
                 'countries': Country.objects.get_countries(),
-                'regions': Country.objects.get_regions(), 
-                'categories': Category.objects.all(),
+                'regions': Country.objects.get_regions().annotate(maps_count=Count('map')), 
+                'categories': Category.objects.annotate(maps_count=Count('map')),
                 'themes': Theme.objects.all()
             })
