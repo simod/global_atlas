@@ -8,7 +8,7 @@
   module.controller('MapController', function($scope, $http,
    leafletData, UrlsProvider){
 
-    var color_thresholds = [0,9,24,49];
+    var color_thresholds = [0,4,24,49];
 
     function getMapColors(maps){
       return maps > color_thresholds[3] ? '#0033CC' :
@@ -45,7 +45,7 @@
         return {
           position: 'topright',
           colors: colors,
-          labels: [ '<strong>Maps</strong>', '1 to 10', '10 to 25', '25 to 50', '50+']
+          labels: [ '<strong>Maps</strong>', '1 to 5', '5 to 25', '25 to 50', '50+']
         }
       })(),
     });
