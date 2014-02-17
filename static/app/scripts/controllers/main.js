@@ -32,6 +32,14 @@
       if($scope.numpages == 0){$scope.numpages = 1};
     });
 
+    $scope.reset_filters = function(){
+      $scope.search_filters = [];
+      $('#country_select').select2('val', '');
+      $('.search_filter').find('li').removeClass('active');
+      $('#title_search').val('');
+      search();
+    }
+
     // Update the filters on change of the country selections
     $('#country_select').on('change', function(e){
       $scope.search_filters['country__id__in'] = e.val;
