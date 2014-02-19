@@ -17,6 +17,10 @@ body {
   padding-right: 15px;
 }
 
+.marketing{
+  font-size: 90%;
+}
+
 /* Custom page header */
 .header {
   border-bottom: 1px solid #e5e5e5;
@@ -262,4 +266,9 @@ h3 {
 
 .thumbnail{
   margin: 0;
+}
+
+.request-button{
+  margin-bottom: 20px;
+  margin-right: 130px;
 }

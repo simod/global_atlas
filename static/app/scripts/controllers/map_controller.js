@@ -8,13 +8,13 @@
   module.controller('MapController', function($scope, $http,
    leafletData, UrlsProvider){
 
-    var color_thresholds = [0,4,24,49];
+    var color_thresholds = [0,5,25,50];
 
     function getMapColors(maps){
-      return maps > color_thresholds[3] ? '#0033CC' :
-             maps > color_thresholds[2] ? '#335CD6' :
-             maps > color_thresholds[1] ? '#657FCB' :
-             maps > color_thresholds[0] ? '#90A3D9' :
+      return maps > color_thresholds[3] ? 'rgb(68,101,137)' :
+             maps > color_thresholds[2] ? 'rgb(102,153,205)' :
+             maps > color_thresholds[1] ? 'rgb(158,187,215)' :
+             maps > color_thresholds[0] ? 'rgb(190, 232,255)' :
              'transparent'
     }
 
@@ -45,7 +45,7 @@
         return {
           position: 'topright',
           colors: colors,
-          labels: [ '<strong>Maps</strong>', '1 to 5', '5 to 25', '25 to 50', '50+']
+          labels: [ '<strong>Maps</strong>', '1 to 5', '6 to 25', '26 to 50', '50+']
         }
       })(),
     });
