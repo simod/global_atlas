@@ -68,14 +68,13 @@
     // Manage the search filters lists adding and removing
     // the 'active' class ad the id in the relative search filter 
     $('.search_filter').find('li').click(function(e){
-
       // if is active enter the deactivate block
       if($(e.target).hasClass('active')){
 
         // is single choice
-        if(!$(e.target).parent().hasClass('multiple_choice')){
+        if(!$(e.target).parents('ul').hasClass('multiple_choice')){
           // clear all acrive classes for the block
-          $(e.target).parent().find('li').removeClass('active');
+          $(e.target).parents('ul').find('li').removeClass('active');
           // Remove the filters entry
           delete $scope.search_filters[$(e.target)
             .attr('data-class') + '__id'];    
@@ -93,9 +92,9 @@
       else // is not active, then activate
       {
         // is single choice
-        if(!$(e.target).parent().hasClass('multiple_choice')){
+        if(!$(e.target).parents('ul').hasClass('multiple_choice')){
           // clear all active classes for the block
-          $(e.target).parent().find('li').removeClass('active');
+          $(e.target).parents('ul').find('li').removeClass('active');
           // Add the filters entry
           $scope.search_filters[$(e.target)
             .attr('data-class') + '__id'] = $(e.target).val();
