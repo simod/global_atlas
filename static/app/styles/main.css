@@ -139,9 +139,10 @@ h1 {
 
 .search_block{
   margin-top: 10px;
+  width: 150px;
 }
 
-.attribute-filters, .spatial-filters{
+.spatial-filters{
   max-width: 150px;
   font-size: 90%;
 }
@@ -151,7 +152,12 @@ h1 {
   max-width: 230px;
 }
 
-.search_filter > li{
+.search_filter > a{
+  text-decoration: none;
+  color: #657FCB;
+}
+
+.search_filter > a >li{
   list-style-type: none;
 }
 

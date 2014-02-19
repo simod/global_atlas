@@ -53,12 +53,10 @@ It's intended to increase the awareness of geographic and crisis related issues,
             <label>Regions</label>
             <ul class="search_filter" id="regions">
               {% for region in regions %}
-                <li data-class="country" value="{{ region.id }}">{{ region }} ({{region.maps_count}})</li>
+                <a href><li data-class="country" value="{{ region.id }}">{{ region }} ({{region.maps_count}})</li></a>
               {% endfor %}
             </ul>
           </div>
-        </div>
-        <div class="attribute-filters pull-left">
           <strong class="pull-left">Refine your query</strong>
           <div class="pull-left">
             <label>By Title or Id</label>
@@ -68,7 +66,7 @@ It's intended to increase the awareness of geographic and crisis related issues,
             <label>Categories</label>
             <ul class="search_filter" id="categories">
               {% for category in categories %}
-                <li data-class="category" value="{{ category.id }}">{{ category }} ({{category.maps_count}})</li>
+                <a href><li data-class="category" value="{{ category.id }}">{{ category }} ({{category.maps_count}})</li></a>
               {% endfor %}
             </ul>
           </div>
