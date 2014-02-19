@@ -32,6 +32,36 @@
       if($scope.numpages == 0){$scope.numpages = 1};
     });
 
+    // Manage the single choice search filters lists adding and removing
+    // the 'active' class ad the id in the relative search filter
+    function _handleSingleChoiceFilters(e){
+
+      // If active then deactivate it
+      if($(e.target).hasClass('active')){
+        // clear all active classes for the block
+        $(e.target).parents('ul').find('li').removeClass('active');
+        // Remove the filters entry
+        delete $scope.search_filters[$(e.target)
+          .attr('data-class') + '__id']; 
+      }
+      else if(!$(e.target).hasClass('active')){
+        // clear all active classes for the block
+        $(e.target).parents('ul').find('li').removeClass('active');
+        // Add the filters entry
+        $scope.search_filters[$(e.target)
+          .attr('data-class') + '__id'] = $(e.target).val();
+          
+        // If is a region then clean the country selection
+        if($(e.target).attr('data-class') === 'country'){
+          $('#country_select').select2('val', '');
+          delete $scope.search_filters['country__id__in'];
+        }
+        $(e.target).addClass('active');
+      }
+      search();
+    };
+    $('.single_choice').find('li').click(_handleSingleChoiceFilters);
+
     $scope.reset_filters = function(){
       $scope.search_filters = [];
       $('#country_select').select2('val', '');
@@ -43,6 +73,9 @@
     // Update the filters on change of the country selections
     $('#country_select').on('change', function(e){
       $scope.search_filters['country__id__in'] = e.val;
+      // clean any region filter
+      $('.search_filter').find('[data-class="country"]').removeClass('active');
+      delete $scope.search_filters['country__id'];
       search();
     });
 
@@ -62,55 +95,6 @@
         $scope.search_filters['id__exact'] = title;
         delete $scope.search_filters['title__icontains'];
       }
-      search();
-    });
-
-    // Manage the search filters lists adding and removing
-    // the 'active' class ad the id in the relative search filter 
-    $('.search_filter').find('li').click(function(e){
-      // if is active enter the deactivate block
-      if($(e.target).hasClass('active')){
-
-        // is single choice
-        if(!$(e.target).parents('ul').hasClass('multiple_choice')){
-          // clear all acrive classes for the block
-          $(e.target).parents('ul').find('li').removeClass('active');
-          // Remove the filters entry
-          delete $scope.search_filters[$(e.target)
-            .attr('data-class') + '__id'];    
-        }
-        else // is a multiple choice
-        {
-          // get the correct filter
-          var filter = $scope.search_filters[$(e.target)
-            .attr('data-class') + '__id__in'];
-          // remove just the correct entry from the filter array
-          $(e.target).removeClass('active');
-            filter.splice(filter.indexOf($(e.target).val()),1);         
-        }               
-      }
-      else // is not active, then activate
-      {
-        // is single choice
-        if(!$(e.target).parents('ul').hasClass('multiple_choice')){
-          // clear all active classes for the block
-          $(e.target).parents('ul').find('li').removeClass('active');
-          // Add the filters entry
-          $scope.search_filters[$(e.target)
-            .attr('data-class') + '__id'] = $(e.target).val();
-        }
-        else // is a multiple choice
-        {
-          // get the correct filter
-          var filter = $scope.search_filters[$(e.target)
-            .attr('data-class') + '__id__in'];
-          // Add the correct entry in the filters array
-          filter.push($(e.target).val());
-        }
-        //Add the active class
-        $(e.target).addClass('active');        
-      }
-      // Search
       search();
     });
 
