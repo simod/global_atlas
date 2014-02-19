@@ -272,3 +272,7 @@ h3 {
   margin-bottom: 20px;
   margin-right: 130px;
 }
+.banner{
+  background: transparent url(/static/images/logo_en.gif) no-repeat scroll center top;
+  height: 80px;
+}
