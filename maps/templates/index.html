@@ -86,12 +86,12 @@ It's intended to increase the awareness of geographic and crisis related issues,
             when="{'one': '1 Map', 'other': '{} Maps'}"><ng-pluralize>
         </h3>
         <div class="pager">
-          <a><strong ng-click="paginate_down()">-</strong></a>
+          <a href><strong ng-click="paginate_down()">-</strong></a>
           <span>page </span>
           <span ng-model="page" ng-bind="page"></span>
           <span> of </span>
           <span ng-bind="numpages"></span>
-          <a><strong ng-click="paginate_up()">+</strong></a>
+          <a href><strong ng-click="paginate_up()">+</strong></a>
         </div>
         <div class="search_results">
           <div>
