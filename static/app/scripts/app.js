@@ -9,6 +9,7 @@
   goog.require('map_controller');
   goog.require('single_choice_service');
   goog.require('single_choice_directive');
+  goog.require('collins_maps_controller');
 
 
   var module = angular.module('atlas', [
@@ -18,6 +19,7 @@
     'title_select_controller',
     'map_controller',
     'single_choice_service',
-    'single_choice_directive'
+    'single_choice_directive',
+    'collins_maps_controller'
   ]);
 })(); 

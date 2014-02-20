@@ -11,7 +11,7 @@ from tastypie.constants import ALL, ALL_WITH_RELATIONS
 from tastypie.validation import FormValidation
 
 from .models import Map, Theme, MapRequest, Country, Format, \
-    MapSize, Category, Requester, Source
+    MapSize, Category, Requester, Source, CollinsMap
 from .forms import MapRequestForm
 
 
@@ -288,4 +288,19 @@ class MapResource(GeoModelResource):
             'id': ALL
         }
 
+class CollinsMapResource(ModelResource):
+    """CollinsMap api"""
 
+    country = fields.ToOneField(CountryResource , 'country')
+    
+    class Meta:
+        queryset = CollinsMap.objects.all()
+        resource_name ='collins_maps'
+        authentication = SessionAuthentication()
+        authorization = DjangoAuthorization()
+        allowed_methods = ['get','post','delete','put']
+
+        filtering = {
+            'country': ALL_WITH_RELATIONS,
+            'id': ALL
+        }

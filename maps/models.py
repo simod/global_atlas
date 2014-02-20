@@ -146,4 +146,14 @@ class Source(models.Model):
         if not self.slug:
             self.slug = slugify(self.name)[:50]
         super(Source, self).save(*args, **kwargs)
+
+
+class CollinsMap(models.Model):
+    """Collins maps"""
+    name = models.CharField(max_length=128)
+    the_file = models.FileField(upload_to='collins')
+    country = models.ForeignKey('Country')
+
+    def __unicode__(self):
+        return self.name
         

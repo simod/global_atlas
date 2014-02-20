@@ -83,7 +83,7 @@ It's intended to increase the awareness of geographic and crisis related issues,
       <div class="results pull-left">
         <h3>Found 
            <ng-pluralize count="search_total_counts"
-            when="{'one': '1 Map', 'other': '{} Maps'}"><ng-pluralize>
+            when="{'one': '1 Map', 'other': '{} Maps'}"></ng-pluralize>
         </h3>
         <div class="pager">
           <a href><strong ng-click="paginate_down()">-</strong></a>
@@ -108,6 +108,15 @@ It's intended to increase the awareness of geographic and crisis related issues,
             {% endverbatim %}
           </div>
         </div>
+      </div>
+      <div class="collins pull-left" ng-controller="CollinsMapsController">
+        <h4>Collins maps found for the selected countries</h4>
+        <p ng-show="!collins_maps.length">No maps</p>
+        {% verbatim %}
+        <article class="pull-left" ng-repeat="map in collins_maps">
+          <a ng-href="collins/{{ map.id }}/download" ng-bind="map.name"></a>
+        </article>
+        {% endverbatim %}
       </div>
     </div>
 

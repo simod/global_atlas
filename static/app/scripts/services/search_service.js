@@ -9,7 +9,7 @@
 
   module.factory('SearchService', function($rootScope, $http, UrlsProvider){
 
-    var search = {
+   return {
       search: function(){
         var url_with_pagination = UrlsProvider.map_url + 
         '?limit=' + $rootScope.results_limit +
@@ -22,6 +22,5 @@
         });
       }
     }
-    return search;
   });
 })();

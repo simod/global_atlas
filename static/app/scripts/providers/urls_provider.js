@@ -19,7 +19,8 @@
         requester_url: ApiUrls.urls.requesters.list_endpoint,
         country_url: ApiUrls.urls.countries.list_endpoint,
         map_url: ApiUrls.urls.maps.list_endpoint,        
-        request_url: ApiUrls.urls.requests.list_endpoint
+        request_url: ApiUrls.urls.requests.list_endpoint,
+        collins_url: ApiUrls.urls.collins_maps.list_endpoint
       }
     }
   });

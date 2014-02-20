@@ -7,7 +7,9 @@
   goog.require('atlas_url_provider');
   goog.require('atlas_search_service');
 
-  var module = angular.module('country_select_controller',['ui.select2']);
+  var module = angular.module('country_select_controller',[
+    'ui.select2'
+    ]);
 
   module.controller('CountrySelectController', function(
     $scope, $rootScope, UrlsProvider, SearchService){
@@ -44,6 +46,7 @@
       $('.search_filter').find('[data-class="country"]').removeClass('active');
       delete $rootScope.search_filters['country__id'];
       SearchService.search();
+      $rootScope.$broadcast('country_changed', {'country__id__in': e.val});
     });
   });
 })();

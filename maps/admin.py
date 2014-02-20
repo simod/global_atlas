@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Map, Theme, MapRequest, Country, Format, \
-    MapSize, Category, Requester, Source
+    MapSize, Category, Requester, Source, CollinsMap
 
 class ThemeAdmin(admin.ModelAdmin):
     prepopulated_fields = { 'slug': ('name',)}
@@ -37,3 +37,4 @@ admin.site.register(Format)
 admin.site.register(MapSize)
 admin.site.register(Requester, RequesterAdmin)
 admin.site.register(Source, SourceAdmin)
+admin.site.register(CollinsMap)
