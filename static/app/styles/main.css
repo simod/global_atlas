@@ -139,11 +139,10 @@ h1 {
 
 .search_block{
   margin-top: 10px;
-  width: 150px;
 }
 
 .spatial-filters{
-  max-width: 150px;
+  max-width: 230px;
   font-size: 90%;
 }
 

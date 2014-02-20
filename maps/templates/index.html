@@ -43,14 +43,14 @@ It's intended to increase the awareness of geographic and crisis related issues,
         <h3>Compose your Filters</h3>
         <a><p ng-click="reset_filters()">Clear all filters</p></a>
         <div class="spatial-filters pull-left">
-          <strong class="pull-left">Search by country or by region</strong>
+          <strong class="pull-left">Search:</strong>
           <div>
-            <label>Countries</label>
+            <label>By one or more Country</label>
             <div id="country_select" ui-select2="select2Options" ng-model="select2" placeholder="Type to search" ng-controller="CountrySelectController">
             </div>
           </div>
           <div class="pull-left search_block">
-            <label>Regions</label>
+            <label>Or by Region</label>
             <ul class="search_filter single_choice" id="regions" single-choice-directive>
               {% for region in regions %}
                 <a href><li data-class="country" value="{{ region.id }}">{{ region }} ({{region.map_set.count}})</li></a>
@@ -63,7 +63,7 @@ It's intended to increase the awareness of geographic and crisis related issues,
             <input id="title_search" ng-model="title" type="text" ng-controller="TitleSelectController" placeholder="Type to search"></input>
           </div>
           <div class="pull-left search_block">
-            <label>Categories</label>
+            <label>By Category</label>
             <ul class="search_filter single_choice" id="categories" single-choice-directive>
               {% for category in categories %}
                 <a href><li data-class="category" value="{{ category.id }}">{{ category }} ({{category.map_set.count}})</li></a>
