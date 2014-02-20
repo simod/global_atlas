@@ -3,11 +3,15 @@
 (function(){
   goog.provide('map_controller');
 
-  var module = angular.module('map_controller', ['leaflet-directive']);
+  goog.require('atlas_search_service');
+
+  var module = angular.module('map_controller', [
+    'leaflet-directive',
+    'atlas_search_service'
+    ]);
 
   module.controller('MapController', function($scope, $http,
-   leafletData, UrlsProvider){
-
+   leafletData, UrlsProvider, SearchService){
     var color_thresholds = [0,5,25,50];
 
     function getMapColors(maps){
@@ -108,7 +112,11 @@
               info_div.update();
             });
             layer.on('click', function(e){
-              $scope.$emit('mapclicked', e.target.feature)
+              // On clik on a country, set the value in the select2
+              // widget and seach
+              $('#country_select').select2('data', 
+                {id: feature.id, text: feature.name},true);
+              SearchService.search();
             });
           }
         }

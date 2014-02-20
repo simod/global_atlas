@@ -51,7 +51,7 @@ It's intended to increase the awareness of geographic and crisis related issues,
           </div>
           <div class="pull-left search_block">
             <label>Regions</label>
-            <ul class="search_filter single_choice" id="regions">
+            <ul class="search_filter single_choice" id="regions" single-choice-directive>
               {% for region in regions %}
                 <a href><li data-class="country" value="{{ region.id }}">{{ region }} ({{region.maps_count}})</li></a>
               {% endfor %}
@@ -64,7 +64,7 @@ It's intended to increase the awareness of geographic and crisis related issues,
           </div>
           <div class="pull-left search_block">
             <label>Categories</label>
-            <ul class="search_filter single_choice" id="categories">
+            <ul class="search_filter single_choice" id="categories" single-choice-directive>
               {% for category in categories %}
                 <a href><li data-class="category" value="{{ category.id }}">{{ category }} ({{category.maps_count}})</li></a>
               {% endfor %}
