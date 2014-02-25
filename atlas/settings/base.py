@@ -103,3 +103,6 @@ STATICFILES_DIRS = (
 MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
 
 TASTYPIE_DEFAULT_FORMATS = ['json']
+
+EMAIL_RECIPIENTS = ['',]
+EMAIL_SENDER = ''
