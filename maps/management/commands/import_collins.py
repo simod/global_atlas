@@ -23,7 +23,7 @@ def load_collins():
             except: raise
 
             try:
-                if not CollinsMap.objects.filter(name = name).exists():
+                if not CollinsMap.objects.filter(country = country).exists():
                     coll, created = CollinsMap.objects.get_or_create(
                         name = name,
                         country = country,
