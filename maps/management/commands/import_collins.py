@@ -17,6 +17,7 @@ def load_collins():
                 country = Country.objects.filter(fips=row[2])[0]
             except:
                 print 'Missing country with fips = %s' % row[2]
+                continue
             try:
                 the_file = File(open('collins/%s/%s.png' % (folder, name)))
             except: raise
