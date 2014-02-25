@@ -185,7 +185,7 @@ def send_request_save_email(instance, sender, **kwargs):
         instance.deadline.isoformat(),
         instance.size,
         instance.format,
-        instance.istitution
+        instance.requester
         )
     send_mail(subject, message, email_sender, recipients)
 
