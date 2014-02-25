@@ -28,6 +28,9 @@ class MapAdmin(admin.ModelAdmin):
     list_display = ('title', 'id', 'date')
     search_fields = ['title', 'id',]
 
+class CollinsMapAdmin(admin.ModelAdmin):)
+    search_fields = ['name']
+
 admin.site.register(Theme, ThemeAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Map, MapAdmin)
@@ -37,4 +40,4 @@ admin.site.register(Format)
 admin.site.register(MapSize)
 admin.site.register(Requester, RequesterAdmin)
 admin.site.register(Source, SourceAdmin)
-admin.site.register(CollinsMap)
+admin.site.register(CollinsMap, CollinsMapAdmin)
