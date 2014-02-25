@@ -23,12 +23,15 @@ def load_collins():
             except: raise
 
             try:
-                coll, created = CollinsMap.objects.get_or_create(
-                    name = name,
-                    country = country,
-                    the_file = the_file
-                )
-                if created: print 'Created map %s' % name
+                if not CollinsMap.objects.filter(name = name).exists():
+                    coll, created = CollinsMap.objects.get_or_create(
+                        name = name,
+                        country = country,
+                        the_file = the_file
+                    )
+                    if created: print 'Created map %s' % name
+                else:
+                    print 'Skipped existing map with name = %s' % name
             except: raise
     print 'Loaded %s maps' % CollinsMap.objects.count()
 
