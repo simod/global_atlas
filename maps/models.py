@@ -2,10 +2,14 @@ import os
 import datetime
 
 from django.db import models
+from django.conf import settings
+from django.db.models import signals
 from django.contrib.gis.db import models as geomodels
 from django.contrib.auth.models import User
 from django.utils.text import slugify
 from django.db.models import Count
+from django.core.mail import send_mail
+from django.dispatch import receiver
 
 class CountryManager(models.Manager):
     """Custom Country model manager"""
@@ -156,4 +160,34 @@ class CollinsMap(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+@receiver(signals.post_save, sender=MapRequest)
+def send_request_save_email(instance, sender, **kwargs):
+    
+    recipients = settings.EMAIL_RECIPIENTS
+    email_sender = settings.EMAIL_SENDER
+    subject = 'Map request from %s' % instance.user.username
+    message = """
+    Title: %s\n\r,
+    Purpose: %s\n\r,
+    Extended Description: %s\n\r,
+    Content: %s\n\r,
+    Deadline: %s\n\r,
+    Size: %s\n\r,
+    Format: %s\n\r,
+    Institution: %s\n\r
+    """ % (
+        instance.title,
+        instance.purpose,
+        instance.extended_description,
+        instance.content,
+        instance.deadline.isoformat(),
+        instance.size,
+        instance.format,
+        instance.istitution
+        )
+    send_mail(subject, message, email_sender, recipients)
+
+
         
