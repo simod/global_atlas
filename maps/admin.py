@@ -28,7 +28,7 @@ class MapAdmin(admin.ModelAdmin):
     list_display = ('title', 'id', 'date')
     search_fields = ['title', 'id',]
 
-class CollinsMapAdmin(admin.ModelAdmin):)
+class CollinsMapAdmin(admin.ModelAdmin):
     search_fields = ['name']
 
 admin.site.register(Theme, ThemeAdmin)
