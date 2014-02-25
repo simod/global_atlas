@@ -103,7 +103,7 @@ It's intended to increase the awareness of geographic and crisis related issues,
               <div class="thumbnail">    
                 <a ng-href="maps/{{ map.id }}/download"><img ng-src="static/{{ map.map_thumbnail }}" /></a>
               </div>
-              <span class="map_date">Published on: {{map.date | date:mediumDate}}</span>
+              <span class="map_date">Published on: {{map.date | date:mediumDate}}  -  File size: {{map.file_size | number:2}} Mb</span>
             </article>
             {% endverbatim %}
           </div>

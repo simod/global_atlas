@@ -271,6 +271,7 @@ class MapResource(GeoModelResource):
     def dehydrate(self, bundle):
         bundle.data['country'] = bundle.obj.country.name
         bundle.data['format'] = bundle.obj.request.format.name
+        bundle.data['file_size'] = float(bundle.obj.map_file.size) / (1024 * 1024)
         return bundle
 
     class Meta:
