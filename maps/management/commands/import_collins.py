@@ -31,7 +31,8 @@ def load_collins():
                     )
                     if created: print 'Created map %s' % name
                 else:
-                    print 'Skipped existing map with name = %s' % name
+                    #print 'Skipped existing map with name = %s' % name
+                    pass
             except: raise
     print 'Loaded %s maps' % CollinsMap.objects.count()
 
