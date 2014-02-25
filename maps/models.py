@@ -169,20 +169,20 @@ def send_request_save_email(instance, sender, **kwargs):
     email_sender = settings.EMAIL_SENDER
     subject = 'Map request from %s' % instance.user.username
     message = """
-    Title: %s\n\r,
-    Purpose: %s\n\r,
-    Extended Description: %s\n\r,
-    Content: %s\n\r,
-    Deadline: %s\n\r,
-    Size: %s\n\r,
-    Format: %s\n\r,
+    Title: %s,\n\r
+    Purpose: %s,\n\r
+    Extended Description: %s,\n\r
+    Content: %s,\n\r
+    Deadline: %s,\n\r
+    Size: %s,\n\r
+    Format: %s,\n\r
     Institution: %s\n\r
     """ % (
         instance.title,
         instance.purpose,
         instance.extended_description,
         instance.content,
-        instance.deadline.isoformat(),
+        instance.deadline.strftime('%Y-%B-%d'),
         instance.size,
         instance.format,
         instance.requester
