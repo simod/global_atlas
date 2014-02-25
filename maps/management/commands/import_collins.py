@@ -13,6 +13,7 @@ def load_collins():
             row = row.split(';')
             folder = row[0]
             name = row[1]
+            country = None
             try:
                 country = Country.objects.filter(fips=row[2])[0]
             except:
