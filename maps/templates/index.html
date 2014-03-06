@@ -37,86 +37,88 @@
         <p class="marketing col-md-7">The Global Atlas on Crisis Areas is a catalogue of maps (format pdf, jpeg) at country or regional level, split in categories: baseline, natural hazard, armed conflict, security, thematic and policy.
 It's intended to increase the awareness of geographic and crisis related issues, to provide the basis for information management in possible crisis situations or planning project.</p>
       </header>
-      <button class="btn btn-small btn-primary col-md-2 pull-right request-button" data-toggle="modal" data-target="#mr_form">Request a map</button>
-      <!-- Search-->
-      <div class="search col-md-3 pull-left" id="search">
-        <h3>Compose your Filters</h3>
-        <a href><p ng-click="reset_filters()">Clear all filters</p></a>
-        <div class="spatial-filters pull-left">
-          <strong class="pull-left">Search</strong>
-          <div>
-            <label>By one or more Country</label>
-            <div id="country_select" ui-select2="select2Options" ng-model="select2" placeholder="Type to search" ng-controller="CountrySelectController">
+      <div id="content">
+        <button class="btn btn-small btn-primary col-md-2 pull-right request-button" data-toggle="modal" data-target="#mr_form">Request a map</button>
+        <!-- Search-->
+        <div class="search col-md-3 pull-left" id="search">
+          <h3>Compose your Filters</h3>
+          <a href><p ng-click="reset_filters()">Clear all filters</p></a>
+          <div class="spatial-filters pull-left">
+            <strong class="pull-left">Search</strong>
+            <div>
+              <label>By one or more Country</label>
+              <div id="country_select" ui-select2="select2Options" ng-model="select2" placeholder="Type to search" ng-controller="CountrySelectController">
+              </div>
+            </div>
+            <div class="pull-left search_block">
+              <label>Or by Region</label>
+              <ul class="search_filter single_choice" id="regions" single-choice-directive>
+                {% for region in regions %}
+                  <a href><li data-class="country" value="{{ region.id }}">{{ region }} ({{region.map_set.count}})</li></a>
+                {% endfor %}
+              </ul>
+            </div>
+            <strong class="pull-left">Refine your query</strong>
+            <div class="pull-left">
+              <label>By Title or Id</label>
+              <input id="title_search" ng-model="title" type="text" ng-controller="TitleSelectController" placeholder="Type to search"></input>
+            </div>
+            <div class="pull-left search_block">
+              <label>By Category</label>
+              <ul class="search_filter single_choice" id="categories" single-choice-directive>
+                {% for category in categories %}
+                  <a href><li data-class="category" value="{{ category.id }}">{{ category }} ({{category.map_set.count}})</li></a>
+                {% endfor %}
+              </ul>
             </div>
           </div>
-          <div class="pull-left search_block">
-            <label>Or by Region</label>
-            <ul class="search_filter single_choice" id="regions" single-choice-directive>
-              {% for region in regions %}
-                <a href><li data-class="country" value="{{ region.id }}">{{ region }} ({{region.map_set.count}})</li></a>
-              {% endfor %}
-            </ul>
-          </div>
-          <strong class="pull-left">Refine your query</strong>
-          <div class="pull-left">
-            <label>By Title or Id</label>
-            <input id="title_search" ng-model="title" type="text" ng-controller="TitleSelectController" placeholder="Type to search"></input>
-          </div>
-          <div class="pull-left search_block">
-            <label>By Category</label>
-            <ul class="search_filter single_choice" id="categories" single-choice-directive>
-              {% for category in categories %}
-                <a href><li data-class="category" value="{{ category.id }}">{{ category }} ({{category.map_set.count}})</li></a>
-              {% endfor %}
-            </ul>
-          </div>
         </div>
-      </div>
 
-      <!-- Map -->
-      <div ng-controller="MapController" class="map col-md-4 pull-left" id="map">
-        <leaflet center="center" geojson="countries" layers="layers" legend="legend">
-        </leaflet>
-      </div>
-
-      <!-- Search results -->
-      <div class="results pull-left">
-        <h3>Found 
-           <ng-pluralize count="search_total_counts"
-            when="{'one': '1 Map', 'other': '{} Maps'}"></ng-pluralize>
-        </h3>
-        <div class="pager">
-          <a href><strong ng-click="paginate_down()"><<</strong></a>
-          <span>page </span>
-          <span ng-model="page" ng-bind="page"></span>
-          <span> of </span>
-          <span ng-bind="numpages"></span>
-          <a href><strong ng-click="paginate_up()">>></strong></a>
+        <!-- Map -->
+        <div ng-controller="MapController" class="map col-md-4 pull-left" id="map">
+          <leaflet center="center" geojson="countries" layers="layers" legend="legend">
+          </leaflet>
         </div>
-        <div class="search_results">
-          <div>
-            {% verbatim %}
-            <article ng-repeat="map in search_results" class="result_article" data-toggle="popover" data-content="<strong>ID: </strong>{{map.id}}</br><strong>Format: </strong>{{map.format}}</br><strong>Size: </strong>{{map.size.name}}</br><strong>Category: </strong>{{map.category.name}}</br><strong>Source: </strong>{{map.source.name}}</br><strong>Country: </strong>{{map.country}}</br><strong>Theme: </strong>{{map.theme.name}}</br><strong>Scale: </strong>{{map.scale}}</br><strong>Description: </strong>{{map.description}}" data-title="<strong>Metadata</strong>">
-              <div class="item-header">
-                <a ng-href="maps/{{ map.id }}/download"><h4 ng-bind="map.title"></h4></a>
-              </div>
-              <div class="thumbnail">    
-                <a ng-href="maps/{{ map.id }}/download"><img ng-src="static/{{ map.map_thumbnail }}" /></a>
-              </div>
-              <span class="map_date">Published on: {{map.date | date:mediumDate}}  -  File size: {{map.file_size | number:2}} Mb</span>
-            </article>
-            {% endverbatim %}
+
+        <!-- Search results -->
+        <div class="results pull-left">
+          <h3>Found 
+             <ng-pluralize count="search_total_counts"
+              when="{'one': '1 Map', 'other': '{} Maps'}"></ng-pluralize>
+          </h3>
+          <div class="pager">
+            <a href><strong ng-click="paginate_down()"><<</strong></a>
+            <span>page </span>
+            <span ng-model="page" ng-bind="page"></span>
+            <span> of </span>
+            <span ng-bind="numpages"></span>
+            <a href><strong ng-click="paginate_up()">>></strong></a>
+          </div>
+          <div class="search_results">
+            <div>
+              {% verbatim %}
+              <article ng-repeat="map in search_results" class="result_article" data-toggle="popover" data-content="<strong>ID: </strong>{{map.id}}</br><strong>Format: </strong>{{map.format}}</br><strong>Size: </strong>{{map.size.name}}</br><strong>Category: </strong>{{map.category.name}}</br><strong>Source: </strong>{{map.source.name}}</br><strong>Country: </strong>{{map.country}}</br><strong>Theme: </strong>{{map.theme.name}}</br><strong>Scale: </strong>{{map.scale}}</br><strong>Description: </strong>{{map.description}}" data-title="<strong>Metadata</strong>">
+                <div class="item-header">
+                  <a ng-href="maps/{{ map.id }}/download"><h4 ng-bind="map.title"></h4></a>
+                </div>
+                <div class="thumbnail">    
+                  <a ng-href="maps/{{ map.id }}/download"><img ng-src="static/{{ map.map_thumbnail }}" /></a>
+                </div>
+                <span class="map_date">Published on: {{map.date | date:mediumDate}}  -  File size: {{map.file_size | number:2}} Mb</span>
+              </article>
+              {% endverbatim %}
+            </div>
           </div>
         </div>
-      </div>
-      <div class="collins pull-left" ng-controller="CollinsMapsController">
-        <h4>Collins maps found for the selected countries</h4>
-        <p ng-show="!collins_maps.length">No maps</p>
-        {% verbatim %}
-        <article class="pull-left" ng-repeat="map in collins_maps">
-          <a ng-href="collins/{{ map.id }}/download" ng-bind="map.name"></a>
-        </article>
-        {% endverbatim %}
+        <div class="collins pull-left" ng-controller="CollinsMapsController">
+          <h4>Collins maps found for the selected countries</h4>
+          <p ng-show="!collins_maps.length">No maps</p>
+          {% verbatim %}
+          <article class="pull-left" ng-repeat="map in collins_maps">
+            <a ng-href="collins/{{ map.id }}/download" ng-bind="map.name"></a>
+          </article>
+          {% endverbatim %}
+        </div>
       </div>
     </div>
 

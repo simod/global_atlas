@@ -1,12 +1,17 @@
 /* Space out content a bit */
 body {
-  padding-top: 20px;
   padding-bottom: 20px;
+  margin: 0;
 }
 
 #wrapper { 
- margin: 0 auto;
- width: 1024px;
+ margin: 0 auto 0;
+}
+
+#content{
+  width: 1024px;
+  margin: 0 auto 0;
+  padding-top: 30px;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -15,6 +20,12 @@ body {
 .footer {
   padding-left: 15px;
   padding-right: 15px;
+  margin-bottom: 15px;
+  margin-top: 0;
+}
+
+.header > p{
+  color: white;
 }
 
 .marketing{
@@ -23,7 +34,16 @@ body {
 
 /* Custom page header */
 .header {
+  padding-top: 15px;
   border-bottom: 1px solid #e5e5e5;
+  background: #ffffff; /* Old browsers */
+background: -moz-linear-gradient(left,  #ffffff 17%, #000177 71%, #080066 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right top, color-stop(17%,#ffffff), color-stop(71%,#000177), color-stop(100%,#080066)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(left,  #ffffff 17%,#000177 71%,#080066 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(left,  #ffffff 17%,#000177 71%,#080066 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(left,  #ffffff 17%,#000177 71%,#080066 100%); /* IE10+ */
+background: linear-gradient(to right,  #ffffff 17%,#000177 71%,#080066 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#080066',GradientType=1 ); /* IE6-9 */
 }
 /* Make the masthead heading the same height as the navigation */
 h1 {
@@ -58,25 +78,6 @@ h1 {
 .jumbotron .btn {
   font-size: 21px;
   padding: 14px 24px;
-}
-
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
-  }
 }
 
 #mr_form{
