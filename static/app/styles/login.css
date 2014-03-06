@@ -1,0 +1,15 @@
+#branding{
+    background: white;
+}
+
+#header{
+    background: #0066FF;
+}
+
+#branding h1{
+    color: #0066FF;
+}
+
+#branding img{
+    padding-left: 110px;
+}
