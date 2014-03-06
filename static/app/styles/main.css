@@ -295,9 +295,10 @@ h3 {
 }
 
 .collins{
+  position: absolute;
+  left: 350px;
+  top: 620px;
   padding: 0;
-  margin-top: -50px;
-  padding-left: 250px;
 }
 
 .collins > article{
