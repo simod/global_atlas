@@ -45,9 +45,8 @@ It's intended to increase the awareness of geographic and crisis related issues,
           <h3>Compose your Filters</h3>
           <a href><p ng-click="reset_filters()">Clear all filters</p></a>
           <div class="spatial-filters pull-left">
-            <strong class="pull-left">Search</strong>
             <div>
-              <label>By one or more Country</label>
+              <label>Search by one or more Country</label>
               <div id="country_select" ui-select2="select2Options" ng-model="select2" placeholder="Type to search" ng-controller="CountrySelectController">
               </div>
             </div>
@@ -59,13 +58,12 @@ It's intended to increase the awareness of geographic and crisis related issues,
                 {% endfor %}
               </ul>
             </div>
-            <strong class="pull-left">Refine your query</strong>
             <div class="pull-left">
-              <label>By Title or Id</label>
+              <label>Refine by Title or Id</label>
               <input id="title_search" ng-model="title" type="text" ng-controller="TitleSelectController" placeholder="Type to search"></input>
             </div>
             <div class="pull-left search_block">
-              <label>By Category</label>
+              <label>Refine by Category</label>
               <ul class="search_filter single_choice" id="categories" single-choice-directive>
                 {% for category in categories %}
                   <a href><li data-class="category" value="{{ category.id }}">{{ category }} ({{category.map_set.count}})</li></a>
