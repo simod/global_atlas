@@ -165,11 +165,13 @@ h1 {
 }
 
 .search_filter > a >li.active{
-  background: #BBCBFF;
+  background: #3030A0;
+  color: white;
 }
 
 .search_filter > a >li:hover{
-  background: #C1DAFF;
+  background: #3030A0;
+  color: white;
 }
 
 .results{
