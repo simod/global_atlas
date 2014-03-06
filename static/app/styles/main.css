@@ -133,7 +133,7 @@ h1 {
 
 #map{
   width: 450px;
-  height: 400px;
+  height: 500px;
   border: 1px solid #C0C0C0;
   margin-right: 20px;
   margin-left: 20px;
@@ -254,7 +254,7 @@ h3 {
 }
 
 .search_results{
-  height: 350px;
+  height: 450px;
   overflow: auto;
 }
 
