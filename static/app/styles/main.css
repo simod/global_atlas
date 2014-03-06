@@ -236,8 +236,7 @@ textarea{
 }
 
 .search strong{
-  margin: 5px;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   min-width: 150px;
   color: #657FCB;
 }
