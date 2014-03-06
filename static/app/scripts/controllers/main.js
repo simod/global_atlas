@@ -41,7 +41,7 @@
 
     $scope.reset_filters = function(){
       $rootScope.search_filters = [];
-      $('#country_select').select2('val', '');
+      $('#country_select').select2('val', '', true);
       $('.search_filter').find('li').removeClass('active');
       $('#title_search').val('');
       SearchService.search();
