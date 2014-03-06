@@ -84,6 +84,7 @@ h1 {
 
 #mr_form{
   height: 700px;
+  overflow: hidden;
 }
 
 #mr_form  p{
@@ -296,8 +297,7 @@ h3 {
 .collins{
   padding: 0;
   margin-top: -50px;
-  margin-left: 250px;
-  width: 440px;
+  padding-left: 250px;
 }
 
 .collins > article{
