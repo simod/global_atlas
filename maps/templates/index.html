@@ -81,11 +81,11 @@ It's intended to increase the awareness of geographic and crisis related issues,
 
         <!-- Search results -->
         <div class="results pull-left">
-          <h3 class="col-md-offset-3">Found 
+          <h3 class="found-maps">Found 
              <ng-pluralize count="search_total_counts"
               when="{'one': '1 Map', 'other': '{} Maps'}"></ng-pluralize>
           </h3>
-          <div class="pager col-md-offset-2">
+          <div class="pager">
             <a href><strong ng-click="paginate_down()"><<</strong></a>
             <span>page </span>
             <span ng-model="page" ng-bind="page"></span>

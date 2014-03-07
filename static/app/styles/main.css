@@ -285,10 +285,15 @@ h3 {
 
 .pager{
   margin: 0;
+  margin-right: 20px;
+}
+
+.found-maps{
+  margin-left: 65px;
 }
 
 .request-button{
-  margin-right: 70px;
+  margin-right: 80px;
 }
 
 .banner{
