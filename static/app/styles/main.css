@@ -149,7 +149,6 @@ h1 {
   max-width: 230px;
   height: 500px;
   font-size: 90%;
-  padding-top: 10px;
 }
 
 .search{
@@ -248,7 +247,9 @@ textarea{
 }
 
 h3 {
-  margin-top: 0px;
+  margin: 0;
+  margin-top: 20px;
+  margin-bottom: 20px;
   font-size: 150%;
 }
 
@@ -257,7 +258,7 @@ h3 {
 }
 
 .search_results{
-  height: 450px;
+  height: 460px;
   overflow: auto;
 }
 
@@ -287,7 +288,6 @@ h3 {
 }
 
 .request-button{
-  margin-bottom: 10px;
   margin-right: 70px;
 }
 
@@ -299,7 +299,7 @@ h3 {
 .collins{
   padding: 0;
   margin-left: 40px;
-  margin-top: -40px;
+  margin-top: -70px;
 }
 
 .collins > article{
