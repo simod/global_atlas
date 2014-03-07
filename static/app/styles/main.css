@@ -147,7 +147,9 @@ h1 {
 
 .spatial-filters{
   max-width: 230px;
+  height: 500px;
   font-size: 90%;
+  padding-top: 10px;
 }
 
 .search{
@@ -295,10 +297,9 @@ h3 {
 }
 
 .collins{
-  position: absolute;
-  left: 350px;
-  top: 620px;
   padding: 0;
+  margin-left: 40px;
+  margin-top: -40px;
 }
 
 .collins > article{
