@@ -85,6 +85,7 @@ h1 {
 #mr_form{
   height: 700px;
   overflow: hidden;
+  width: 400px;
 }
 
 #mr_form  p{
