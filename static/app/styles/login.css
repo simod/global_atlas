@@ -17,3 +17,7 @@
 .reg{
     margin-left: 69px;
 }
+
+.login #container{
+    width: 30em;
+}
