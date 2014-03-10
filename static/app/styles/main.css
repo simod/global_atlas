@@ -38,13 +38,13 @@ body {
   padding-top: 15px;
   border-bottom: 1px solid #e5e5e5;
   background: #ffffff; /* Old browsers */
-  background: -moz-linear-gradient(left,  #ffffff 13%, #000972 38%, #080066 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, right top, color-stop(13%,#ffffff), color-stop(38%,#000972), color-stop(100%,#080066)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(left,  #ffffff 13%,#000972 38%,#080066 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(left,  #ffffff 13%,#000972 38%,#080066 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(left,  #ffffff 13%,#000972 38%,#080066 100%); /* IE10+ */
-  background: linear-gradient(to right,  #ffffff 13%,#000972 38%,#080066 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#080066',GradientType=1 ); /* IE6-9 */
+  background: -moz-linear-gradient(left,  #ffffff 15%, #3a6eb7 43%, #4062aa 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right top, color-stop(15%,#ffffff), color-stop(43%,#3a6eb7), color-stop(100%,#4062aa)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(left,  #ffffff 15%,#3a6eb7 43%,#4062aa 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(left,  #ffffff 15%,#3a6eb7 43%,#4062aa 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(left,  #ffffff 15%,#3a6eb7 43%,#4062aa 100%); /* IE10+ */
+  background: linear-gradient(to right,  #ffffff 15%,#3a6eb7 43%,#4062aa 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#4062aa',GradientType=1 ); /* IE6-9 */
 }
 /* Make the masthead heading the same height as the navigation */
 h1 {
@@ -52,7 +52,8 @@ h1 {
   margin-bottom: 0;
   line-height: 40px;
   padding-bottom: 19px;
-  font-family: 'Lato';
+  font-family: 'Lato-bold';
+  color: #2D428E;
 }
 
 /* Custom page footer */
@@ -312,4 +313,15 @@ h3 {
   padding: 5px;
   border-right: 1px solid #e5e5e5;
   border-left: 1px solid #e5e5e5;
+}
+
+.disclaimer > a{
+  color: white;
+  font-size: 90%;
+  margin-right: 5px;
+}
+
+.contacts{
+  border-left: 1px solid gray;
+  padding-left: 5px
 }
