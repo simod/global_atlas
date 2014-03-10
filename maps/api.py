@@ -9,6 +9,7 @@ from tastypie.authorization import DjangoAuthorization
 from tastypie import fields
 from tastypie.constants import ALL, ALL_WITH_RELATIONS
 from tastypie.validation import FormValidation
+from tastypie.cache import SimpleCache
 
 from .models import Map, Theme, MapRequest, Country, Format, \
     MapSize, Category, Requester, Source, CollinsMap
@@ -152,6 +153,7 @@ class CountryResource(GeoModelResource):
         authentication= SessionAuthentication()
         authorization = DjangoAuthorization()
         allowed_methods = ['get','post','delete','put']
+        cache = SimpleCache(timeout=60000)
 
         filtering = {
             'fips': ALL,
