@@ -189,5 +189,9 @@ def send_request_save_email(instance, sender, **kwargs):
         )
     send_mail(subject, message, email_sender, recipients)
 
-
+@receiver(signals.pre_save, sender=Map)
+def pre_map_save(instance, sender, **kwargs):
+    file_path =  os.path.join(settings.MEDIA_ROOT, 'maps', instance.map_file.name)
+    if os.path.exists(file_path):
+        os.remove(file_path)
         
