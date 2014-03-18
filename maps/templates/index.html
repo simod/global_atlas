@@ -32,21 +32,25 @@
     <![endif]-->
 
     <div id="wrapper">
-      <header class="col-md-12 header">
-        <span class="banner col-md-2"></span>
-        <h1 class="col-md-3">Global Crisis Atlas</h1>
-        <p class="marketing col-md-7">The Global Atlas on Crisis Areas is a catalogue of maps (format pdf, jpeg) at country or regional level, split in categories: baseline, natural hazard, armed conflict, security, thematic and policy.
-It's intended to increase the awareness of geographic and crisis related issues, to provide the basis for information management in possible crisis situations or planning project.</p>
-        <div class="disclaimer pull-right">
-          <a href="http://ec.europa.eu/geninfo/legal_notices_en.htm">Disclaimer</a>
-          <a class="contacts" href="mailto:gemma@jrc.ec.europa.eu">Contact us</a>
-        </div>
+      <header class="header">
+        <p class="banner-flag">
+          <img alt="Commission logo" id="banner-flag" src="{% static "images/logo_en.gif" %}"></img></p>
+        <h1 id="site-title" class="pull-left">Global Crisis Atlas</h1>
+        <span class="title" id="banner-image-title"></span>  
+        <ul class="reset-list" id="services">
+          <li>
+            <a href="http://ec.europa.eu/geninfo/legal_notices_en.htm">Legal Notes</a>
+          </li>
+          <li>
+            <a href="mailto:gemma@jrc.ec.europa.eu">Contact Us</a>
+          </li>
+        </ul>
       </header>
       <div id="content">
-        <button class="btn btn-small btn-primary col-md-2 pull-right request-button" data-toggle="modal" data-target="#mr_form">Request a map</button>
+        <button class="btn btn-small btn-primary pull-right request-button" data-toggle="modal" data-target="#mr_form">Request a map</button>
         <!-- Search-->
         <div class="search col-md-3 pull-left" id="search">
-          <button class="btn btn-small btn-primary col-md-offset-2" ng-click="reset_filters()">Clear all filters</button>
+          <button class="btn btn-small btn-primary col-md-offset-3" ng-click="reset_filters()">Clear all filters</button>
           <h3>Compose your Filters</h3>
           <div class="spatial-filters pull-left">
             <div>

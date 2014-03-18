@@ -10,13 +10,16 @@ body {
 }
 
 #content{
-  width: 1024px;
+  width: 984px;
+  height: 650px;
   margin: 0 auto 0;
   padding-top: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border:1px solid #369
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
 .marketing,
 .footer {
   padding-left: 15px;
@@ -25,27 +28,10 @@ body {
   margin-top: 0;
 }
 
-.header{
-  color: white;
-}
-
 .marketing{
   font-size: 90%;
 }
 
-/* Custom page header */
-.header {
-  padding-top: 15px;
-  border-bottom: 1px solid #e5e5e5;
-  background: #ffffff; /* Old browsers */
-  background: -moz-linear-gradient(left,  #ffffff 15%, #3a6eb7 43%, #4062aa 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, right top, color-stop(15%,#ffffff), color-stop(43%,#3a6eb7), color-stop(100%,#4062aa)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(left,  #ffffff 15%,#3a6eb7 43%,#4062aa 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(left,  #ffffff 15%,#3a6eb7 43%,#4062aa 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(left,  #ffffff 15%,#3a6eb7 43%,#4062aa 100%); /* IE10+ */
-  background: linear-gradient(to right,  #ffffff 15%,#3a6eb7 43%,#4062aa 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#4062aa',GradientType=1 ); /* IE6-9 */
-}
 /* Make the masthead heading the same height as the navigation */
 h1 {
   margin-top: 0;
@@ -139,7 +125,7 @@ h1 {
   height: 500px;
   border: 1px solid #C0C0C0;
   margin-right: 20px;
-  margin-left: 20px;
+  margin-left: 10px;
   padding: 0px;
 }
 
@@ -179,7 +165,7 @@ h1 {
 }
 
 .results{
-  width: 300px;
+  width: 250px;
 }
 
 ul{
@@ -291,16 +277,11 @@ h3 {
 }
 
 .found-maps{
-  margin-left: 65px;
+  margin-left: 50px;
 }
 
 .request-button{
   margin-right: 80px;
-}
-
-.banner{
-  background: transparent url(/static/images/logo_en.gif) no-repeat scroll center top;
-  height: 80px;
 }
 
 .collins{
@@ -325,3 +306,54 @@ h3 {
   border-left: 1px solid gray;
   padding-left: 5px
 }
+
+/* BANNER */
+
+.header{
+  width: 984px;
+  position:relative;
+  min-height:145px;
+  background-color:#fff;
+  line-height:1.4;
+  margin: 0 auto 0;
+}
+#banner-flag{position:absolute;left:40px;top:15px;z-index:8;color:#000;width:172px;height:119px;}
+
+
+#banner-image-title{
+  float:left;height:145px;width:100%;background-repeat:no-repeat;background-position:0 0;}
+.title{background-image:url("/static/images/title.gif");}
+
+#site-title{
+  position: absolute;
+  height: 30px;
+  margin-left: 250px;
+  margin-top: 100px;
+}
+
+/* Make the masthead heading the same height as the navigation */
+h1 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+  padding-bottom: 19px;
+  font-family: 'Lato-bold';
+  color: white;
+  font-size: 200%;
+}
+
+#services{
+  font-size:90%;font-weight:normal;position:absolute;left:0;top:2px;right:0;padding:1px 50px 1px 1px;text-align:right;}
+#services li{display:inline;padding:3px 0;}
+#services a,
+#services a:focus,
+#services a:hover,
+#services a:active{color:#396ea2;text-decoration:underline;border:0;}
+#services a.first{border:0;background-image:none;}
+
+.js #services{padding-right:140px;}
+
+/* adjust some elements on font-size change */
+
+.font-size-2 #services{padding-right:150px;}
+.font-size-3 #services{padding-right:172px;}

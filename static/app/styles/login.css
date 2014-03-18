@@ -21,3 +21,13 @@
 .login #container{
     width: 30em;
 }
+
+.footer{
+    float: left;
+    width: 760px;
+    background: white;
+    padding: 20px;
+    margin-left: -200px;
+    font-size: 90%;
+    border: 1px solid #ccc;
+}
