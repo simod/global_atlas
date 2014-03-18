@@ -11,7 +11,7 @@
 }
 
 #branding img{
-    padding-left: 110px;
+    padding-left: 90px;
 }
 
 .reg{
@@ -19,13 +19,17 @@
 }
 
 .login #container{
-    width: 31em;
+    margin-top: 30px;
+}
+
+.login .submit-row{
+    padding-left: 125px;
 }
 
 .footer{
     float: left;
     width: 760px;
-    background: white;
+    background: #eee;
     padding: 20px;
     margin-left: -200px;
     font-size: 90%;
