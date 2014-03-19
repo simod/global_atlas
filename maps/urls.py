@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib.auth.decorators import login_required
+from django.views.generic import TemplateView
 from tastypie.api import Api
 from django_downloadview import ObjectDownloadView
 
@@ -32,6 +33,7 @@ urlpatterns = patterns('',
     (r'^accounts/login/$', 'django.contrib.auth.views.login',
         {'template_name': 'login.html'}),
     url(r'^$', login_required(Home.as_view())),
+    url(r'^help/?$', TemplateView.as_view(template_name="help.html")),
     url(r'^maps/(?P<pk>[0-9]+)/download/?$', login_required(map_download), name='map_download'),
     url(r'^collins/(?P<pk>[0-9]+)/download/?$', login_required(collins_download), name='collins_download'),
     url(r'', include(api.urls)),
