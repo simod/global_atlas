@@ -32,6 +32,7 @@ urlpatterns = patterns('',
     # Examples:
     (r'^accounts/login/$', 'django.contrib.auth.views.login',
         {'template_name': 'login.html'}),
+    url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}, name='logout'),
     url(r'^$', login_required(Home.as_view())),
     url(r'^help/?$', TemplateView.as_view(template_name="help.html")),
     url(r'^maps/(?P<pk>[0-9]+)/download/?$', login_required(map_download), name='map_download'),

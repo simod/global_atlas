@@ -33,6 +33,9 @@
     <div id="wrapper">
       <header class="header">
         <ul class="reset-list" id="services">
+          <li class="login">
+            <span>Logged in as {{ user.username }}</span> | <a href="{% url "logout" %}">Logout</a>
+          </li>
           <li>
             <a href="http://ec.europa.eu/geninfo/legal_notices_en.htm">Legal Notes</a> |
           </li>
