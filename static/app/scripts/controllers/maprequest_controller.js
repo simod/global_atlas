@@ -10,7 +10,6 @@
 
   module.controller('MRController', function($scope, $http, UrlsProvider){
     $scope.submit = function(){
-
       var data = {
         title: $scope.title,
         email: $scope.email,
@@ -29,7 +28,12 @@
           alert('Your request is correctly registered!');
         })
         .error(function(data, status, headers, config){
-          alert(data['error']);
+          var errors = '';
+          for (var key in data['requests']){
+            var string =  key + ': ' + data['requests'][key] + '\n\r';
+            errors += string;
+          }
+          alert(errors);
         });
     }
   });
