@@ -169,6 +169,7 @@ def send_request_save_email(instance, sender, **kwargs):
     email_sender = settings.EMAIL_SENDER
     subject = 'Map request from %s' % instance.user.username
     message = """
+    User Email: %s,\n\r
     Title: %s,\n\r
     Purpose: %s,\n\r
     Extended Description: %s,\n\r
@@ -178,6 +179,7 @@ def send_request_save_email(instance, sender, **kwargs):
     Format: %s,\n\r
     Institution: %s\n\r
     """ % (
+        instance.email,
         instance.title,
         instance.purpose,
         instance.extended_description,
