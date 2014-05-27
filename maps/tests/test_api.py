@@ -327,7 +327,7 @@ class MapRequestApiTests(ResourceTestCase):
         self.assertKeys(self.deserialize(resp), [u'id', u'title', 
             u'email', u'user', u'date', u'purpose', u'extended_description', 
             u'content', u'size', u'format', u'requester', u'resource_uri',
-            u'deadline'])
+            u'deadline', u'quantity',])
         self.assertEqual(self.deserialize(resp)['title'], 'request1')
 
     def test_maprequest_post_unauth(self):
@@ -346,7 +346,8 @@ class MapRequestApiTests(ResourceTestCase):
             'email': 's@d.com',
             'format': '/api/formats/%s/' % Format.objects.all()[0].pk,
             'requester': '/api/requesters/%s/' % Requester.objects.all()[0].pk,
-            'size': '/api/sizes/%s/' % MapSize.objects.all()[0].pk
+            'size': '/api/sizes/%s/' % MapSize.objects.all()[0].pk,
+            'quantity': '2',
         }
         self.api_client.client.login(username=username, password=password)
         self.assertHttpCreated(self.api_client.post(self.list_url, 

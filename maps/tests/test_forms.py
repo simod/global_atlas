@@ -24,6 +24,7 @@ class FormTests(TestCase):
             'requester': '/api/requesters/%s/',
             'size': '/api/sizes/%s/',
             'deadline': '2014-05-01',
+            'quantity': '2'
         }
 
         load_test_data('maprequests')
