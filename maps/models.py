@@ -69,6 +69,7 @@ class MapRequest(models.Model):
     size = models.ForeignKey('MapSize')
     format = models.ForeignKey('Format')
     requester = models.ForeignKey('Requester', verbose_name='Institution')
+    quantity = models.PositiveIntegerField(default=1)
 
     def __unicode__(self):
         return self.title
@@ -177,7 +178,8 @@ def send_request_save_email(instance, sender, **kwargs):
     Deadline: %s,\n\r
     Size: %s,\n\r
     Format: %s,\n\r
-    Institution: %s\n\r
+    Institution: %s,\n\r
+    Quantity: %s \n\r
     """ % (
         instance.email,
         instance.title,
@@ -187,7 +189,8 @@ def send_request_save_email(instance, sender, **kwargs):
         instance.deadline.strftime('%Y-%B-%d'),
         instance.size,
         instance.format,
-        instance.requester
+        instance.requester, 
+        instance.quantity
         )
     send_mail(subject, message, email_sender, recipients)
 

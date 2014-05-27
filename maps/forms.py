@@ -18,7 +18,8 @@ class MapRequestForm(ModelForm):
             'deadline',
             'size',
             'format',
-            'requester'
+            'requester',
+            'quantity',
         ]
 
     def __init__(self, *args, **kwargs):

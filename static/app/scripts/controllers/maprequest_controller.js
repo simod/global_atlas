@@ -19,7 +19,8 @@
         deadline: $scope.deadline,
         size: UrlsProvider.size_url + $scope.size +'/',
         format: UrlsProvider.format_url + $scope.format +'/',
-        requester: UrlsProvider.requester_url + $scope.requester +'/'
+        requester: UrlsProvider.requester_url + $scope.requester +'/',
+        quantity: $scope.quantity
       }
 
       $http.post(UrlsProvider.request_url, data)
