@@ -18,20 +18,64 @@
     margin-left: 69px;
 }
 
-.login #container{
+#login-form #container{
     margin-top: 30px;
-}
-
-.login .submit-row{
-    padding-left: 125px;
 }
 
 .footer{
     float: left;
-    width: 760px;
-    background: #eee;
+    width: 500px;
     padding: 20px;
-    margin-left: -200px;
     font-size: 90%;
     border: 1px solid #ccc;
+}
+
+#content{
+    padding: 0;
+    height: 500px
+}
+
+#login-form #content-main {
+    width: 100%;
+}
+
+#login-form {
+    float: left;
+    margin-top: 1em;
+    margin-left: 1.5em;
+    margin-right: 2em;
+    width: 200px;
+}
+
+#login-form .form-row {
+    padding: 4px 0;
+    float: left;
+    width: 100%;
+}
+
+#login-form .form-row label {
+    padding-right: 0.5em;
+    line-height: 2em;
+    font-size: 1em;
+    clear: both;
+    color: #333;
+}
+
+#login-form .form-row #id_username, #login-form .form-row #id_password {
+    clear: both;
+    padding: 6px;
+    width: 200px;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+#login-form span.help {
+    font-size: 10px;
+    display: block;
+}
+
+#login-form .submit-row {
+    clear: both;
+    padding: 1em 0 0 4.5em;
 }

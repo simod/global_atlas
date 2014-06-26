@@ -1,17 +1,65 @@
-{% extends "admin/login.html" %}
+{% extends "admin/base.html" %}
 {% load staticfiles %}
+{% load i18n admin_static %}
 
-{% block extrastyle %}{{ block.super }}
+{% block extrastyle %}
+<link rel="stylesheet" href="{% static "bower_components/bootstrap/dist/css/bootstrap.css" %}">
+<link rel="stylesheet" href="{% static "fonts/lato_font.css" %}">
+<link rel="stylesheet" href="{% static "styles/main.css" %}">
 <link rel="stylesheet" type="text/css" href="{% static "styles/login.css" %}" />
 <link rel="icon" href="{% static "images/favicon.ico" %}">
+
 {% endblock %}
 
+{% block breadcrumbs %}{% endblock %}
+
 {% block title %}JRC Global Crisis Atlas{% endblock %}
-{% block branding %}
-<img src="{% static "images/logo_en.gif" %}"/>
-<h1 id="site-name">Welcome to the Global Crisis Atlas</h1>
+{% block messages %}
+<header class="header">
+    <p class="banner-flag">
+      <img alt="Commission logo" id="banner-flag" src="{% static "images/logo_en.gif" %}"></img></p>
+    <h1 id="site-title" class="pull-left">Global Crisis Atlas</h1>
+    <span class="title" id="banner-image-title"></span>  
+</header>
 {% endblock %}
-{% block footer %}
+{% block content %}
+
+{% if form.errors and not form.non_field_errors and not form.this_is_the_login_form.errors %}
+<p class="errornote">
+{% if form.errors.items|length == 1 %}{% trans "Please correct the error below." %}{% else %}{% trans "Please correct the errors below." %}{% endif %}
+</p>
+{% endif %}
+
+{% if form.non_field_errors or form.this_is_the_login_form.errors %}
+{% for error in form.non_field_errors|add:form.this_is_the_login_form.errors %}
+<p class="errornote">
+    {{ error }}
+</p>
+{% endfor %}
+{% endif %}
+
+<div id="content-main">
+<form action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
+  <div class="form-row">
+    {% if not form.this_is_the_login_form.errors %}{{ form.username.errors }}{% endif %}
+    <label for="id_username" class="required">{{ form.username.label }}:</label> {{ form.username }}
+  </div>
+  <div class="form-row">
+    {% if not form.this_is_the_login_form.errors %}{{ form.password.errors }}{% endif %}
+    <label for="id_password" class="required">{% trans 'Password:' %}</label> {{ form.password }}
+    <input type="hidden" name="this_is_the_login_form" value="1" />
+    <input type="hidden" name="next" value="{{ next }}" />
+  </div>
+  {% url 'admin_password_reset' as password_reset_url %}
+  {% if password_reset_url %}
+  <div class="password-reset-link">
+    <a href="{{ password_reset_url }}">{% trans 'Forgotten your password or username?' %}</a>
+  </div>
+  {% endif %}
+  <div class="submit-row">
+    <label>&nbsp;</label><input type="submit" value="{% trans 'Log in' %}" />
+  </div>
+</form>
 <div class="footer">
 <p>The Global Crisis Atlas is a service of the Commission that provides a catalogue of digital maps produced by its in-house science service, the Joint Research Centre, to meet the needs of the European External Action service (EEAS) and the Service for Foreign Policy Instruments (FPI). The service is financed by the Instrument contributing to Stability and Peace.</p><br>
  
@@ -26,7 +74,11 @@
  
 <p>The Global Crisis Atlas is intended to increase the awareness of geographic and crisis related issues, to provide the information basis to support decision making in potential crisis situations and in planning projects.<br>
 The website is password protected, you must login first.</p><br>
-<p>For any comments/suggestions please write to <a href="mailto:gemma@jrc.ec.europa.eu">gemma@jrc.ec.europa.eu</a></p>
+<p>For any comments/suggestions or ask for login credentials please write to <a href="mailto:gemma@jrc.ec.europa.eu">gemma@jrc.ec.europa.eu</a></p>
 <a href="http://ec.europa.eu/geninfo/legal_notices_en.htm">Legal Notes</a>
+</div>
+<script type="text/javascript">
+document.getElementById('id_username').focus()
+</script>
 </div>
 {% endblock %}
