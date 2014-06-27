@@ -38,8 +38,9 @@ class Map(geomodels.Model):
     map_thumbnail = models.FileField(upload_to='thumbnails',  blank=True, null=True)
     country = models.ForeignKey('Country')
     size = models.ForeignKey('MapSize')
+    version = models.PositiveIntegerField(default=1)
     center = geomodels.PointField(blank=True, null=True)
-    
+
     def __unicode__(self):
         return self.title
 

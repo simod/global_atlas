@@ -282,6 +282,7 @@ class MapResource(GeoModelResource):
         authentication= SessionAuthentication()
         authorization = DjangoAuthorization()
         allowed_methods = ['get','post','delete','put']
+        excludes = ['version',]
 
         filtering = {
             'title': ALL,
