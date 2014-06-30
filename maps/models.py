@@ -200,4 +200,10 @@ def pre_map_save(instance, sender, **kwargs):
     file_path =  os.path.join(settings.MEDIA_ROOT, 'maps', instance.map_file.name)
     if os.path.exists(file_path):
         os.remove(file_path)
+
+@receiver(signals.pre_save, sender=CollinsMap)
+def pre_map_save(instance, sender, **kwargs):
+    file_path =  os.path.join(settings.MEDIA_ROOT, 'collins', instance.the_file.name)
+    if os.path.exists(file_path):
+        os.remove(file_path)
         
