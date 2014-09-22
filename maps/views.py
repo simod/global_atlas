@@ -21,5 +21,6 @@ class Home(View):
                 'countries': Country.objects.get_countries(),
                 'regions': Country.objects.get_regions(), 
                 'categories': Category.objects.all(),
-                'themes': Theme.objects.all()
+                'themes': Theme.objects.all(),
+                'latest_maps': Map.objects.all().order_by('-date')[:10]
             })

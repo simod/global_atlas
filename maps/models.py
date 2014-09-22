@@ -40,6 +40,7 @@ class Map(geomodels.Model):
     size = models.ForeignKey('MapSize')
     version = models.PositiveIntegerField(default=1)
     center = geomodels.PointField(blank=True, null=True)
+    short_title = models.CharField(max_length=128, default=None, null=True, blank=True)
 
     def __unicode__(self):
         return self.title

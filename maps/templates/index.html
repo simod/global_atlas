@@ -52,6 +52,22 @@
         <span class="title" id="banner-image-title"></span>  
       </header>
       <div id="content">
+        <div id="latest_maps" class="carousel slide col-md-12" data-ride="carousel">
+          <span class="carousel-container"><strong>Latest maps on: </strong></span>
+          <span class="carousel-container carousel-inner">
+            {% for map in latest_maps %}
+            {% if forloop.first or forloop.counter|divisibleby:6 %}
+            <div class="item {% if forloop.first %} active {% endif %}">
+            {% endif %}
+              <div class="latest_map" data-toggle="popover" data-content="<strong>{{ map.title }}</strong>">
+                <a href="maps/{{ map.id }}/download">{{ map.short_title }}</a>
+              </div>
+            {% if forloop.counter|divisibleby:5 or forloop.last %} 
+            </div>
+            {% endif %}
+            {% endfor %}
+          </span>
+        </div>
         <button class="btn btn-small btn-primary pull-right request-button" data-toggle="modal" data-target="#mr_form">Request a map</button>
         <!-- Search-->
         <div class="search col-md-3 pull-left" id="search">
@@ -189,6 +205,13 @@
           html: true,
           trigger: 'hover',
           placement: 'left'
+        });
+
+        $('.latest_map').popover({
+          html: true,
+          container: 'body',
+          trigger: 'hover',
+          placement: 'top'
         });
 
         // Get the api urls and bootstrap the application
