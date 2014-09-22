@@ -128,7 +128,7 @@ class MapApiTests(ResourceTestCase):
         self.assertKeys(self.deserialize(resp), [u'category', u'scale', 
             u'title',  u'description', u'country', u'request', u'source', 
             u'theme', u'map_thumbnail', u'date', u'size', u'map_file', u'center',
-            u'id', u'resource_uri', u'format', u'file_size'])
+            u'id', u'resource_uri', u'format', u'file_size', u'short_title'])
         self.assertEqual(self.deserialize(resp)['title'], 'A map')
 
     def test_map_post_unauth(self):
