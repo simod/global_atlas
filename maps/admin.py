@@ -4,6 +4,7 @@ from .models import Map, Theme, MapRequest, Country, Format, \
 
 class ThemeAdmin(admin.ModelAdmin):
     prepopulated_fields = { 'slug': ('name',)}
+    ordering = ['name']
 
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = { 'slug': ('name',)}
