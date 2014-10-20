@@ -39,6 +39,7 @@
       }
     };
 
+    // TODO move to a directive
     // Update the filters on change of the country selections
     $('#country_select').on('change', function(e){
       $rootScope.search_filters['country__id__in'] = e.val;

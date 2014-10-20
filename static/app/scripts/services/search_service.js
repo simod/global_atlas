@@ -13,7 +13,8 @@
       search: function(){
         var url_with_pagination = UrlsProvider.map_url + 
         '?limit=' + $rootScope.results_limit +
-        '&offset=' + ($rootScope.results_limit * ($rootScope.page - 1));
+        '&offset=' + ($rootScope.results_limit * ($rootScope.page - 1)) + 
+        '&order_by=-date';
 
         $http.get(url_with_pagination, {params: $rootScope.search_filters})
         .success(function(data){

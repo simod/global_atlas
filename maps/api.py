@@ -277,7 +277,7 @@ class MapResource(GeoModelResource):
         return bundle
 
     class Meta:
-        queryset = Map.objects.all().order_by('-date')
+        queryset = Map.objects.all()
         resource_name = 'maps'
         authentication= SessionAuthentication()
         authorization = DjangoAuthorization()
@@ -291,6 +291,7 @@ class MapResource(GeoModelResource):
             'theme': ALL_WITH_RELATIONS,
             'id': ALL
         }
+        ordering = ['date']
 
 class CollinsMapResource(ModelResource):
     """CollinsMap api"""
