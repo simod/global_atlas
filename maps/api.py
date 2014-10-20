@@ -277,7 +277,7 @@ class MapResource(GeoModelResource):
         return bundle
 
     class Meta:
-        queryset = Map.objects.all().order_by('-date').order_by('-id').distinct()
+        queryset = Map.objects.all().order_by('-date').order_by('id').distinct()
         resource_name = 'maps'
         authentication= SessionAuthentication()
         authorization = DjangoAuthorization()
