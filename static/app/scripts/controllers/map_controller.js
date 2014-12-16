@@ -51,7 +51,7 @@
           colors: colors,
           labels: [ '<strong>Maps</strong>', '1 to 5', '6 to 25', '26 to 50', '50+']
         }
-      })(),
+      })()
     });
 
     var map = leafletData.getMap();
