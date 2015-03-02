@@ -43,7 +43,7 @@ class ModelFormValidation(FormValidation):
         converted = []
         for one_uri in uris:
             try:
-                # hopefully /api/v1/<resource_name>/<pk>/
+                # hopefully /api/<resource_name>/<pk>/
                 converted.append(int(one_uri.split('/')[-2]))
             except (IndexError, ValueError):
                 raise ValueError(

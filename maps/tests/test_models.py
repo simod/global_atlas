@@ -6,7 +6,7 @@ from django.db import IntegrityError
 from django.contrib.gis.geos import GEOSGeometry
 
 from maps.models import Map, Theme, MapRequest, Country, Format, \
-    MapSize, Category, Requester, Source
+    MapSize, Category, Requester, Source, MapHistory
 from .testdata import load_test_data, samplefile
 
 
@@ -408,3 +408,34 @@ class ModelManagerTests(TestCase):
          returns just them"""
         count = Country.objects.get_countries().count()
         self.assertEqual(count, 2)
+
+class MapHistoryTests(TestCase):
+    def setUp(self):
+        load_test_data('maps')
+        themap, created = Map.objects.get_or_create(
+            title = 'atitle',
+            date = datetime.now(),
+            theme = Theme.objects.get(slug='crisis'),
+            category = Category.objects.get(slug='location'),
+            source = Source.objects.get(slug='jrc'),
+            center = GEOSGeometry("POINT (0 0)"),
+            request = MapRequest.objects.all()[0],
+            map_file = samplefile,
+            map_thumbnail = samplefile,
+            country = Country.objects.get(fips='IT'),
+            size = MapSize.objects.get(name='A4')
+        )
+
+    def test_map_history_add(self):
+        """Test that a map history is created when a version is updated"""
+        themap = Map.objects.all()[0]
+        themap.version = 2
+        themap.save()
+        self.assertEqual(MapHistory.objects.count(), 1)
+
+    def test_map_history_not_add(self):
+        """Test that a map history is not created when a version is not updated"""
+        themap = Map.objects.all()[0]
+        themap.save()
+        self.assertEqual(MapHistory.objects.count(), 0)
+

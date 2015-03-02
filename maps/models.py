@@ -165,6 +165,16 @@ class CollinsMap(models.Model):
         return self.name
 
 
+class MapHistory(models.Model):
+    """Keeps track of the maps version update"""
+    map = models.ForeignKey(Map)
+    date = models.DateTimeField(auto_now_add=True)
+    version = models.PositiveIntegerField(default=1)
+
+    def __unicode__(self):
+        return "%s, %s" % (self.map.title, self.date.isoformat())
+
+
 @receiver(signals.post_save, sender=MapRequest)
 def send_request_save_email(instance, sender, **kwargs):
     
@@ -196,15 +206,24 @@ def send_request_save_email(instance, sender, **kwargs):
         )
     send_mail(subject, message, email_sender, recipients)
 
+
 @receiver(signals.pre_save, sender=Map)
 def pre_map_save(instance, sender, **kwargs):
-    file_path =  os.path.join(settings.MEDIA_ROOT, 'maps', instance.map_file.name)
-    if os.path.exists(file_path):
-        os.remove(file_path)
+    the_map = Map.objects.filter(id=instance.id)
+
+    if the_map.count() == 1:
+        file_path =  os.path.join(settings.MEDIA_ROOT, the_map[0].map_file.name)
+        if the_map[0].map_file != instance.map_file:
+            os.remove(file_path)
+        if the_map[0].version < instance.version:
+            MapHistory.objects.create(map=instance, version=instance.version)
+
 
 @receiver(signals.pre_save, sender=CollinsMap)
-def pre_map_save(instance, sender, **kwargs):
-    file_path =  os.path.join(settings.MEDIA_ROOT, 'collins', instance.the_file.name)
-    if os.path.exists(file_path):
-        os.remove(file_path)
+def pre_collins_save(instance, sender, **kwargs):
+    the_map = Map.objects.filter(id=instance.id)
+    if the_map.count() == 1:
+        file_path =  os.path.join(settings.MEDIA_ROOT, the_map[0].map_file.name)
+        if the_map[0].map_file != instance.map_file:
+            os.remove(file_path)
         
