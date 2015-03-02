@@ -32,6 +32,9 @@ class MapAdmin(admin.ModelAdmin):
 class CollinsMapAdmin(admin.ModelAdmin):
     search_fields = ['name']
 
+class MapHistoryAdmin(admin.ModelAdmin):
+    list_display = ('__unicode__','date','map')
+
 admin.site.register(Theme, ThemeAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Map, MapAdmin)
@@ -42,4 +45,4 @@ admin.site.register(MapSize)
 admin.site.register(Requester, RequesterAdmin)
 admin.site.register(Source, SourceAdmin)
 admin.site.register(CollinsMap, CollinsMapAdmin)
-admin.site.register(MapHistory)
+admin.site.register(MapHistory, MapHistoryAdmin)
