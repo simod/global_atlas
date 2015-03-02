@@ -41,6 +41,7 @@ class Map(geomodels.Model):
     version = models.PositiveIntegerField(default=1)
     center = geomodels.PointField(blank=True, null=True)
     short_title = models.CharField(max_length=128, default=None, null=True, blank=True)
+    advertized = models.BooleanField(default=True)
 
     def __unicode__(self):
         return self.title

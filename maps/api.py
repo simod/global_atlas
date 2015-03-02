@@ -277,12 +277,12 @@ class MapResource(GeoModelResource):
         return bundle
 
     class Meta:
-        queryset = Map.objects.all().order_by('-date', '-id').distinct()
+        queryset = Map.objects.filter(advertized=True).order_by('-date', '-id').distinct()
         resource_name = 'maps'
         authentication= SessionAuthentication()
         authorization = DjangoAuthorization()
         allowed_methods = ['get','post','delete','put']
-        excludes = ['version',]
+        excludes = ['version','advertized']
 
         filtering = {
             'title': ALL,
