@@ -172,7 +172,7 @@ class MapHistory(models.Model):
     version = models.PositiveIntegerField(default=1)
 
     def __unicode__(self):
-        return "%s, %s" % (self.map.title, self.date.isoformat())
+        return "%s, v%s, %s" % (self.map.id, self.version, self.date.date())
 
 
 @receiver(signals.post_save, sender=MapRequest)
