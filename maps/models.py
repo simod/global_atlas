@@ -39,6 +39,7 @@ class Map(geomodels.Model):
     country = models.ForeignKey('Country')
     size = models.ForeignKey('MapSize')
     version = models.PositiveIntegerField(default=1)
+    time_cost = models.DecimalField(max_digits=5, decimal_places=1, default=4.0)
     center = geomodels.PointField(blank=True, null=True)
     short_title = models.CharField(max_length=128, default=None, null=True, blank=True)
     advertized = models.BooleanField(default=True)
