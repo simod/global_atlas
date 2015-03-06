@@ -28,6 +28,7 @@ class MapRequestAdmin(admin.ModelAdmin):
 class MapAdmin(admin.ModelAdmin):
     list_display = ('title', 'id', 'date')
     search_fields = ['title', 'id',]
+    exclude = ['center',]
 
 class CollinsMapAdmin(admin.ModelAdmin):
     search_fields = ['name']
