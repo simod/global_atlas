@@ -431,11 +431,11 @@ class MapHistoryTests(TestCase):
         themap = Map.objects.all()[0]
         themap.version = 2
         themap.save()
-        self.assertEqual(MapHistory.objects.count(), 1)
+        self.assertEqual(MapHistory.objects.count(), 4)
 
     def test_map_history_not_add(self):
         """Test that a map history is not created when a version is not updated"""
         themap = Map.objects.all()[0]
         themap.save()
-        self.assertEqual(MapHistory.objects.count(), 0)
+        self.assertEqual(MapHistory.objects.count(), 3)
 

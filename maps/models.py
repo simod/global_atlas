@@ -220,6 +220,10 @@ def pre_map_save(instance, sender, **kwargs):
         if the_map[0].version < instance.version:
             MapHistory.objects.create(map=instance, version=instance.version)
 
+@receiver(signals.post_save, sender=Map)
+def post_map_save(instance, sender, **kwargs):
+    if instance.version == 1 and MapHistory.objects.filter(map=instance).count() == 0:
+        MapHistory.objects.create(map=instance, version=instance.version)
 
 @receiver(signals.pre_save, sender=CollinsMap)
 def pre_collins_save(instance, sender, **kwargs):
