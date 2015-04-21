@@ -130,7 +130,7 @@
                   <a ng-href="maps/{{ map.id }}/download"><h4 ng-bind="map.title"></h4></a>
                 </div>
                 <div class="thumbnail">    
-                  <a ng-href="maps/{{ map.id }}/download"><img ng-src="static/{{ map.map_thumbnail }}" /></a>
+                  <a ng-href="maps/{{ map.id }}/download" target="_blank"><img ng-src="static/{{ map.map_thumbnail }}" /></a>
                 </div>
                 <span class="map_date">Published on: {{map.date | date:mediumDate}}  -  File size: {{map.file_size | number:2}} Mb</span>
               </article>

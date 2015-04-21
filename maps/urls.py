@@ -25,7 +25,7 @@ api.register(CountryResource())
 api.register(UserResource())
 api.register(CollinsMapResource())
 
-map_download = ObjectDownloadView.as_view(model=Map, file_field='map_file')
+map_download = ObjectDownloadView.as_view(model=Map, file_field='map_file',attachment = False)
 collins_download = ObjectDownloadView.as_view(model=CollinsMap, file_field='the_file')
 
 urlpatterns = patterns('',
