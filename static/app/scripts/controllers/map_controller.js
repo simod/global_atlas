@@ -26,13 +26,9 @@
       layers: {
         baselayers: {
           ithaca: {
-            name: 'ithaca-silver',
-            type: 'wms',
-            url: 'http://playground.ithacaweb.org/geoserver/gwc/service/wms',
-            layerOptions: {
-              layers: 'gmes:erds',
-              format: 'image/png'
-            }
+            name: 'stamen',
+            type: 'xyz',
+            url: 'http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png'
           }
         }
       },
