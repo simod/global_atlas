@@ -54,7 +54,7 @@
         return {
           position: 'topright',
           colors: colors,
-          labels: [ '<strong>Maps</strong>', '1 to 5', '6 to 10', '1 to 30', '30+']
+          labels: [ '<strong>Maps</strong>', '1 to 5', '6 to 10', '11 to 30', '30+']
         }
       })()
     });
