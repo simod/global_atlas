@@ -33,9 +33,9 @@
         }
       },
       center: {
-        lat: 5.6,
-        lng: 3.9,
-        zoom: 2
+        lat: 25,
+        lng: 20,
+        zoom: 3
       },
       legend: (function(){
         var colors = [0];
