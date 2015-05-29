@@ -12,7 +12,7 @@ from tastypie.validation import FormValidation
 from tastypie.cache import SimpleCache
 
 from .models import Map, Theme, MapRequest, Country, Format, \
-    MapSize, Category, Requester, Source, CollinsMap
+    MapSize, Category, Requester, Source, CollinsMap, MapHistory
 from .forms import MapRequestForm
 
 
@@ -164,9 +164,9 @@ class CountryResource(GeoModelResource):
     def dehydrate(self, bundle):
         bundle.data['type'] = 'Feature'
         bundle.data['maps_count'] = {
-            'total': bundle.obj.map_set.count(),
-            'counts': list(bundle.obj.map_set. \
-            values('category__name').annotate(count=Count('category__name')))
+            'total': MapHistory.objects.filter(map__in=bundle.obj.map_set.all()).count(),
+            'counts': list(MapHistory.objects.filter(map__in=bundle.obj.map_set.all()). \
+            values('map__category__name').annotate(count=Count('map__category__name')))
         }  
         
         return bundle
