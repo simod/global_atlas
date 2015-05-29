@@ -12,7 +12,7 @@
 
   module.controller('MapController', function($scope, $http,
    leafletData, UrlsProvider, SearchService){
-    var color_thresholds = [0,5,25,50];
+    var color_thresholds = [0,5,10,30];
 
     function getMapColors(maps){
       return maps > color_thresholds[3] ? 'rgb(68,101,137)' :
@@ -25,10 +25,19 @@
     angular.extend($scope, {
       layers: {
         baselayers: {
+          // ithaca: {
+          //   name: 'stamen',
+          //   type: 'xyz',
+          //   url: 'http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png'
+          // },
           ithaca: {
-            name: 'stamen',
-            type: 'xyz',
-            url: 'http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png'
+            name: 'ithaca-silver',
+            type: 'wms',
+            url: 'http://playground.ithacaweb.org/geoserver/gwc/service/wms',
+            layerOptions: {
+              layers: 'gmes:erds',
+              format: 'image/png'
+            }
           }
         }
       },
@@ -45,7 +54,7 @@
         return {
           position: 'topright',
           colors: colors,
-          labels: [ '<strong>Maps</strong>', '1 to 5', '6 to 25', '26 to 50', '50+']
+          labels: [ '<strong>Maps</strong>', '1 to 5', '6 to 10', '1 to 30', '30+']
         }
       })()
     });
@@ -71,7 +80,7 @@
     info_div.update = function(country){
       this._div.innerHTML = country ? 
         '<p class="flag flag-' + country['iso3'].toLowerCase() + '"></p>' +
-        '<strong>' + country['name'] + '</strong>' + 
+        '<strong>' + country['name'] + '</strong>' + country['maps_count']['total'] +
         '<br><p class="map-info-counts">' + (country['maps_count']['total'] !== 0 ? 
           this.create_counts_snippet(country['maps_count']['counts']) : 
           'No maps') + '</p>':
