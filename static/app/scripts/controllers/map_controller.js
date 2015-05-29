@@ -63,7 +63,7 @@
     info_div.create_counts_snippet = function(counts){
       var html = '';
       for(var i=0; i < counts.length; i++){
-        html += counts[i].category__name + ': ' + counts[i].count + '<br>';
+        html += counts[i].map__category__name + ': ' + counts[i].count + '<br>';
       }
       return html;
     };
