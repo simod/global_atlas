@@ -80,7 +80,7 @@
     info_div.update = function(country){
       this._div.innerHTML = country ? 
         '<p class="flag flag-' + country['iso3'].toLowerCase() + '"></p>' +
-        '<strong>' + country['name'] + '</strong>' + country['maps_count']['total'] +
+        '<strong style="margin-right:10px;">' + country['name'] + '</strong>' + country['maps_count']['total'] +
         '<br><p class="map-info-counts">' + (country['maps_count']['total'] !== 0 ? 
           this.create_counts_snippet(country['maps_count']['counts']) : 
           'No maps') + '</p>':
