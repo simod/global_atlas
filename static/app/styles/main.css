@@ -387,3 +387,8 @@ h1 {
 .carousel-container{
   float: left;
 }
+
+#regions{
+  max-height: 260px;
+  overflow: auto;
+}
