@@ -389,6 +389,6 @@ h1 {
 }
 
 #regions{
-  max-height: 260px;
+  max-height: 240px;
   overflow: auto;
 }
